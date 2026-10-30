@@ -72,3 +72,12 @@ html body #bottomNav button.active .ico{color:#fff!important}
 .lift-pose-0{animation-delay:0s}.lift-pose-1{animation-delay:-1.2s}.lift-pose-2{animation-delay:-2.4s}.lift-pose-3{animation-delay:-3.6s}
 @keyframes lift-pose-cycle{0%,24.99%{opacity:1}25%,100%{opacity:0}}
 @media(prefers-reduced-motion:reduce){.lift-pose{animation:none!important;opacity:0}.lift-pose-0{opacity:1}}
+
+/* v5.7: six-item silver bottom navigation, including narrow iPhones */
+html body #bottomNav{background:#c5cbd1!important;border-top:1px solid #eef1f4!important;display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr));gap:2px;padding:6px 3px max(8px,env(safe-area-inset-bottom))!important}
+html body #bottomNav button{display:flex!important;flex-direction:column;justify-content:center;align-items:center;min-width:0!important;width:100%;min-height:55px;padding:5px 1px!important;margin:0;color:#20252b!important;background:transparent!important;font-size:clamp(8px,2.25vw,11px)!important;line-height:1.15;white-space:nowrap;letter-spacing:-.2px}
+html body #bottomNav button .ico{font-size:21px;margin-bottom:4px;color:inherit!important}
+html body #bottomNav button.active{background:#23272d!important;color:#fff!important;border-radius:11px}
+html body #bottomNav button.active .ico{color:#fff!important}
+.video-library-item{border-left:3px solid #b8c0c9}
+@media(max-width:360px){html body #bottomNav button .ico{font-size:18px}html body #bottomNav button{font-size:8px!important}}

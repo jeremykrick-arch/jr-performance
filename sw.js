@@ -1,4 +1,4 @@
-const CACHE='jr-performance-v5-6-0';
+const CACHE='jr-performance-v5-7-0';
 const ASSETS=['./','./index.html','./style.css','./program.js','./app.js','./manifest.webmanifest','./icon-192.png','./icon-512.png'];
 self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)));self.skipWaiting()});
 self.addEventListener('activate',event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))));self.clients.claim()});

@@ -1,18 +1,9 @@
-JR PERFORMANCE — COMPLETE REINSTALL (v8.20 core + all 30 demo videos)
+JR Performance — Saturday-first training week
 
-This ZIP is a full GitHub Pages website. Extract it before uploading.
+Training week: Saturday, Sunday, Monday, Tuesday, Wednesday, Thursday, Friday.
+Workouts (unchanged): Saturday total body, Monday lower body, Thursday upper body.
+Week 1 opens on Saturday; Home calendar and Schedule calendar start on Saturday.
 
-CONTENTS
-- index.html, app.js, style.css, program.js, movement_catalog.js
-- manifest.webmanifest, sw.js, icon-192.png, icon-512.png
-- .nojekyll (GitHub Pages compatibility)
-- videos/ (30 MP4 exercise demonstrations)
+Install: Extract ZIP and upload root-level files to GitHub Pages. Upload videos/*.mp4 into the videos folder. Replace all matching files. Keep folder structure.
 
-INSTALL
-1. Download and EXTRACT the ZIP on your computer.
-2. In your jr-performance GitHub repository, replace the root-level files with the files from the extracted folder.
-3. Make sure videos/ is a real folder in the repository, containing the 30 MP4 files. If uploading in GitHub's website, navigate into videos/ before uploading its files; GitHub may flatten folders when dragging everything at once. GitHub Desktop is easier for uploading the complete directory tree.
-4. Commit changes to your GitHub Pages branch and wait for deployment.
-5. Open the website in Safari and refresh. If an old installed app remains cached, first check the normal Safari URL.
-
-NOTE: This is the last verified v8.20 core package, not a new confirmed fix for the Week 1 Monday crash. JavaScript syntax and archive contents were checked, but physical iPhone testing was not performed.
+The application uses the same localStorage key as previous versions.

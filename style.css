@@ -81,3 +81,19 @@ html body #bottomNav button.active{background:#23272d!important;color:#fff!impor
 html body #bottomNav button.active .ico{color:#fff!important}
 .video-library-item{border-left:3px solid #b8c0c9}
 @media(max-width:360px){html body #bottomNav button .ico{font-size:18px}html body #bottomNav button{font-size:8px!important}}
+
+/* v5.8 anatomy illustration refinements */
+.illustration-stage{background:radial-gradient(ellipse at 50% 34%,#303b46 0%,#161b21 56%,#0a0d11 100%);border:1px solid #576371;border-radius:18px;box-shadow:inset 0 1px 0 #ffffff22,0 12px 35px #0007}
+.primary-lift-svg{width:min(100%,380px);height:340px;filter:drop-shadow(0 6px 12px #0009)}
+.lift-diagram-label{font-size:10px;letter-spacing:1.8px;font-weight:700;fill:#d4dce4}
+.muscle-panel{border:1px solid #596572;border-radius:14px}
+
+/* Individual exercise-specific four-phase sequences */
+.jr-individual-svg .jr-individual-frame{opacity:0;animation:jrIndividualCycle 5.6s steps(1,end) infinite}
+.jr-individual-svg .jr-individual-frame-0{animation-delay:0s}
+.jr-individual-svg .jr-individual-frame-1{animation-delay:-4.2s}
+.jr-individual-svg .jr-individual-frame-2{animation-delay:-2.8s}
+.jr-individual-svg .jr-individual-frame-3{animation-delay:-1.4s}
+@keyframes jrIndividualCycle{0%,24.99%{opacity:1}25%,100%{opacity:0}}
+.illustration-stage.paused .jr-individual-frame{animation-play-state:paused}
+@media(prefers-reduced-motion:reduce){.jr-individual-svg .jr-individual-frame{animation:none;opacity:0}.jr-individual-svg .jr-individual-frame-0{opacity:1}}

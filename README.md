@@ -1,7 +1,3 @@
-JR Performance v5.7 — Movement Library
+JR Performance 5.9 — All Movement Illustrations
 
-New sixth bottom navigation item: Movements. Search/filter all unique program movements, and open the existing illustrated guides with muscle highlights, cues, and optional coach videos. The silver navigation is sized for six buttons on phones.
-
-Deploy all files to the root of your existing GitHub Pages repository. Export a JSON backup first. Existing localStorage key and data format are unchanged.
-
-Four primary lifts have pose sequences; remaining movements have generalized animated illustrations, not exercise-specific videos. No licensed real videos are bundled.
+Every unique exercise in the 12-week program now has an individualized four-phase illustrated sequence. The original four primary lifts retain their dedicated poses. The other 26 unique movements use individually selected phase sequences, equipment details and existing muscle-emphasis labels. These are stylized schematic guides, not anatomically verified 3D animation or coaching substitutes. Data format unchanged. Export backup before upgrading.

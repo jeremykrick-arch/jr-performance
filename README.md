@@ -7,3 +7,8 @@ Upload the contents of this ZIP to the root of the existing GitHub Pages reposit
 
 ## Storage
 Workout data remains in browser localStorage under `jr-performance-v1`. The theme update does not reset it.
+
+
+Updated weekly schedule: Monday gym; Tuesday 4:30 PM pitching with Coach Taylor; Wednesday 7:15 PM practice; Thursday gym before 7:00 PM hitting; Friday recovery; Saturday gym; Sunday 11:00 AM practice. Local storage key unchanged for compatibility.
+
+Schedule update: Thursday 7:00 PM hitting lesson with Dan Kennon.

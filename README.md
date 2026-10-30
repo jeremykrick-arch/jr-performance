@@ -10,3 +10,5 @@ self.addEventListener('fetch',event=>{let request=event.request;if(request.metho
 - Profile photo / initials shown in the header on every page; tapping opens Profile.
 - Header name reflects editable athlete display name.
 - Cache bumped; same local storage key and workout data.
+
+Version 5.3.4: Profile Save button and prominent Add Height or Weight action on the athlete profile. Fields auto-save on change.

@@ -1,15 +1,12 @@
-# JR Performance 7.4 — Responsive Design
+# JR Performance 8.0 — Smart Movement Library
 
-Responsive update based on Version 7.3. Adapts the interface to compact phones (320px), standard phones, tablets, and desktop screens. Preserves the five-tab navigation, top-right Settings, original MP4 videos, and existing browser data schema.
+Expanded original library to 152 exercises, with search, categories, equipment filters, favorites and session-specific workout swaps.
 
-## Deploy to GitHub Pages
-1. Export a backup of JR’s data in the app before updating.
-2. Extract the ZIP and upload its contents (not the outer folder) to the repository root.
-3. Keep the `videos/` directory and filenames unchanged. If your repository already has the videos, you can upload just `index.html`, `style.css`, `sw.js` and leave the videos untouched.
-4. Wait for Pages deployment, then fully close and reopen the installed app.
+## Installation
+Back up your existing JR Performance data. Upload the contents of this package to the root of your GitHub Pages repository. Keep `videos/` as a folder. If the videos are already hosted and unchanged, you can skip uploading them again. New file: `movement_catalog.js` MUST be uploaded alongside app.js, program.js, style.css, index.html, and sw.js.
 
-Responsive rules are appended at the end of `style.css`; the app’s data format and training logic are unchanged. Test on your own iPhone; automated browser and JavaScript checks cannot guarantee every device behaves identically.
+## Swapping
+Train > choose a session > SWAP on an exercise. Recommended choices share its movement pattern and training objective. All movements allows broader choices, but these may change the program's purpose. Changes apply only to the chosen week/day and are saved locally under the same `jr-performance-v1` storage key. Use Restore to return to the original exercise. Logged sets remain under their original exercise name.
 
-
-## Version 7.5 — Outline Refresh
-Movement Library cards now have transparent backgrounds and fine white outlines. Header settings gear is grey outline without a button background. Existing videos and saved data structures are unchanged.
+## Limitations
+The expanded library does not include new exercise videos; only original existing videos are marked VIDEO. New exercise demos show a clearly labeled unavailable state. Exercise suggestions are not biomechanically validated or medical advice. Consult JR's coach before new movements.

@@ -318,3 +318,53 @@ body header button.header-settings svg{stroke:#a8adb5!important;fill:none!import
 body header button.header-settings:hover svg{stroke:#f1f3f5!important}
 body header button.header-settings:focus-visible{outline:2px solid #a8adb5!important;outline-offset:1px}
 @media(max-width:390px){body button.v71-movement{padding:13px 10px!important;gap:9px!important}}
+
+/* JR Performance 7.6 — legible, responsive Movement Library category filters */
+html body .v71-chips {
+  display:flex!important; flex-wrap:wrap!important; align-items:stretch;
+  gap:9px!important; overflow:visible!important; padding:12px 0 16px!important;
+  max-width:100%;
+}
+html body .v71-chips button.v71-chip,
+html body .v71-chips button.v71-chip:not(.secondary):not(.ghost):not(.small):not(.active) {
+  display:inline-flex!important; align-items:center; justify-content:center;
+  flex:0 1 auto!important; width:auto!important; max-width:100%!important;
+  min-width:0!important; min-height:42px!important; height:auto!important;
+  padding:10px 14px!important; border-radius:12px!important;
+  border:1px solid #666d77!important; background:#17191d!important;
+  background-image:none!important; box-shadow:none!important;
+  color:#e5e8ec!important; font-size:13px!important; font-weight:700!important;
+  letter-spacing:0!important; line-height:1.35!important;
+  white-space:normal!important; overflow-wrap:anywhere!important;
+  text-align:center!important; text-transform:none!important;
+}
+html body .v71-chips button.v71-chip.selected,
+html body .v71-chips button.v71-chip[aria-pressed="true"] {
+  background:#30353c!important; border-color:#f2f4f6!important;
+  color:#fff!important; box-shadow:inset 0 0 0 1px rgba(255,255,255,.25)!important;
+}
+html body .v71-chips button.v71-chip:focus-visible{outline:2px solid #fff!important;outline-offset:3px!important}
+@media(max-width:420px){
+  html body .v71-chips{gap:8px!important}
+  html body .v71-chips button.v71-chip{font-size:12px!important;padding:10px 12px!important;min-height:44px!important}
+}
+
+/* v7.7: Clear, unobstructed exercise video playback */
+body .jr-rendered-stage{position:relative;background:#050505!important;border:1px solid #33373d!important;border-radius:14px;overflow:hidden;box-shadow:none!important;isolation:isolate}
+body .jr-rendered-stage::before,body .jr-rendered-stage::after,body .jr-rendered-stage .illustration-caption{display:none!important;content:none!important}
+body .jr-rendered-stage video{display:block!important;position:relative!important;z-index:1!important;opacity:1!important;filter:none!important;mix-blend-mode:normal!important;transform:none!important;object-fit:contain!important;width:100%!important;height:auto!important;max-height:min(65dvh,600px)!important;background:#050505!important}
+body .video-sheet .jr-rendered-stage~p.mini{color:#aeb2bc}
+
+/* v7.8: compact, collapsible readiness card */
+.readiness-card .readiness-head{align-items:flex-start;gap:12px;flex-wrap:wrap}
+.readiness-card .readiness-head h2{margin:0 0 5px}
+.readiness-head-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-left:auto}
+.readiness-toggle{min-width:82px;min-height:38px;white-space:nowrap}
+.readiness-body{padding-top:12px}
+.readiness-dismiss{margin-top:12px}
+.readiness-compact{padding-top:8px}
+.readiness-compact p{margin:0 0 8px}
+@media(max-width:420px){.readiness-head-actions{margin-left:0;width:100%;justify-content:space-between}.readiness-card .readiness-head>div:first-child{width:100%}}
+
+/* JR Performance 8.0 — Smart Movement Library */
+.jr8-filterbar{display:flex;align-items:end;gap:12px;flex-wrap:wrap;margin:14px 0}.jr8-filterbar label{flex:1 1 175px;min-width:0;color:#aaa;font-size:11px;letter-spacing:.09em}.jr8-filterbar select{display:block;width:100%;margin-top:6px;background:#18191b;color:#fff;border:1px solid #555;border-radius:12px;padding:12px}.jr8-favfilter{border:1px solid #777!important;background:transparent!important;color:#eee!important;border-radius:12px;min-height:46px}.jr8-favfilter.on{background:#35363a!important;border-color:#eee!important}.jr8-movement{display:flex!important;align-items:center!important;padding:0!important;min-height:76px}.jr8-movement-main{display:flex;flex:1;min-width:0;align-items:center;gap:10px;text-align:left;background:transparent!important;color:#fff!important;border:0!important;padding:12px!important}.jr8-movement-main .v71-movement-info{min-width:0;flex:1}.jr8-movement-main .v71-movement-info strong{overflow-wrap:anywhere}.jr8-favorite{flex:none!important;width:42px;height:46px;border:0!important;background:transparent!important;color:#a8a8b3!important;font-size:24px!important;padding:0!important}.jr8-favorite.on{color:#fff!important}.swap-exercise-actions{display:flex;gap:6px;flex-wrap:wrap}.swap-exercise-actions button{white-space:nowrap}.swap-original{font-size:12px;color:#b9bdc5;padding:9px 11px;border:1px solid #666;border-radius:9px;margin:10px 0}.swap-original button{background:none!important;border:0!important;color:white!important;text-decoration:underline;padding:2px 6px}.swap-overlay{z-index:10000}.swap-sheet{max-width:660px!important;max-height:min(90dvh,850px);overflow-y:auto;overscroll-behavior:contain}.swap-header{display:flex;justify-content:space-between;gap:12px;align-items:start}.swap-header h2{overflow-wrap:anywhere;font-size:clamp(18px,4vw,26px)}.swap-controls{display:flex;gap:8px;margin:12px 0}.swap-controls button{flex:1;min-width:0}.swap-sheet .v71-search-label{display:block;margin:10px 0;color:#bfc1c5}.swap-sheet input,.swap-sheet select{display:block;width:100%;margin:6px 0 12px;background:#1d1e21;color:#fff;border:1px solid #666;border-radius:10px;padding:12px}.swap-choice{display:flex!important;justify-content:space-between;gap:12px;width:100%;padding:14px 10px!important;margin:7px 0;background:#151517!important;border:1px solid #666!important;color:#fff!important;border-radius:12px;text-align:left;align-items:center}.swap-choice span:first-child{min-width:0}.swap-choice b,.swap-choice small{display:block;overflow-wrap:anywhere}.swap-choice small{color:#aaa;margin-top:4px}.swap-choice span:last-child{white-space:nowrap;font-size:10px;letter-spacing:.07em;color:#bbb}.jr8-no-video{border:1px dashed #747474;background:#161719;padding:26px 18px;text-align:center;border-radius:16px;margin:12px 0}.jr8-no-video p{color:#bbb;line-height:1.5}.v71-chips{flex-wrap:wrap!important}.v71-chip{width:auto!important;height:auto!important;min-width:fit-content!important;border-radius:100px!important;white-space:nowrap!important;padding:10px 13px!important}.workout-card .exercise-head{gap:8px}.workout-card .exercise-head>div:first-child{min-width:0}@media(max-width:380px){.swap-exercise-actions{width:100%;margin-top:8px}.workout-card .exercise-head{flex-wrap:wrap}.swap-choice{gap:6px}.swap-sheet{padding:15px!important}}

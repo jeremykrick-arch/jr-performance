@@ -12,3 +12,11 @@ self.addEventListener('fetch',event=>{let request=event.request;if(request.metho
 - Cache bumped; same local storage key and workout data.
 
 Version 5.3.4: Profile Save button and prominent Add Height or Weight action on the athlete profile. Fields auto-save on change.
+
+
+## Version 5.4 — Exercise Video Library
+- All 32 unique program movements now have a Video & Form button and a searchable video library.
+- Each exercise opens an in-app teaching panel with coaching cues, common mistakes, a targeted YouTube search, and a technique-review checkbox.
+- Parent/coach can paste a specific YouTube video URL per movement. It will play embedded in the panel where YouTube allows embedding. Video URLs and review status save with existing app data and JSON backups.
+- No unverified YouTube video has been preselected as an authoritative demonstration. Video playback requires internet.
+- All existing training, profile, schedule, navigation and data storage remain in place.

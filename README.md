@@ -1,24 +1,11 @@
-JR Performance v7.2 — Settings & Interface Update
+# JR Performance 7.4 — Responsive Design
 
-New: persistent settings gear in upper-right; dedicated settings landing page; athlete photo/profile shortcut; workout preferences, measurements, parent overview, and backup/data options organized under settings; five main tabs retained.
+Responsive update based on Version 7.3. Adapts the interface to compact phones (320px), standard phones, tablets, and desktop screens. Preserves the five-tab navigation, top-right Settings, original MP4 videos, and existing browser data schema.
 
-Installation: export a backup in the current app first, then upload the CONTENTS of this ZIP to the root of your GitHub Pages repository, retaining the videos/ directory. Refresh the installed PWA if necessary. Local browser data key remains unchanged.
+## Deploy to GitHub Pages
+1. Export a backup of JR’s data in the app before updating.
+2. Extract the ZIP and upload its contents (not the outer folder) to the repository root.
+3. Keep the `videos/` directory and filenames unchanged. If your repository already has the videos, you can upload just `index.html`, `style.css`, `sw.js` and leave the videos untouched.
+4. Wait for Pages deployment, then fully close and reopen the installed app.
 
-Existing exercise videos and training data structures are unchanged.
-
-# JR Performance 7.1 — Movements + Interface Refinement
-
-This is a complete replacement package for GitHub Pages. Extract the ZIP and upload the **contents**, preserving the `videos/` folder and existing filenames.
-
-## Changes
-- Restored **Movements** as a permanent fifth bottom-navigation tab.
-- Redesigned Movement Library with large dark cards, prominent play actions, searchable exercise list, category chips, and movement counts.
-- Fixed search-field focus loss when typing by updating results without rebuilding the search input.
-- Refined five-tab mobile layout and iPhone safe-area spacing.
-- Updated service-worker cache version.
-- Kept original videos, workout logging, progress, schedule, profile, and existing `jr-performance-v1` localStorage data schema.
-
-## Important
-Export a data backup before deploying. Replace all previous app files and keep the `videos` directory intact. Hard-refresh or reopen the installed app after GitHub Pages finishes deploying.
-
-The exercise videos remain stylized illustrative renders, not photorealistic 3D.
+Responsive rules are appended at the end of `style.css`; the app’s data format and training logic are unchanged. Test on your own iPhone; automated browser and JavaScript checks cannot guarantee every device behaves identically.

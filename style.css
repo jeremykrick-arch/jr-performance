@@ -390,3 +390,15 @@ body .set-row button.set-check-button:focus-visible{outline:3px solid #86efac!im
 body .set-row.done{opacity:1!important;background:rgba(34,197,94,.065)!important;border-radius:10px}
 @media (hover:hover){body .set-row button.set-check-button:not(.checked):hover{border-color:#e5e7eb!important;color:#fff!important}body .set-row button.set-check-button.checked:hover{background:#4ade80!important}}
 @media(prefers-reduced-motion:reduce){body .set-row button.set-check-button{transition:none!important}}
+
+/* v8.4: transparent incomplete checkboxes; yellow completed state */
+body .set-row button.set-check-button,
+body .set-row button.set-check-button:not(.checked){background:transparent!important;border:1.5px solid #747b84!important;color:#aeb5bf!important;box-shadow:none!important;border-radius:11px!important;}
+body .set-row button.set-check-button.checked{background:#facc15!important;border:1.5px solid #fde047!important;color:#181818!important;box-shadow:0 0 0 2px rgba(250,204,21,.18)!important;}
+body .set-row.done{opacity:1!important;background:rgba(250,204,21,.075)!important;border-radius:10px;}
+body .set-row button.set-check-button:focus-visible{outline:3px solid #fde047!important;outline-offset:2px;}
+@media(hover:hover){body .set-row button.set-check-button:not(.checked):hover{background:rgba(255,255,255,.06)!important;border-color:#d4d4d8!important;color:#fff!important;}body .set-row button.set-check-button.checked:hover{background:#fde047!important;}}
+
+/* v8.5 Smart Weight Progression */
+.strength-profile .strength-entry{border:1px solid rgba(255,255,255,.22);border-radius:16px;padding:16px;margin:16px 0;background:rgba(255,255,255,.025)}
+.strength-entry h3{margin:0 0 12px}.strength-inputs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.strength-inputs label{font-size:12px;color:#c7c7cc}.strength-inputs input{width:100%;min-width:0}.strength-entry-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px}.smart-weight-hint{display:flex;flex-wrap:wrap;align-items:center;gap:7px 12px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.12);color:#bfc0c7}.smart-weight-hint span{font-size:10px;letter-spacing:.1em}.smart-weight-hint b{color:#f4e267}.smart-weight-hint small{flex-basis:100%;line-height:1.4}@media(max-width:540px){.strength-inputs{grid-template-columns:1fr 1fr}.strength-inputs label:last-child{grid-column:1/-1}}

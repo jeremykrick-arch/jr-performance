@@ -1,12 +1,9 @@
-JR Performance 8.3 — Set Completion Checkmarks
+# JR Performance 8.5 — Smart Weight Progression
 
-Upload these three files to the ROOT of your existing GitHub Pages repository, replacing the existing copies:
-- app.js
-- style.css
-- sw.js
+Upload all root files to your GitHub Pages repository; keep the existing `videos/` folder unchanged. If upgrading from 8.4, replace `app.js`, `style.css`, and `sw.js`.
 
-No need to upload videos, movement_catalog.js, or other app files again.
+Settings → Strength profile: enter controlled working weights and reps or an estimated 1RM. The app estimates 1RM using Epley and prepopulates empty set weights when opening Train. Primary strength lifts use a conservative week-specific percentage; other exercises use prior completed working sets. Deloads and readiness modify or block suggestions. Existing entered weights are never overwritten. New movement swaps use their own prior history.
 
-Set buttons now show a checkmark outline before completion and a vivid green background with a dark checkmark after completion. Tap again to undo. Existing saved workout data and workout-date behavior remain unchanged.
+No max-effort testing required. These are illustrative training suggestions, not medical advice or biomechanically validated prescriptions. Supervise youth strength training and stop when pain is reported.
 
-Back up your data before updating. Close and reopen the installed app after GitHub Pages deploys if the old appearance is cached.
+LocalStorage key unchanged: `jr-performance-v1`. Back up before deployment.

@@ -1,8 +1,20 @@
-# JR Performance 6.4 — Original Videos Only
+# JR Performance 7.0 — Dark Experience
 
-Removed all RepDB animations, references, attribution and licensed assets. Every programmed exercise now uses its corresponding original JR Performance MP4 in `videos/` (30 unique videos covering 32 scheduled movement entries), including Barbell front squat.
+A dark-mode interface update inspired by modern workout tracking patterns. All existing exercise videos, 12-week workouts, athlete records, backups, and schedule remain available.
 
-The original videos are stylized shaded 2D anatomical-style animations, **not** photorealistic 3D and not biomechanically validated. Rely on qualified coaching for exercise form.
+## Changes
+- Redesigned athlete Home dashboard with a prominent Start Workout action, weekly date strip, session cards, and progress snapshots.
+- Four-tab bottom navigation: Home, Train, Progress, Schedule.
+- Movement Library and Profile remain available from Home and Train (and header avatar).
+- Refreshed workout cards, previous-session display, video buttons, and consistent dark-mode styling.
+- Existing localStorage key `jr-performance-v1` retained to preserve data on the same origin and browser.
+- Original videos only; no RepDB assets.
 
-## Deploy
-Back up training data first. Upload the entire contents of this folder (including `videos/`) to the existing GitHub Pages repository. The offline cache version has changed so older RepDB files should be removed from the app cache on update. Existing localStorage data and training features remain intact.
+## Installation
+1. In the existing app, export a JSON backup (Profile → Data & Backups).
+2. Unzip and upload **all contents** to the root of the existing GitHub Pages repository, including the `videos/` folder.
+3. Remove obsolete RepDB files from the repository if present; this package does not include them.
+4. Allow the updated service worker to activate; if the old UI persists, close and reopen the app or clear site cache (do not clear site data without a backup).
+
+## Notes
+Workout videos are original stylized anatomical illustrations, not photorealistic or biomechanically validated. The new interface does not alter stored training data or add AI recommendations. Tested via static syntax and package checks; iPhone/browser interactive testing remains necessary.

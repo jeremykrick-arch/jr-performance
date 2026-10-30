@@ -1,12 +1,7 @@
-# JR Performance 8.0 — Smart Movement Library
+# JR Performance 8.1 — Icon Refresh
 
-Expanded original library to 152 exercises, with search, categories, equipment filters, favorites and session-specific workout swaps.
+This release updates the bottom navigation, settings rows, workout Demo/Swap buttons, schedule event icons, and Home quick links with a consistent original SVG outline icon system. No icon font, CDN, subscription, or external library is required.
 
-## Installation
-Back up your existing JR Performance data. Upload the contents of this package to the root of your GitHub Pages repository. Keep `videos/` as a folder. If the videos are already hosted and unchanged, you can skip uploading them again. New file: `movement_catalog.js` MUST be uploaded alongside app.js, program.js, style.css, index.html, and sw.js.
+Retains all Version 8.0 features and the original videos. To update an existing installation, replace `app.js`, `style.css`, `index.html`, and `sw.js`. Existing `videos/` and `movement_catalog.js` can remain unchanged.
 
-## Swapping
-Train > choose a session > SWAP on an exercise. Recommended choices share its movement pattern and training objective. All movements allows broader choices, but these may change the program's purpose. Changes apply only to the chosen week/day and are saved locally under the same `jr-performance-v1` storage key. Use Restore to return to the original exercise. Logged sets remain under their original exercise name.
-
-## Limitations
-The expanded library does not include new exercise videos; only original existing videos are marked VIDEO. New exercise demos show a clearly labeled unavailable state. Exercise suggestions are not biomechanically validated or medical advice. Consult JR's coach before new movements.
+The localStorage key is unchanged. Export a backup before updating. Refresh or close/reopen an installed PWA to clear its old cache.

@@ -1,9 +1,12 @@
-JR Performance 8.17 — STABLE ROLLBACK
+JR Performance 8.18 - Mobile compatibility and Train navigation repair
 
-Restores app.js from v8.12 and visual styles from v8.13, before v8.14-v8.16 navigation fixes. index.html uses fresh ?v=817 cache-busting links. Includes all required root-level app files (no video files).
+Replace these files in the root of your GitHub repository:
+- app.js
+- index.html
+- sw.js
 
-Upload/replace ALL root-level files in this ZIP in the repository root (NOT a subfolder). Keep the existing videos/ folder untouched. This does not reset localStorage or workout records. Do NOT delete the installed app or clear website data.
+The update provides a fallback for structuredClone on older iOS Safari versions and avoids Array.at(), which can also fail on older browsers. Cache version and script URLs are bumped.
 
-After GitHub Pages deploys, open the website in Safari and reload, then close/reopen the installed app. If still broken, please send a screenshot or error message; do not clear storage.
+Keep style.css, program.js, movement_catalog.js and videos/ unchanged. Do not uninstall the app or clear site data; workouts are stored in localStorage.
 
-This is a rollback, not a verified iPhone bug fix.
+Testing: JavaScript syntax and offline simulated navigation tested; NOT tested on a physical iPhone.

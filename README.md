@@ -1,52 +1,12 @@
-# JR Performance v5.2 — Black / White / Silver
-
-An offline-capable, mobile-first workout app for JR. Includes all 36 Monday/Thursday/Saturday workouts, 12-week training phases, set logging, conservative progression suggestions, pre-workout readiness, baseball schedule and workload logs, performance scorecard, achievements, parent overview, exercise library, rest timers, JSON backups and CSV exports.
-
-## Install / update on GitHub Pages
-
-1. **Export a JSON backup from the old app first.**
-2. Extract this ZIP and upload all web files to the **root** of your existing `jr-performance` repository, replacing older files. `README.md` and `supabase_setup.sql` may also be uploaded; the SQL file contains no secrets.
-3. Commit. Keep GitHub Pages configured to deploy from `main` / `(root)`.
-4. After deployment, open `https://jeremykrick-arch.github.io/jr-performance/` in Safari. Refresh the page; if the older version persists, close/reopen the installed app or clear the site's cached data **only after exporting a backup**.
-5. Safari Share → Add to Home Screen.
-
-## Data preservation
-
-This app continues using the same `localStorage` key (`jr-performance-v1`) and retains previous session and performance-test records. All new fields are additive. Data remains local to the browser and device unless cloud backup is explicitly configured. Clearing browser storage may erase records. Do not store private medical details in the public repository.
-
-## Optional parent-managed Supabase cloud backup
-
-**Cloud sync is not active until you set it up.** A parent must create and manage a Supabase project and login account. In Supabase's SQL editor, run `supabase_setup.sql` to enable a per-user, row-level-security-protected backup table. Enable Supabase email/password authentication, create/confirm a parent account, then in JR Performance → Profile → Data & cloud backup enter the project's HTTPS URL and **public anon/publishable key**, sign in, and upload a backup. On another device, sign in and **restore** before enabling auto-backup. Do not put service-role keys in the app. Cloud backups are a last-write-wins snapshot, **not real-time conflict-free multi-device sync**. Avoid using both devices simultaneously. For sensitive data, review Supabase privacy settings and child data policies before enabling.
-
-## Features and safeguards
-
-- Smart progression suggestions are **optional**, based on prior completed sets, technique and readiness; they never overwrite recorded weights.
-- Recovery weeks 4, 8, 12 have reduced sets; pain flags suspend progression suggestions.
-- Thursday workout is intentionally moderate before Dan Kennon's 7 PM hitting lesson.
-- Workout modification and rest are legitimate; this is not medical advice or a replacement for coaching.
-- Exercise videos open uncurated YouTube search results (requires internet).
-- Parent overview is a **local view** of the same data, not separate secure parent login.
-- Schedule edits are stored locally. Changing the recurring schedule does not change the program's Monday/Thursday/Saturday exercise allocation.
-
-## Testing
-
-Serve locally (`python -m http.server 8000`) and test on iPhone Safari after publishing. Service workers require HTTPS or localhost. Verify old backup restore, set logging, timers, calendar, charts, offline mode, and cloud login before relying on the app.
-
-## Version 5.1 profile upgrade
-- Athlete identity card, optional baseball details, jersey, editable goals, weekly completion, personal record links, and organized profile menus.
-- Data remains in the existing `jr-performance-v1` browser storage record. Export a backup before upgrading.
-- No public social profile or photo upload; profile is private to device unless parent enables optional cloud backup.
-
-## Version 5.2 branding
-All team branding has been removed from visible app screens and app metadata. The theme is black, white, and silver. Existing saved team data is retained internally for compatibility but is not displayed.
+const CACHE='jr-performance-v5-3-3-silver-nav-avatar-20261030';
+const ASSETS=['./','./index.html','./style.css','./program.js','./app.js','./manifest.webmanifest','./icon-192.png','./icon-512.png'];
+self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)));self.skipWaiting()});
+self.addEventListener('activate',event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))));self.clients.claim()});
+self.addEventListener('fetch',event=>{let request=event.request;if(request.method!=='GET'||new URL(request.url).origin!==self.location.origin)return;event.respondWith(fetch(request).then(response=>{if(response.ok){let clone=response.clone();caches.open(CACHE).then(c=>c.put(request,clone))}return response}).catch(()=>caches.match(request).then(x=>x||caches.match('./index.html'))))});
 
 
-## Version 5.3 — Athlete development
-Profile photo upload (locally resized), removal, dated height and weight measurements, history and charts. Measurements are saved in the existing `jr-performance-v1` data and included in JSON backup/cloud sync. Profile pictures are stored as compressed images in the same data; browser storage capacity varies. Export a backup before updating.
-
-
-## v5.3.1 Navigation visibility fix
-Corrected a dark-theme CSS selector that made the inactive bottom navigation text/icons nearly invisible. All five navigation tabs (Home, Train, Schedule, Progress, Profile) now have explicit contrasting colors and a five-column layout. Updated the service-worker cache identifier to force asset refresh. Existing workout data remains stored under the same localStorage key.
-
-## v5.3.2 navigation contrast update
-The bottom navigation bar now uses a medium silver/graphite background (#424a53), white inactive icons/labels, and a light silver active tab with dark text. No JavaScript logic or saved-data schema was changed. The service worker cache key was incremented.
+## Version 5.3.3
+- Silver bottom navigation (light silver background, dark inactive buttons, dark active pill with white text).
+- Profile photo / initials shown in the header on every page; tapping opens Profile.
+- Header name reflects editable athlete display name.
+- Cache bumped; same local storage key and workout data.

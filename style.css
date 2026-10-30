@@ -102,3 +102,5 @@ html body #bottomNav button.active .ico{color:#fff!important}
 .repdb-stage{background:#111317;border:1px solid #555c63;border-radius:16px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;min-height:300px;padding:12px}
 .repdb-stage img{width:100%;max-width:380px;height:340px;object-fit:contain}
 .repdb-stage .illustration-caption{position:absolute;bottom:10px;left:12px;right:12px;text-align:center;background:#121416d9;color:#eef0f2;padding:5px;border-radius:8px;font-size:11px}
+
+.repdb-stage{flex-direction:column;gap:8px;min-height:360px;background:#191c20}.repdb-stage img{display:block;width:min(100%,420px);height:auto;min-height:250px;aspect-ratio:1/1;object-fit:contain}.repdb-status{font-size:12px;color:#e1e5e9;padding-bottom:30px}.repdb-stage .illustration-caption{pointer-events:none}

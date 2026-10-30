@@ -10,3 +10,10 @@ Every unique exercise in the 12-week program now has an individualized four-phas
 - Attribution: Exercise data & images: RepDB (https://repdb.co). Preview license: CC BY-NC 4.0 (see REPDB_LICENSE.md). Noncommercial use only.
 - Animated WebP loops by default; does not offer pause or speed controls.
 - Backup existing data before deploying.
+
+## v6.0.1 animation loading fix
+- Forces eager loading of the bundled front squat animated WebP.
+- Displays loading / loaded / failed feedback within the exercise guide.
+- Updates the service worker cache identifier to refresh installed PWA assets.
+- Only Front Squat has a licensed RepDB animation in this package; other exercises use existing illustrations.
+- Test: Movement Library → Barbell front squat → Watch Guide.

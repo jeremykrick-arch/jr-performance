@@ -1,6 +1,8 @@
-JR Performance v8.22 — Clickable Gym Schedule
+JR Performance 8.23 — Monday stability
 
-Gym dates on the Schedule calendar open that day in Train. Weekly lineup gym rows and selected-day gym rows also open Train. Other dates and activities remain on Schedule. Saturday-first training week is preserved.
+Complete site package: all core files and videos.
+Quick update from v8.22: app.js and sw.js.
 
-Quick update: replace app.js, style.css and sw.js.
-Full reinstall: upload all root files and the videos folder. Do not flatten the videos directory.
+Fixes: optional weight suggestions cannot block Train; isolated workout-count and layout failures; safe timer rendering; Schedule navigation fallback. If a card fails, technical details are shown.
+
+No claim of reproducing the reported iPhone failure. Test Week 1 Monday on the phone.

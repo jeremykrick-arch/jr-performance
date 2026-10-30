@@ -1,5 +1,5 @@
-JR Performance v8.12 — Athlete Profile Refresh
+JR Performance v8.13 — Profile navigation contrast
 
-Replace app.js, style.css and sw.js in the GitHub repository. Do not delete or reupload videos or other files.
+Replace style.css and sw.js at repository root. Do not replace app.js, program.js, movement_catalog.js or videos.
 
-Redesigned athlete profile with compact identity header, yellow-accent stats, training progress, measurements, goal, and organized navigation. Existing profile data and training history remain unchanged.
+Quick Access and Profile & Settings now use distinct medium-charcoal navigation rows, high-contrast white titles, lighter descriptions, yellow icons and chevrons, and accessible focus styles. No data changes.

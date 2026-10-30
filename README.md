@@ -20,3 +20,7 @@ Version 5.3.4: Profile Save button and prominent Add Height or Weight action on 
 - Parent/coach can paste a specific YouTube video URL per movement. It will play embedded in the panel where YouTube allows embedding. Video URLs and review status save with existing app data and JSON backups.
 - No unverified YouTube video has been preselected as an authoritative demonstration. Video playback requires internet.
 - All existing training, profile, schedule, navigation and data storage remain in place.
+
+
+## v5.4.1 embedded video UX
+Saved coach-approved YouTube videos play in the exercise dialog inside the app. Paste a URL, save, and the embedded player appears. The external search is optional only. Internet and video owner embedding permission are required.

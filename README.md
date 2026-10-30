@@ -1,7 +1,5 @@
-JR Performance 8.9 — Subtle Yellow Accents
+JR Performance 8.10 — Consistent Yellow Icons & Calendar
 
-Upgrade from v8.8: replace style.css and sw.js only. app.js is included unchanged for reference.
+Upload app.js, style.css and sw.js to the repository root, replacing those files. Keep other files and videos unchanged.
 
-Changes: yellow active bottom navigation icons, calendar selected day and event dots, settings icons, schedule event icons, progress bars and a few action icons. Existing yellow completed set checkmarks and workout stars retained. Dark backgrounds and most typography remain monochrome.
-
-No changes to stored data, exercises, videos or workout logic.
+Updates: Home navigation arrows and quick links, current day and workout markers, calendar month arrows and dates, workout chevrons, settings/profile arrows. No changes to workout data or storage keys.

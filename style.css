@@ -467,3 +467,27 @@ body .v7-tool-grid .ui-icon{color:#facc15!important}
 body .v7-session-icon{color:#facc15!important;background:#292720!important}
 /* Keep existing yellow set checks and rating stars unchanged. */
 @media(prefers-reduced-motion:reduce){body nav#bottomNav button.active{transition:none!important}}
+
+/* v8.10 — unified understated yellow navigation and calendar accents */
+:root{--jr-accent:#facc15;--jr-accent-muted:rgba(250,204,21,.11)}
+/* Home: arrow glyphs and quick links use one accent, without filled yellow buttons. */
+body .v7-round{color:var(--jr-accent)!important;border-color:#554c2b!important}
+body .v7-section-title button{color:#e7cf6a!important}
+body .v7-chevron,body .v7-tool>span:last-child{color:var(--jr-accent)!important}
+body .v7-primary span{color:#816000!important}
+body .v7-week-strip .week-day.today{border-color:#d5ad35!important;background:var(--jr-accent-muted)!important}
+body .v7-week-strip .week-day.today b{color:#ffe27a!important}
+body .v7-week-strip .week-day i.gym{background:var(--jr-accent)!important}
+body .v7-stat-track i{background:var(--jr-accent)!important}
+/* Schedule: month arrows, dates, event dots and the selected date share the accent. */
+body .calendar-nav-arrow{color:var(--jr-accent)!important;border-color:#5a5032!important;background:#25231e!important;min-width:43px;min-height:43px;font-size:25px;line-height:1}
+body .calendar-grid .cal-day:not(.chosen){background:#202329!important;border-color:#3a3e45!important}
+body .calendar-grid .cal-day.chosen{background:var(--jr-accent-muted)!important;color:#ffe27a!important;border-color:var(--jr-accent)!important}
+body .calendar-grid .cal-day i{color:var(--jr-accent)!important}
+/* Exercise cards, menus and Settings: consistent secondary navigation arrows. */
+body .compact-chevron,body .compact-more{color:#e4ca62!important}
+body .profile-chevron,body .settings-chevron{color:#e4ca62!important}
+body .settings-back{color:#e4ca62!important}
+/* Subtle keyboard focus on navigation elements. */
+body .v7-round:focus-visible,body .week-day:focus-visible,body .calendar-nav-arrow:focus-visible,body .compact-chevron:focus-visible{outline:2px solid var(--jr-accent)!important;outline-offset:2px}
+@media(hover:hover){body .calendar-nav-arrow:hover{background:#353021!important}body .week-day:hover{border-color:#766532!important}}

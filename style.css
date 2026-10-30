@@ -538,3 +538,14 @@ body .profile-v812 .profile-v812-links .profile-chevron{color:#facc15!important;
 body .profile-v812 .profile-v812-links .profile-menu:focus-visible{outline:2px solid #facc15!important;outline-offset:2px!important;}
 @media(hover:hover){body .profile-v812 .profile-v812-links .profile-menu:hover{background:#343b43!important;border-color:#828b96!important;}}
 @media(max-width:390px){body .profile-v812 .profile-v812-links{padding:14px!important;}body .profile-v812 .profile-v812-links .profile-menu{padding:10px!important;}}
+
+/* v8.22: Schedule gym shortcuts (touch-friendly and accessible). */
+body button.schedule-workout-link{display:flex;align-items:center;gap:10px;width:100%;min-height:64px;padding:11px 8px!important;text-align:left;background:rgba(250,204,21,.035)!important;color:#f7f8fa!important;border:1px solid rgba(250,204,21,.16)!important;border-radius:11px!important;margin:6px 0;cursor:pointer;box-shadow:none!important;}
+body button.schedule-workout-link .event-body{min-width:0;flex:1;}
+body button.schedule-workout-link .event-body b{color:#f7f8fa!important;}
+body button.schedule-workout-link .event-body small{color:#bfc4cd!important;}
+body button.schedule-workout-link .schedule-workout-arrow{color:#facc15!important;font-size:22px;font-weight:800;line-height:1;}
+body button.schedule-workout-link .pill{flex-shrink:0;}
+body button.schedule-workout-link:focus-visible{outline:2px solid #facc15!important;outline-offset:2px;}
+@media(hover:hover){body button.schedule-workout-link:hover{background:rgba(250,204,21,.1)!important;border-color:rgba(250,204,21,.4)!important;}}
+body .calendar-grid .cal-day{touch-action:manipulation;}

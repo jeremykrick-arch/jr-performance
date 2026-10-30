@@ -1,9 +1,6 @@
-JR Performance — Saturday-first training week
+JR Performance v8.22 — Clickable Gym Schedule
 
-Training week: Saturday, Sunday, Monday, Tuesday, Wednesday, Thursday, Friday.
-Workouts (unchanged): Saturday total body, Monday lower body, Thursday upper body.
-Week 1 opens on Saturday; Home calendar and Schedule calendar start on Saturday.
+Gym dates on the Schedule calendar open that day in Train. Weekly lineup gym rows and selected-day gym rows also open Train. Other dates and activities remain on Schedule. Saturday-first training week is preserved.
 
-Install: Extract ZIP and upload root-level files to GitHub Pages. Upload videos/*.mp4 into the videos folder. Replace all matching files. Keep folder structure.
-
-The application uses the same localStorage key as previous versions.
+Quick update: replace app.js, style.css and sw.js.
+Full reinstall: upload all root files and the videos folder. Do not flatten the videos directory.

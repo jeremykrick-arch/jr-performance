@@ -1,5 +1,7 @@
-JR Performance v8.13 — Profile navigation contrast
+JR Performance v8.14 — Train movements recovery
 
-Replace style.css and sw.js at repository root. Do not replace app.js, program.js, movement_catalog.js or videos.
+Replace app.js, style.css and sw.js in the repository root. Keep program.js, movement_catalog.js, and videos/ in place.
 
-Quick Access and Profile & Settings now use distinct medium-charcoal navigation rows, high-contrast white titles, lighter descriptions, yellow icons and chevrons, and accessible focus styles. No data changes.
+Fixes: Restore all workout movements button, visible counts of active/skipped/removed movements, recovery message if none active, and safer movement catalog lookup. Existing workout data is retained.
+
+If the workout is still blank, verify program.js and movement_catalog.js are in the repository root, then refresh the installed app.

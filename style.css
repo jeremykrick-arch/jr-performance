@@ -538,3 +538,14 @@ body .profile-v812 .profile-v812-links .profile-chevron{color:#facc15!important;
 body .profile-v812 .profile-v812-links .profile-menu:focus-visible{outline:2px solid #facc15!important;outline-offset:2px!important;}
 @media(hover:hover){body .profile-v812 .profile-v812-links .profile-menu:hover{background:#343b43!important;border-color:#828b96!important;}}
 @media(max-width:390px){body .profile-v812 .profile-v812-links{padding:14px!important;}body .profile-v812 .profile-v812-links .profile-menu{padding:10px!important;}}
+
+/* v8.14: keep the daily workout list visible and recoverable */
+.movement-toolbar-actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+.train-recovery{border:1px solid rgba(250,204,21,.45)!important;background:#202024!important;color:#fff!important;margin:12px 0!important}
+.train-recovery b,.train-recovery h2{color:#fff!important}
+.train-recovery p{color:#d5d5d8!important;line-height:1.5}
+.train-recovery button{background:#facc15!important;color:#161616!important}
+.compact-workout-card{display:block!important;visibility:visible!important}
+.compact-card-top{display:flex!important;visibility:visible!important}
+.compact-card-title strong{color:#f7f7f7!important}
+@media(max-width:430px){.movement-order-toolbar{align-items:flex-start}.movement-toolbar-actions{max-width:180px}.movement-toolbar-actions button{font-size:11px!important;padding:8px!important}}

@@ -1,9 +1,8 @@
-# JR Performance 6.3 — Original Rendered Movement Videos
+# JR Performance 6.4 — Original Videos Only
 
-30 new MP4 video loops (covering all 32 scheduled exercise entries) are bundled under `videos/`, one per distinct programmed exercise. Videos play offline after caching by the browser.
+Removed all RepDB animations, references, attribution and licensed assets. Every programmed exercise now uses its corresponding original JR Performance MP4 in `videos/` (30 unique videos covering 32 scheduled movement entries), including Barbell front squat.
 
-**Visual quality disclosure:** These are original, shaded **2D anatomical-style motion renderings** with highlighted working regions, NOT photorealistic 3D athletes, not professional motion capture, and not validated biomechanics. The visual standard of the supplied photorealistic reference is not fully achieved. Use qualified coaching for exercise form.
+The original videos are stylized shaded 2D anatomical-style animations, **not** photorealistic 3D and not biomechanically validated. Rely on qualified coaching for exercise form.
 
-The previous app functionality and localStorage key are preserved. Back up athlete data before replacing the GitHub Pages files. Deploy all files, including the `videos/` folder. iOS may require tapping Play due to autoplay settings.
-
-The older RepDB preview assets are retained, subject to the included license, but the new video player takes precedence for the 32 programmed movements.
+## Deploy
+Back up training data first. Upload the entire contents of this folder (including `videos/`) to the existing GitHub Pages repository. The offline cache version has changed so older RepDB files should be removed from the app cache on update. Existing localStorage data and training features remain intact.

@@ -1,12 +1,9 @@
-# JR Performance 6.1 — Original Motion Studio Prototype
+# JR Performance 6.3 — Original Rendered Movement Videos
 
-Three original continuously interpolated side-view motion studies:
-- Barbell back squat
-- Trap bar deadlift
-- Barbell strict press
+30 new MP4 video loops (covering all 32 scheduled exercise entries) are bundled under `videos/`, one per distinct programmed exercise. Videos play offline after caching by the browser.
 
-Open **Movements** and tap **Motion Studio** on these exercises. Includes pause/play, replay, speed and timeline scrubbing. No external video, subscription or third-party animation license is needed for these three new studies.
+**Visual quality disclosure:** These are original, shaded **2D anatomical-style motion renderings** with highlighted working regions, NOT photorealistic 3D athletes, not professional motion capture, and not validated biomechanics. The visual standard of the supplied photorealistic reference is not fully achieved. Use qualified coaching for exercise form.
 
-**Accuracy note:** This is a 2.5D illustrated motion prototype, not a 3D anatomical model or biomechanically validated exercise video. The front squat retains the separate RepDB CC BY-NC preview asset and attribution. All other exercise guides remain available.
+The previous app functionality and localStorage key are preserved. Back up athlete data before replacing the GitHub Pages files. Deploy all files, including the `videos/` folder. iOS may require tapping Play due to autoplay settings.
 
-Deployment: export backup first, then replace files in your existing GitHub Pages repo. Keep the `repdb/` directory. The service worker cache version has changed.
+The older RepDB preview assets are retained, subject to the included license, but the new video player takes precedence for the 32 programmed movements.

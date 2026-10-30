@@ -1,7 +1,9 @@
-JR Performance v8.14 — Train movements recovery
+JR Performance 8.16 — Mobile navigation repair
 
-Replace app.js, style.css and sw.js in the repository root. Keep program.js, movement_catalog.js, and videos/ in place.
+Upload index.html, app.js, and sw.js to the repository root. style.css and supporting files are included in the full archive but unchanged from 8.15.
 
-Fixes: Restore all workout movements button, visible counts of active/skipped/removed movements, recovery message if none active, and safer movement catalog lookup. Existing workout data is retained.
+This update makes bottom navigation clicks use a persistent delegated handler, adds a visible recovery message on navigation errors, and bumps script cache URLs. It does not reset local storage.
 
-If the workout is still blank, verify program.js and movement_catalog.js are in the repository root, then refresh the installed app.
+After publishing, open the website in Safari, refresh, then fully close and reopen the installed home-screen app. Do not uninstall or clear Safari website data without exporting a backup.
+
+No physical iPhone testing was performed.

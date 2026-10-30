@@ -282,3 +282,39 @@ body .timer-dock{z-index:160}
 @media(prefers-reduced-motion:reduce){
   body button:not(.secondary),body .v7-session-row{transition:none!important}
 }
+
+
+/* JR Performance 7.5 — refined outlined Movement Library */
+body button.v71-movement,
+body button.v71-movement:hover,
+body button.v71-movement:focus-visible {
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  border:1px solid rgba(238,241,245,.66)!important;
+  color:#f5f6f8!important;
+}
+body button.v71-movement{border-radius:15px;transition:border-color .18s ease,transform .18s ease;}
+body button.v71-movement:hover{border-color:#fff!important;transform:translateY(-1px)}
+body button.v71-movement:active{transform:scale(.99)}
+body .v71-movement-info strong{color:#fff!important}
+body .v71-movement-info small{color:#adb3bc!important}
+body .v71-movement-index{color:#c0c5cc!important}
+body .v71-play{background:transparent!important;border:1px solid #8f969f!important;color:#fff!important}
+/* Transparent settings button with a simple grey outline gear icon */
+body header button.header-settings,
+body header button.header-settings.selected,
+body header button.header-settings:hover,
+body header button.header-settings:focus-visible{
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  border:0!important;
+  border-radius:0!important;
+  color:#a8adb5!important;
+}
+body header button.header-settings{padding:8px!important;min-width:40px;min-height:40px}
+body header button.header-settings svg{stroke:#a8adb5!important;fill:none!important;width:23px;height:23px}
+body header button.header-settings:hover svg{stroke:#f1f3f5!important}
+body header button.header-settings:focus-visible{outline:2px solid #a8adb5!important;outline-offset:1px}
+@media(max-width:390px){body button.v71-movement{padding:13px 10px!important;gap:9px!important}}

@@ -9,3 +9,7 @@ Responsive update based on Version 7.3. Adapts the interface to compact phones (
 4. Wait for Pages deployment, then fully close and reopen the installed app.
 
 Responsive rules are appended at the end of `style.css`; the app’s data format and training logic are unchanged. Test on your own iPhone; automated browser and JavaScript checks cannot guarantee every device behaves identically.
+
+
+## Version 7.5 — Outline Refresh
+Movement Library cards now have transparent backgrounds and fine white outlines. Header settings gear is grey outline without a button background. Existing videos and saved data structures are unchanged.

@@ -381,3 +381,12 @@ nav#bottomNav button .nav-label{display:block;font-size:inherit;line-height:1.15
 .swap-exercise-actions .ui-icon{width:15px;height:15px;vertical-align:-3px;margin-right:3px}
 .v7-tool-grid .ui-icon{width:24px;height:24px;display:block;margin-bottom:9px}
 @media(max-width:360px){nav#bottomNav button .ico .ui-icon{width:21px;height:21px}}
+
+/* v8.3: accessible, high-contrast completion control */
+body .set-row button.set-check-button{display:grid;place-items:center;width:100%;min-height:46px;padding:6px!important;border:1.5px solid #69727d!important;border-radius:12px!important;background:#1b2026!important;color:#bfc6ce!important;box-shadow:none!important;transition:background .15s ease,border-color .15s ease,transform .15s ease}
+body .set-row button.set-check-button .set-check-icon{display:block;width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+body .set-row button.set-check-button.checked{background:#22c55e!important;border-color:#4ade80!important;color:#062a16!important;box-shadow:0 0 0 2px #22c55e20!important}
+body .set-row button.set-check-button:focus-visible{outline:3px solid #86efac!important;outline-offset:2px}
+body .set-row.done{opacity:1!important;background:rgba(34,197,94,.065)!important;border-radius:10px}
+@media (hover:hover){body .set-row button.set-check-button:not(.checked):hover{border-color:#e5e7eb!important;color:#fff!important}body .set-row button.set-check-button.checked:hover{background:#4ade80!important}}
+@media(prefers-reduced-motion:reduce){body .set-row button.set-check-button{transition:none!important}}

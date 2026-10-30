@@ -1,7 +1,12 @@
-# JR Performance 8.1 — Icon Refresh
+JR Performance 8.3 — Set Completion Checkmarks
 
-This release updates the bottom navigation, settings rows, workout Demo/Swap buttons, schedule event icons, and Home quick links with a consistent original SVG outline icon system. No icon font, CDN, subscription, or external library is required.
+Upload these three files to the ROOT of your existing GitHub Pages repository, replacing the existing copies:
+- app.js
+- style.css
+- sw.js
 
-Retains all Version 8.0 features and the original videos. To update an existing installation, replace `app.js`, `style.css`, `index.html`, and `sw.js`. Existing `videos/` and `movement_catalog.js` can remain unchanged.
+No need to upload videos, movement_catalog.js, or other app files again.
 
-The localStorage key is unchanged. Export a backup before updating. Refresh or close/reopen an installed PWA to clear its old cache.
+Set buttons now show a checkmark outline before completion and a vivid green background with a dark checkmark after completion. Tap again to undo. Existing saved workout data and workout-date behavior remain unchanged.
+
+Back up your data before updating. Close and reopen the installed app after GitHub Pages deploys if the old appearance is cached.

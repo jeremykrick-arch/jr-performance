@@ -1,5 +1,7 @@
-JR Performance 8.20 — version-matched core recovery
+JR Performance 8.24 — Null Set Fix
 
-Upload ALL 9 app files to the repository root (README optional). Do not remove videos/.
-Includes movement-level error isolation, navigation safeguard, and consistent cache/version references.
-Does not alter the storage key. Clean-data rendering verified in Node VM; physical iPhone not tested.
+Root cause from iPhone screenshot: null is not an object (evaluating x.done).
+Null-safe set completion, previous-performance and progress calculations.
+
+Quick update: replace app.js and sw.js.
+Full reinstall: upload all files preserving videos/ directory.

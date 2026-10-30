@@ -408,3 +408,33 @@ body .set-row button.set-check-button:focus-visible{outline:3px solid #fde047!im
 
 /* v8.7 five-star workout finish */
 .finish-rating-card{text-align:center;padding:24px 16px}.finish-rating-card h2{margin-bottom:6px}.session-stars{display:flex;justify-content:center;gap:clamp(4px,2vw,12px);margin:16px auto 8px;max-width:370px}.session-star{flex:1;min-width:0;max-width:66px;height:62px;background:transparent!important;border:1px solid #4b4b53!important;border-radius:13px!important;color:#62636a!important;font-size:clamp(27px,7vw,39px)!important;line-height:1;cursor:pointer;padding:0!important;transition:color .12s,border-color .12s,transform .12s}.session-star.selected{color:#ffd54a!important;border-color:#ffd54a!important;background:rgba(255,213,74,.08)!important}.session-star:active{transform:scale(.94)}.session-star:focus-visible{outline:2px solid #ffd54a;outline-offset:2px}.rating-caption{min-height:24px;color:#d7d7dc;font-weight:600;margin:6px 0 18px}.finish-workout-button{min-height:54px}.rating-average{font-size:32px;font-weight:800;color:#ffd54a}.rating-average span{font-size:13px;color:#a5a5ac}.rating-history{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.rating-history-pill{border:1px solid #4a4a50;border-radius:12px;padding:7px 10px;color:#ffd54a;font-size:12px}@media(max-width:360px){.session-star{height:52px}}
+
+/* v8.8 compact, action-focused movement cards */
+.compact-workout-card{padding:12px!important;margin-bottom:10px!important;border-radius:16px!important}
+.compact-card-top{display:flex;align-items:center;gap:8px;min-width:0}
+.compact-card-title{flex:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:4px;background:transparent!important;color:#f4f4f5!important;border:0!important;padding:6px 0!important}
+.compact-card-title strong{font-size:clamp(15px,3.5vw,19px);line-height:1.25;overflow-wrap:anywhere}
+.compact-card-title span{font-size:11px;color:#adb3bd;font-weight:500;line-height:1.4}
+.compact-drag,.compact-chevron,.compact-more{flex:none;background:transparent!important;color:#cbd0d7!important;border:1px solid #444b54!important;border-radius:10px!important;width:36px;min-height:40px;padding:0!important;display:grid;place-items:center;font-size:20px}
+.compact-drag{touch-action:none;cursor:grab;font-size:17px}
+.compact-more{font-size:25px;line-height:1}
+.compact-card-body{padding-top:11px;margin-top:10px;border-top:1px solid #333a43}
+.compact-set-head,.compact-set-row{display:grid;grid-template-columns:25px minmax(43px,.85fr) minmax(54px,1fr) minmax(48px,.8fr) 43px;gap:5px;align-items:center;text-align:center}
+.compact-set-head{color:#aeb4bd;font-size:9px;letter-spacing:.03em;font-weight:750;margin-bottom:8px}
+.compact-set-row{padding:5px 0;min-height:51px}
+.compact-set-row.done{background:rgba(250,204,21,.075);border-radius:10px}
+.compact-set-row>span:first-child{font-size:12px;color:#cdd0d6}
+.compact-previous{font-size:11px;color:#adb3bd;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.compact-set-row input{box-sizing:border-box;width:100%;min-width:0;min-height:44px;padding:8px 3px!important;text-align:center;font-size:16px!important;border-radius:9px!important}
+.compact-set-row .set-check-button{display:grid;place-items:center;width:100%;min-height:44px;padding:5px!important;border:1.5px solid #747b84!important;border-radius:11px!important;background:transparent!important;color:#aeb5bf!important}
+.compact-set-row .set-check-button .set-check-icon{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.compact-set-row .set-check-button.checked{background:#facc15!important;border-color:#fde047!important;color:#181818!important}
+.compact-card-actions,.compact-options,.compact-load-tools{display:flex;flex-wrap:wrap;gap:8px}
+.compact-card-actions{margin-top:12px}
+.compact-card-actions button,.compact-options button,.compact-load-tools button{background:#24282d!important;border:1px solid #49505a!important;color:#f0f0f2!important;border-radius:10px!important;min-height:40px;padding:8px 12px!important;font-size:12px;font-weight:650}
+.compact-options{margin-top:10px;padding:10px 0;border-top:1px solid #353b43}
+.compact-details{margin-top:12px;padding:12px;border:1px solid #444a52;background:#1d2025;border-radius:12px;font-size:12px;line-height:1.55;color:#c9ced5}
+.compact-details p{margin:6px 0}
+.compact-load-tools{margin-top:10px}
+.movement-complete .compact-card-title strong{color:#f6e59b}
+@media(max-width:380px){.compact-workout-card{padding:9px!important}.compact-card-top{gap:5px}.compact-drag,.compact-chevron,.compact-more{width:32px}.compact-set-head,.compact-set-row{grid-template-columns:20px minmax(37px,.8fr) minmax(47px,1fr) minmax(43px,.8fr) 39px;gap:3px}.compact-previous{font-size:10px}.compact-set-head{font-size:8px}}

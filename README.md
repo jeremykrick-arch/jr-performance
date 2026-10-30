@@ -1,7 +1,16 @@
-JR Performance 8.7 — Workout Ratings
+# JR Performance v8.8 — Compact Workout Cards
 
-Replace app.js, style.css, and sw.js in your GitHub repository. Existing videos and movement_catalog.js do not need to be uploaded again.
+## Install over v8.7
+Replace **app.js**, **style.css**, and **sw.js** in the repository root. Keep the other files, including `videos/`, unchanged.
 
-Finish Workout now uses a 1–5 star rating and Finish Workout button. A rating is required to finish a session. The selected rating is stored with the session, shown in Progress with an average and recent history, and remains editable. Previously completed workouts remain unchanged.
+## Changes
+- Compact movement header: name, sets/reps, suggested weight, progress.
+- Tap movement title or chevron to expand/collapse; first incomplete movement opens by default.
+- Completed movement collapses automatically after the last set.
+- Expanded set table: set number, previous set, editable weight/reps, yellow completion checkmark.
+- Demo, Swap, and More controls; More contains skip, remove, and details.
+- Drag handle remains accessible in compact header.
+- Coaching and progression details are hidden unless requested.
+- No data migration or changes to existing localStorage key.
 
-For the existing progression algorithm, ratings 4–5 count as good technique and 1–3 as needs-work; a subjective star rating is not a substitute for actual technique assessment.
+JavaScript syntax and ZIP integrity verified; physical iPhone interactions not tested.

@@ -1,5 +1,5 @@
-JR Performance 8.10 — Consistent Yellow Icons & Calendar
+JR Performance v8.12 — Athlete Profile Refresh
 
-Upload app.js, style.css and sw.js to the repository root, replacing those files. Keep other files and videos unchanged.
+Replace app.js, style.css and sw.js in the GitHub repository. Do not delete or reupload videos or other files.
 
-Updates: Home navigation arrows and quick links, current day and workout markers, calendar month arrows and dates, workout chevrons, settings/profile arrows. No changes to workout data or storage keys.
+Redesigned athlete profile with compact identity header, yellow-accent stats, training progress, measurements, goal, and organized navigation. Existing profile data and training history remain unchanged.

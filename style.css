@@ -491,3 +491,37 @@ body .settings-back{color:#e4ca62!important}
 /* Subtle keyboard focus on navigation elements. */
 body .v7-round:focus-visible,body .week-day:focus-visible,body .calendar-nav-arrow:focus-visible,body .compact-chevron:focus-visible{outline:2px solid var(--jr-accent)!important;outline-offset:2px}
 @media(hover:hover){body .calendar-nav-arrow:hover{background:#353021!important}body .week-day:hover{border-color:#766532!important}}
+
+/* v8.11: readable white schedule dates; selected date stays yellow */
+body .calendar-grid button.cal-day:not(.chosen){color:#f7f8fa!important;-webkit-text-fill-color:#f7f8fa!important;}
+body .calendar-grid button.cal-day.chosen{color:#ffe27a!important;-webkit-text-fill-color:#ffe27a!important;}
+
+/* v8.12 · athlete profile refresh */
+.profile-v812{max-width:840px;margin:0 auto;padding-bottom:24px}
+.profile-v812-top,.profile-v812-sectionhead,.profile-v812-progressline{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.profile-v812-top{margin:6px 0 18px}
+.profile-v812-edit{display:inline-flex;align-items:center;gap:7px;background:#24282e!important;border:1px solid #424850!important;border-radius:11px;padding:9px 13px!important;color:#f5f5f5!important;font-size:13px;font-weight:700}
+.profile-v812-edit svg{width:17px;height:17px;color:#facc15}
+.profile-v812-identity{display:flex;align-items:center;gap:17px;margin-bottom:20px}
+.profile-v812-avatar{width:82px;height:82px;flex:none;display:grid;place-items:center;border-radius:23px;background:#292e34;border:1px solid #626a74;color:#facc15;font-size:27px;font-weight:900;overflow:hidden}
+.profile-v812-avatar img{width:100%;height:100%;object-fit:cover}
+.profile-v812-name{min-width:0}.profile-v812-name h1{margin:0;font-size:clamp(25px,5vw,36px);line-height:1.15;letter-spacing:-.7px;overflow-wrap:anywhere}
+.profile-v812-name h1 span{color:#facc15;font-size:.58em;vertical-align:middle}
+.profile-v812-name p{margin:5px 0 10px;color:#c4cbd2;font-size:14px}
+.profile-v812-chips{display:flex;flex-wrap:wrap;gap:6px}.profile-v812-chips span{font-size:10px;letter-spacing:.4px;font-weight:750;border:1px solid #444b53;border-radius:7px;padding:5px 8px;color:#d4d9df}
+.profile-v812-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-bottom:13px}
+.profile-v812-metrics>div{min-width:0;text-align:center;border:1px solid #353b42;border-radius:14px;background:#22262b;padding:15px 6px}
+.profile-v812-metrics strong,.profile-v812-metrics span{display:block}.profile-v812-metrics strong{font-size:26px;line-height:1.2;color:#facc15}.profile-v812-metrics span{font-size:11px;color:#c3c9d1;margin-top:5px}
+.profile-v812-panel,.profile-v812-links{background:#202429;border:1px solid #353b42;border-radius:17px;padding:18px;margin-bottom:13px}
+.profile-v812-sectionhead{margin-bottom:15px}.profile-v812-sectionhead h2,.profile-v812-links h2{font-size:12px;letter-spacing:1.1px;font-weight:850;color:#e8eaed;margin:0}.profile-v812-sectionhead>span{font-size:11px;font-weight:800;color:#facc15}
+.profile-v812-progressline b{font-size:16px}.profile-v812-progressline small{color:#b6bec7;font-size:12px}
+.profile-v812-track{height:7px;border-radius:12px;background:#363d44;overflow:hidden;margin:11px 0 17px}.profile-v812-track span{display:block;height:100%;border-radius:12px;background:#facc15}
+.profile-v812-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.profile-v812-two>div{padding:12px;border-radius:11px;background:#2a2f35;min-width:0}.profile-v812-two b,.profile-v812-two small{display:block}.profile-v812-two b{font-size:17px;color:#f5f6f7}.profile-v812-two small{font-size:11px;color:#b8c0c9;margin-top:5px}
+.profile-v812-body{margin-bottom:5px}.profile-v812-body>div small{margin:0 0 7px;letter-spacing:.7px;font-weight:750}.profile-v812-body>div b{font-size:23px}
+.profile-v812-link{display:flex;align-items:center;justify-content:space-between;width:100%;background:transparent!important;color:#e9ecef!important;border:0!important;border-top:1px solid #373e45!important;border-radius:0!important;text-align:left;padding:15px 0 0!important;margin-top:16px;font-size:13px;font-weight:750}
+.profile-v812-link span,.profile-v812-textbutton{color:#facc15!important}.profile-v812-textbutton{background:none!important;border:0!important;padding:4px!important;font-size:12px;font-weight:750}
+.profile-v812-goal p{font-size:14px;line-height:1.55;margin:0;color:#cbd2d9}
+.profile-v812-links h2{margin-bottom:8px}.profile-v812-links .profile-menu{padding:13px 2px;min-height:60px;color:#f4f5f6!important}.profile-v812-links .profile-menu-icon{width:36px;height:36px;border-radius:10px;background:#2b3036;color:#facc15;font-size:18px}
+.profile-v812-links .profile-menu-icon svg{width:19px;height:19px;stroke:currentColor}.profile-v812-links .profile-menu-text small{color:#aeb7c1}.profile-v812-links .profile-chevron{color:#facc15}
+.profile-v812-foot{text-align:center;font-size:10px;letter-spacing:1.3px;color:#929da8;margin:20px 0}
+@media(max-width:390px){.profile-v812-avatar{width:66px;height:66px;border-radius:17px}.profile-v812-identity{gap:12px}.profile-v812-panel,.profile-v812-links{padding:15px}.profile-v812-metrics strong{font-size:23px}}

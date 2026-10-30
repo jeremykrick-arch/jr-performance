@@ -6,7 +6,19 @@
 
 /* Version 5.2: black / white / silver visual system */
 :root{--bg:#08090a;--panel:#151719;--panel2:#222529;--border:#454a50;--ink:#f7f8f9;--muted:#b7bec5;--red:#cbd0d5;--red2:#858d95;--green:#dce0e4;--amber:#bfc6cd;color-scheme:dark}
-button:not(.secondary):not(.ghost):not(.small):not(.profile-menu):not(.active){color:#111417}button.checked{color:#111417!important}.mark{color:#111417}.hero,.profile-hero{background:linear-gradient(135deg,#30353a,#141719 70%);border-color:#5c636b}.profile-avatar{color:#111417;background:linear-gradient(135deg,#f0f2f4,#9199a1);border-color:#f0f2f4}.pill{background:#34393e;border-color:#737b84;color:#f0f2f4}.accent{color:#e6e9ec}.bar>span{background:linear-gradient(90deg,#858c94,#e4e7ea)}.workout-card{border-left-color:#cbd0d5}nav button.active{background:#454c53;color:#fff}.set-row button.checked{background:#aeb5bc;color:#111417}.cal-day.chosen{background:#69727b;border-color:#e4e7ea}.timer-dock{border-color:#9ba3aa;background:#262a2e}.toast{border-color:#bfc5cb}.notice,.notice.good,.notice.danger{background:#2b3035;border-color:#687079;color:#e7eaed}
+button:not(.secondary):not(.ghost):not(.small):not(.profile-menu):not(.active):not(.nav-item){color:#111417}button.checked{color:#111417!important}.mark{color:#111417}.hero,.profile-hero{background:linear-gradient(135deg,#30353a,#141719 70%);border-color:#5c636b}.profile-avatar{color:#111417;background:linear-gradient(135deg,#f0f2f4,#9199a1);border-color:#f0f2f4}.pill{background:#34393e;border-color:#737b84;color:#f0f2f4}.accent{color:#e6e9ec}.bar>span{background:linear-gradient(90deg,#858c94,#e4e7ea)}.workout-card{border-left-color:#cbd0d5}nav button.active{background:#454c53;color:#fff}.set-row button.checked{background:#aeb5bc;color:#111417}.cal-day.chosen{background:#69727b;border-color:#e4e7ea}.timer-dock{border-color:#9ba3aa;background:#262a2e}.toast{border-color:#bfc5cb}.notice,.notice.good,.notice.danger{background:#2b3035;border-color:#687079;color:#e7eaed}
 
 /* v5.3 athlete photo and growth */
 .profile-avatar{overflow:hidden}.profile-avatar img{width:100%;height:100%;object-fit:cover;display:block}.photo-edit{display:flex;gap:15px;align-items:center;margin:18px 0;flex-wrap:wrap}.photo-edit>div:last-child{flex:1;min-width:170px}.photo-edit input[type=file]{max-width:100%;font-size:12px}.growth-chart{display:block;width:100%;height:auto;max-height:240px;margin:10px 0}.growth-summary{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}.growth-summary>div{border:1px solid #555d65;border-radius:12px;padding:15px;background:#24282c}.growth-summary small,.growth-summary b{display:block}.growth-summary b{font-size:23px;margin-top:5px}
+
+/* v5.3.1: ensure all five bottom navigation items remain visible on dark theme */
+#bottomNav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:stretch;width:100%;box-sizing:border-box}
+#bottomNav button{color:#cbd0d5!important;background:transparent;min-width:0;width:100%;font-size:11px;padding:6px 2px;white-space:nowrap}
+#bottomNav button.active{color:#fff!important;background:#454b52}
+#bottomNav button .ico{color:inherit}
+
+/* v5.3.2 — contrasting silver bottom navigation */
+#bottomNav{background:#424a53!important;border-top:1px solid #89929c;box-shadow:0 -5px 24px rgba(0,0,0,.45);backdrop-filter:blur(16px)}
+#bottomNav button{color:#f0f2f4!important;background:transparent!important;border-radius:12px}
+#bottomNav button.active{background:#e3e7eb!important;color:#161b20!important;font-weight:900}
+#bottomNav button.active .ico{color:#161b20!important}

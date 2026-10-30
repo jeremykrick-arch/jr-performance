@@ -43,3 +43,10 @@ All team branding has been removed from visible app screens and app metadata. Th
 
 ## Version 5.3 — Athlete development
 Profile photo upload (locally resized), removal, dated height and weight measurements, history and charts. Measurements are saved in the existing `jr-performance-v1` data and included in JSON backup/cloud sync. Profile pictures are stored as compressed images in the same data; browser storage capacity varies. Export a backup before updating.
+
+
+## v5.3.1 Navigation visibility fix
+Corrected a dark-theme CSS selector that made the inactive bottom navigation text/icons nearly invisible. All five navigation tabs (Home, Train, Schedule, Progress, Profile) now have explicit contrasting colors and a five-column layout. Updated the service-worker cache identifier to force asset refresh. Existing workout data remains stored under the same localStorage key.
+
+## v5.3.2 navigation contrast update
+The bottom navigation bar now uses a medium silver/graphite background (#424a53), white inactive icons/labels, and a light silver active tab with dark text. No JavaScript logic or saved-data schema was changed. The service worker cache key was incremented.

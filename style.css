@@ -438,3 +438,32 @@ body .set-row button.set-check-button:focus-visible{outline:3px solid #fde047!im
 .compact-load-tools{margin-top:10px}
 .movement-complete .compact-card-title strong{color:#f6e59b}
 @media(max-width:380px){.compact-workout-card{padding:9px!important}.compact-card-top{gap:5px}.compact-drag,.compact-chevron,.compact-more{width:32px}.compact-set-head,.compact-set-row{grid-template-columns:20px minmax(37px,.8fr) minmax(47px,1fr) minmax(43px,.8fr) 39px;gap:3px}.compact-previous{font-size:10px}.compact-set-head{font-size:8px}}
+
+
+/* v8.9 — restrained yellow accents; dark surfaces remain unchanged */
+:root{--jr-highlight:#facc15;--jr-highlight-soft:rgba(250,204,21,.10)}
+/* Navigation: active icon and label, no bright filled tab */
+body nav#bottomNav button.active{background:rgba(250,204,21,.075)!important;color:#facc15!important;border-radius:12px!important}
+body nav#bottomNav button.active .ui-icon{color:#facc15!important;stroke:currentColor!important}
+body nav#bottomNav button:not(.active) .ui-icon{color:#a6abb8}
+/* Settings: small yellow line icons within charcoal tiles */
+body .settings-row-icon{color:#facc15!important;border-color:#4a4430!important;background:#292720!important}
+body .settings-row-icon .ui-icon{color:#facc15!important}
+body .header-settings.selected{border-color:#facc15!important;color:#facc15!important;background:#28251b!important}
+/* Schedule: yellow selection ring and restrained event markers */
+body .cal-day.chosen{background:rgba(250,204,21,.12)!important;border:1.5px solid #facc15!important;color:#ffe783!important;box-shadow:inset 0 0 0 1px rgba(250,204,21,.12)!important}
+body .cal-day i{color:#facc15!important;font-size:17px;line-height:13px}
+body .calendar-grid>small{color:#d2bc63}
+body .event-icon{background:#2a281f!important;color:#facc15!important}
+body .event-icon .ui-icon{color:#facc15!important}
+/* Quiet indicators for activity and workout completion */
+body .bar>span{background:linear-gradient(90deg,#b68d15,#facc15)!important}
+body .compact-workout-card.movement-complete .compact-card-title strong{color:#ffe27a!important}
+body .compact-card-top .compact-drag:active{border-color:#facc15!important;color:#facc15!important}
+body .compact-card-top .compact-chevron:focus-visible,body .compact-card-top .compact-more:focus-visible{outline:2px solid #facc15!important;outline-offset:2px}
+body .smart-weight-hint b{color:#facc15!important}
+/* Home quick-action icons: accent the icon, not the entire tile */
+body .v7-tool-grid .ui-icon{color:#facc15!important}
+body .v7-session-icon{color:#facc15!important;background:#292720!important}
+/* Keep existing yellow set checks and rating stars unchanged. */
+@media(prefers-reduced-motion:reduce){body nav#bottomNav button.active{transition:none!important}}

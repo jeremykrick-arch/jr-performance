@@ -1,16 +1,9 @@
-# JR Performance v4 — Smart Progression
+# JR Performance — Wow Factor–Inspired Theme
 
-Upload the contents of this folder to the root of the existing GitHub Pages repository. Do not upload the ZIP itself.
+Visual refresh of JR Performance v4 with black, white, steel gray, navy and red accents inspired by Wow Factor Baseball apparel. This is a personal training app, not an official Wow Factor product. No official logo assets are included.
 
-## New in v4
-- Advisory weight progression on primary lifts, based on the last logged workout, completed reps, form, and recovery.
-- Technique rating on each primary lift.
-- Pain flag and conservative recommendations.
-- Recovery weeks 4, 8, and 12 never suggest increases.
-- No automatic changes to logged weights.
+## Deploy
+Upload the contents of this ZIP to the root of the existing GitHub Pages repository, replacing files with the same names. Keep the same website URL and browser to retain local workout data. Export a JSON backup before updating.
 
-## Data safety
-Uses the same localStorage key as prior versions, preserving records in the same browser and origin. Export a backup before updating. Workout history is local to each device.
-
-## Limitations
-This is a youth training aid, not a substitute for a qualified strength coach or medical assessment. Suggestions are deliberately conservative; adjust for pitching, practice, fatigue and pain.
+## Storage
+Workout data remains in browser localStorage under `jr-performance-v1`. The theme update does not reset it.

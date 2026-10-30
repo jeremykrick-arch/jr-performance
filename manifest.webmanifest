@@ -1,11 +1,11 @@
 {
-  "name": "JR Baseball Performance",
+  "name": "JR Performance | Baseball Training",
   "short_name": "JR Performance",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#0c1423",
-  "theme_color": "#101a2b",
+  "background_color": "#0b0c10",
+  "theme_color": "#0b0c10",
   "icons": [
     {
       "src": "icon-192.png",

@@ -525,27 +525,3 @@ body .calendar-grid button.cal-day.chosen{color:#ffe27a!important;-webkit-text-f
 .profile-v812-links .profile-menu-icon svg{width:19px;height:19px;stroke:currentColor}.profile-v812-links .profile-menu-text small{color:#aeb7c1}.profile-v812-links .profile-chevron{color:#facc15}
 .profile-v812-foot{text-align:center;font-size:10px;letter-spacing:1.3px;color:#929da8;margin:20px 0}
 @media(max-width:390px){.profile-v812-avatar{width:66px;height:66px;border-radius:17px}.profile-v812-identity{gap:12px}.profile-v812-panel,.profile-v812-links{padding:15px}.profile-v812-metrics strong{font-size:23px}}
-
-/* v8.13 — high-contrast Profile navigation sections */
-body .profile-v812 .profile-v812-links{background:#1c2025!important;border:1px solid #454c54!important;padding:18px!important;}
-body .profile-v812 .profile-v812-links h2{color:#ffffff!important;font-size:13px!important;letter-spacing:1.25px!important;margin:0 0 14px!important;padding:0 0 11px!important;border-bottom:1px solid #434a53!important;}
-body .profile-v812 .profile-v812-links .profile-menu{display:flex!important;align-items:center!important;gap:12px!important;background:#2b3037!important;border:1px solid #4b535d!important;border-radius:12px!important;margin:0 0 9px!important;padding:12px!important;min-height:68px!important;color:#ffffff!important;box-shadow:none!important;}
-body .profile-v812 .profile-v812-links .profile-menu:last-child{margin-bottom:0!important;border:1px solid #4b535d!important;}
-body .profile-v812 .profile-v812-links .profile-menu-text b{color:#ffffff!important;font-size:14px!important;font-weight:800!important;line-height:1.35!important;}
-body .profile-v812 .profile-v812-links .profile-menu-text small{color:#c9d0d8!important;font-size:12px!important;line-height:1.45!important;}
-body .profile-v812 .profile-v812-links .profile-menu-icon{background:#20242a!important;border:1px solid #505861!important;color:#facc15!important;width:42px!important;height:42px!important;flex:none!important;}
-body .profile-v812 .profile-v812-links .profile-chevron{color:#facc15!important;font-size:27px!important;}
-body .profile-v812 .profile-v812-links .profile-menu:focus-visible{outline:2px solid #facc15!important;outline-offset:2px!important;}
-@media(hover:hover){body .profile-v812 .profile-v812-links .profile-menu:hover{background:#343b43!important;border-color:#828b96!important;}}
-@media(max-width:390px){body .profile-v812 .profile-v812-links{padding:14px!important;}body .profile-v812 .profile-v812-links .profile-menu{padding:10px!important;}}
-
-/* v8.14: keep the daily workout list visible and recoverable */
-.movement-toolbar-actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
-.train-recovery{border:1px solid rgba(250,204,21,.45)!important;background:#202024!important;color:#fff!important;margin:12px 0!important}
-.train-recovery b,.train-recovery h2{color:#fff!important}
-.train-recovery p{color:#d5d5d8!important;line-height:1.5}
-.train-recovery button{background:#facc15!important;color:#161616!important}
-.compact-workout-card{display:block!important;visibility:visible!important}
-.compact-card-top{display:flex!important;visibility:visible!important}
-.compact-card-title strong{color:#f7f7f7!important}
-@media(max-width:430px){.movement-order-toolbar{align-items:flex-start}.movement-toolbar-actions{max-width:180px}.movement-toolbar-actions button{font-size:11px!important;padding:8px!important}}

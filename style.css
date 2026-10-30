@@ -97,3 +97,8 @@ html body #bottomNav button.active .ico{color:#fff!important}
 @keyframes jrIndividualCycle{0%,24.99%{opacity:1}25%,100%{opacity:0}}
 .illustration-stage.paused .jr-individual-frame{animation-play-state:paused}
 @media(prefers-reduced-motion:reduce){.jr-individual-svg .jr-individual-frame{animation:none;opacity:0}.jr-individual-svg .jr-individual-frame-0{opacity:1}}
+
+/* RepDB licensed preview animation */
+.repdb-stage{background:#111317;border:1px solid #555c63;border-radius:16px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;min-height:300px;padding:12px}
+.repdb-stage img{width:100%;max-width:380px;height:340px;object-fit:contain}
+.repdb-stage .illustration-caption{position:absolute;bottom:10px;left:12px;right:12px;text-align:center;background:#121416d9;color:#eef0f2;padding:5px;border-radius:8px;font-size:11px}

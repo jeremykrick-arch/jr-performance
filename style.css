@@ -35,3 +35,40 @@ html body #bottomNav button.active .ico{color:#fff!important}
 
 /* v5.4 video demonstration center */
 .video-overlay{position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,.82);display:flex;align-items:flex-end;justify-content:center;padding:12px 8px max(12px,env(safe-area-inset-bottom))}.video-sheet{background:#1b1e22;color:#f7f8f9;border:1px solid #858b93;border-radius:20px 20px 14px 14px;padding:18px;width:min(100%,640px);max-height:92dvh;overflow-y:auto;box-shadow:0 20px 90px #000}.video-sheet h2{margin:16px 0}.video-sheet .row{align-items:center}.video-frame{aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden}.video-frame iframe{width:100%;height:100%;border:0}.video-empty{min-height:190px;border:1px dashed #737a82;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:22px;background:#282d33}.video-empty p{max-width:320px;color:#c8cdd2}.video-play{font-size:34px;margin-bottom:8px}.video-cues{display:grid;gap:10px;margin:14px 0}.video-cues>div{background:#282c31;border-radius:12px;padding:12px;border:1px solid #414850}.video-cues p{margin:7px 0 0;color:#e2e5e9}.video-url-label{display:block;margin-top:12px}.video-url-label input{width:100%;margin-top:6px}.video-filter-row{display:flex;gap:7px;overflow-x:auto;padding:12px 0}.video-filter-row button{white-space:nowrap;flex-shrink:0}.video-library-item{display:flex;align-items:center;justify-content:space-between;gap:12px}.video-library-item>div{min-width:0}.video-library-item button{flex-shrink:0}.video-sheet a.button{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border-radius:10px;padding:12px}.video-sheet .actionrow{flex-wrap:wrap}@media(max-width:420px){.video-library-item{flex-direction:column;align-items:stretch}.video-sheet{padding:13px}.video-sheet .actionrow>*{flex:1}}
+
+/* v5.5 illustrated exercise guides */
+.illustration-stage{position:relative;background:radial-gradient(circle at 50% 35%,#323944 0%,#15191f 72%);border:1px solid #67707b;border-radius:15px;min-height:280px;display:grid;place-items:center;overflow:hidden;margin:12px 0 8px}
+.anatomy-svg{width:min(100%,330px);height:300px;display:block}
+.illustration-caption{position:absolute;left:12px;bottom:10px;font-size:10px;letter-spacing:1.2px;color:#cdd3d9;font-weight:800}
+.figure-motion{transform-origin:160px 202px;animation:body-bob 2.8s ease-in-out infinite}
+.anatomy-squat .figure-motion{animation:squat-motion 2.8s ease-in-out infinite}
+.anatomy-hinge .torso-motion{transform-origin:160px 205px;animation:hinge-motion 2.8s ease-in-out infinite}
+.anatomy-press .arms-motion{transform-origin:160px 143px;animation:press-motion 2.8s ease-in-out infinite}
+.anatomy-pull .arms-motion{transform-origin:160px 143px;animation:pull-motion 2.8s ease-in-out infinite}
+.anatomy-run .legs-motion{transform-origin:160px 208px;animation:run-motion 1.1s ease-in-out infinite}
+.anatomy-jump .figure-motion{animation:jump-motion 2.5s ease-in-out infinite}
+.anatomy-rotate .torso-motion{transform-origin:160px 203px;animation:rotate-motion 2.5s ease-in-out infinite}
+.anatomy-brace .figure-motion{animation:brace-motion 3s ease-in-out infinite}
+.illustration-stage.paused *{animation-play-state:paused!important}
+.illustration-actions{display:flex;gap:8px;margin-bottom:12px}
+.muscle-panel{border:1px solid #4f5862;background:#22272e;padding:13px;border-radius:12px;margin-bottom:12px}
+.muscle-panel p{margin:6px 0;color:#e4e7eb;text-transform:capitalize;font-size:13px}
+.muscle-dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:7px}.muscle-dot.primary{background:#ff715e}.muscle-dot.secondary{background:#e7aa9d}
+.coach-video{border-top:1px solid #515964;margin-top:16px;padding-top:14px}.coach-video summary{color:#e7eaed}
+@keyframes squat-motion{0%,100%{transform:translateY(0) scaleY(1)}45%,55%{transform:translateY(26px) scaleY(.84)}}
+@keyframes hinge-motion{0%,100%{transform:rotate(0)}45%,55%{transform:rotate(24deg)}}
+@keyframes press-motion{0%,100%{transform:translateY(0)}45%,55%{transform:translateY(-25px)}}
+@keyframes pull-motion{0%,100%{transform:rotate(0)}45%,55%{transform:rotate(-11deg)}}
+@keyframes run-motion{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(10deg)}}
+@keyframes jump-motion{0%,100%{transform:translateY(0)}45%,55%{transform:translateY(-32px)}}
+@keyframes rotate-motion{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(10deg)}}
+@keyframes brace-motion{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes body-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+@media(prefers-reduced-motion:reduce){.illustration-stage *{animation:none!important}}
+
+/* Four primary-lift exercise-specific position sequences */
+.primary-lift-svg{width:min(100%,330px);height:300px;display:block}
+.lift-pose{opacity:0;animation:lift-pose-cycle 4.8s steps(1,end) infinite}
+.lift-pose-0{animation-delay:0s}.lift-pose-1{animation-delay:-1.2s}.lift-pose-2{animation-delay:-2.4s}.lift-pose-3{animation-delay:-3.6s}
+@keyframes lift-pose-cycle{0%,24.99%{opacity:1}25%,100%{opacity:0}}
+@media(prefers-reduced-motion:reduce){.lift-pose{animation:none!important;opacity:0}.lift-pose-0{opacity:1}}

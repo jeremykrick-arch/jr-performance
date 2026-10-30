@@ -1,4 +1,4 @@
-# JR Performance v5 — Wow Factor Stoppers
+# JR Performance v5.2 — Black / White / Silver
 
 An offline-capable, mobile-first workout app for JR. Includes all 36 Monday/Thursday/Saturday workouts, 12-week training phases, set logging, conservative progression suggestions, pre-workout readiness, baseball schedule and workload logs, performance scorecard, achievements, parent overview, exercise library, rest timers, JSON backups and CSV exports.
 
@@ -31,3 +31,15 @@ This app continues using the same `localStorage` key (`jr-performance-v1`) and r
 ## Testing
 
 Serve locally (`python -m http.server 8000`) and test on iPhone Safari after publishing. Service workers require HTTPS or localhost. Verify old backup restore, set logging, timers, calendar, charts, offline mode, and cloud login before relying on the app.
+
+## Version 5.1 profile upgrade
+- Athlete identity card, optional baseball details, jersey, editable goals, weekly completion, personal record links, and organized profile menus.
+- Data remains in the existing `jr-performance-v1` browser storage record. Export a backup before upgrading.
+- No public social profile or photo upload; profile is private to device unless parent enables optional cloud backup.
+
+## Version 5.2 branding
+All team branding has been removed from visible app screens and app metadata. The theme is black, white, and silver. Existing saved team data is retained internally for compatibility but is not displayed.
+
+
+## Version 5.3 — Athlete development
+Profile photo upload (locally resized), removal, dated height and weight measurements, history and charts. Measurements are saved in the existing `jr-performance-v1` data and included in JSON backup/cloud sync. Profile pictures are stored as compressed images in the same data; browser storage capacity varies. Export a backup before updating.

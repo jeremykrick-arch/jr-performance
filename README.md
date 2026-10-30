@@ -1,20 +1,24 @@
-# JR Performance 7.0 — Dark Experience
+JR Performance v7.2 — Settings & Interface Update
 
-A dark-mode interface update inspired by modern workout tracking patterns. All existing exercise videos, 12-week workouts, athlete records, backups, and schedule remain available.
+New: persistent settings gear in upper-right; dedicated settings landing page; athlete photo/profile shortcut; workout preferences, measurements, parent overview, and backup/data options organized under settings; five main tabs retained.
+
+Installation: export a backup in the current app first, then upload the CONTENTS of this ZIP to the root of your GitHub Pages repository, retaining the videos/ directory. Refresh the installed PWA if necessary. Local browser data key remains unchanged.
+
+Existing exercise videos and training data structures are unchanged.
+
+# JR Performance 7.1 — Movements + Interface Refinement
+
+This is a complete replacement package for GitHub Pages. Extract the ZIP and upload the **contents**, preserving the `videos/` folder and existing filenames.
 
 ## Changes
-- Redesigned athlete Home dashboard with a prominent Start Workout action, weekly date strip, session cards, and progress snapshots.
-- Four-tab bottom navigation: Home, Train, Progress, Schedule.
-- Movement Library and Profile remain available from Home and Train (and header avatar).
-- Refreshed workout cards, previous-session display, video buttons, and consistent dark-mode styling.
-- Existing localStorage key `jr-performance-v1` retained to preserve data on the same origin and browser.
-- Original videos only; no RepDB assets.
+- Restored **Movements** as a permanent fifth bottom-navigation tab.
+- Redesigned Movement Library with large dark cards, prominent play actions, searchable exercise list, category chips, and movement counts.
+- Fixed search-field focus loss when typing by updating results without rebuilding the search input.
+- Refined five-tab mobile layout and iPhone safe-area spacing.
+- Updated service-worker cache version.
+- Kept original videos, workout logging, progress, schedule, profile, and existing `jr-performance-v1` localStorage data schema.
 
-## Installation
-1. In the existing app, export a JSON backup (Profile → Data & Backups).
-2. Unzip and upload **all contents** to the root of the existing GitHub Pages repository, including the `videos/` folder.
-3. Remove obsolete RepDB files from the repository if present; this package does not include them.
-4. Allow the updated service worker to activate; if the old UI persists, close and reopen the app or clear site cache (do not clear site data without a backup).
+## Important
+Export a data backup before deploying. Replace all previous app files and keep the `videos` directory intact. Hard-refresh or reopen the installed app after GitHub Pages finishes deploying.
 
-## Notes
-Workout videos are original stylized anatomical illustrations, not photorealistic or biomechanically validated. The new interface does not alter stored training data or add AI recommendations. Tested via static syntax and package checks; iPhone/browser interactive testing remains necessary.
+The exercise videos remain stylized illustrative renders, not photorealistic 3D.

@@ -1,5 +1,6 @@
-JR Performance v8.31 — One-time activity icon
+JR Performance 8.33 — Athletic Development Dashboard
 
-On Schedule, tap the yellow + icon next to the selected day to add a one-time event. A dialog replaces the old always-visible form.
-
-Replace app.js, style.css and sw.js in your GitHub repository. Keep all other files, including videos, unchanged.
+Upload the root files and videos/ directory to GitHub Pages.
+Adds dated baseball athletic tests, trends, Home performance summary, and preserves the existing training program.
+Workout records and athletic test results are stored locally under jr-performance-v1 and included in JSON backups.
+No cloud push notifications are introduced.

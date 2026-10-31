@@ -1,5 +1,5 @@
-JR Performance v8.34 — Home Athletic Performance Contrast Update
+JR Performance v8.35 — New Home Screen Icon
 
-Updated Home athletic preview with a white high-contrast panel, dark metric values, and readable labels. No sample values inserted; all metrics continue to use saved athletic test results.
+New JR monogram icon in 180px (Apple touch icon), 192px and 512px (PWA). Updated index.html, sw.js for icon caching. No workout code or stored data changed.
 
-Install: replace website files in GitHub Pages. This complete site includes the videos folder. Existing local workout and athletic data are not reset.
+Upload index.html, sw.js, icon-180.png, icon-192.png, icon-512.png to GitHub repository root. On iPhone remove old Home Screen shortcut, open site in Safari and Add to Home Screen again if old icon remains.

@@ -549,3 +549,12 @@ body button.schedule-workout-link .pill{flex-shrink:0;}
 body button.schedule-workout-link:focus-visible{outline:2px solid #facc15!important;outline-offset:2px;}
 @media(hover:hover){body button.schedule-workout-link:hover{background:rgba(250,204,21,.1)!important;border-color:rgba(250,204,21,.4)!important;}}
 body .calendar-grid .cal-day{touch-action:manipulation;}
+
+/* v8.25: swipeable future dates and visible favorite states */
+body .v7-week-strip{display:flex!important;grid-template-columns:none!important;gap:7px!important;overflow-x:auto!important;overscroll-behavior-x:contain;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;padding:2px 1px 10px;scrollbar-width:thin;scrollbar-color:#6e5b1b transparent}
+body .v7-week-strip .week-day{flex:0 0 calc((100% - 42px)/7)!important;min-width:0!important;scroll-snap-align:start}
+body .jr-calendar-hint{margin:-5px 2px 10px;font-size:11px;color:#b7b9be}
+body .jr8-favorite.on{color:#facc15!important;text-shadow:0 0 9px rgba(250,204,21,.25)}
+body .jr8-favorite.on:focus-visible{outline:2px solid #facc15!important}
+body .jr8-favfilter.on{color:#facc15!important;border-color:#a68b29!important;background:rgba(250,204,21,.08)!important}
+@media(max-width:380px){body .v7-week-strip .week-day{flex-basis:calc((100% - 24px)/7)!important}body .v7-week-strip{gap:4px!important}}

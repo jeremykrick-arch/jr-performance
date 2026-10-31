@@ -558,3 +558,13 @@ body .jr8-favorite.on{color:#facc15!important;text-shadow:0 0 9px rgba(250,204,2
 body .jr8-favorite.on:focus-visible{outline:2px solid #facc15!important}
 body .jr8-favfilter.on{color:#facc15!important;border-color:#a68b29!important;background:rgba(250,204,21,.08)!important}
 @media(max-width:380px){body .v7-week-strip .week-day{flex-basis:calc((100% - 24px)/7)!important}body .v7-week-strip{gap:4px!important}}
+
+/* 8.26 movement instant-search helper */
+.jr-live-search-hint{margin:7px 2px 13px;color:#d1d5db;font-size:.82rem;}
+#libraryResults{min-height:100px;}
+#librarySearch:focus{outline:2px solid #facc15;outline-offset:2px;}
+
+/* 8.27: prevent iOS Safari auto-zoom when focusing Movement Library search. */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;}
+body .v71-search-wrap input,body #librarySearch,body input[type="search"]{font-size:16px!important;line-height:1.4!important;}
+@media(max-width:767px){body input:not([type="checkbox"]):not([type="radio"]),body textarea,body select{font-size:16px!important;}}

@@ -88,7 +88,7 @@ function renderSettingsPage(){
  }
  const initials=(p.name||'JR').trim().split(/\s+/).map(x=>x[0]).join('').slice(0,2).toUpperCase();
  $('app').innerHTML=`<section class="settings-page">
- <div class="settings-top"><button class="settings-back" onclick="closeSettings()" aria-label="Back to app">← <span>BACK</span></button><span class="settings-top-label">PREFERENCES</span></div>
+ <div class="settings-top"><button class="settings-back" onclick="closeSettings()" aria-label="Back to app"><span class="settings-back-arrow" aria-hidden="true">←</span><span>Back</span></button><span class="settings-top-label">PREFERENCES</span></div>
  <div class="settings-heading"><span class="v7-kicker">JR PERFORMANCE</span><h1>SETTINGS<span class="settings-dot">.</span></h1><p>Make your training experience your own.</p></div>
  <button class="settings-athlete" onclick="settingsOpen('edit')"><span class="settings-athlete-photo">${p.photo?`<img src="${esc(p.photo)}" alt="Athlete photo">`:esc(initials)}</span><span class="settings-athlete-text"><strong>${esc(p.name||'JR')}</strong><small>${esc(p.position||'Baseball athlete')} · Edit athlete profile</small></span><span class="settings-chevron">›</span></button>
  <div class="settings-group"><h2>TRAINING</h2>

@@ -1,3 +1,4 @@
-JR Performance v8.28 — Train UI cleanup
-Replace app.js, style.css, sw.js in the GitHub repository.
-Changes: remove Reset Order and Restore Layout buttons; show 60-second readiness check in a popup once per workout date/week/day, with a compact button to reopen. No program or video changes.
+JR Performance 8.29 — Header & Settings Back
+Replace index.html, app.js, style.css, and sw.js in the GitHub repository root.
+The header no longer shows version 8.20. Settings Back uses a consistent dark button, white label and yellow arrow.
+Other program, movement, and video files remain unchanged.

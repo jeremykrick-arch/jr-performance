@@ -1,6 +1,5 @@
-JR Performance 8.33 — Athletic Development Dashboard
+JR Performance v8.34 — Home Athletic Performance Contrast Update
 
-Upload the root files and videos/ directory to GitHub Pages.
-Adds dated baseball athletic tests, trends, Home performance summary, and preserves the existing training program.
-Workout records and athletic test results are stored locally under jr-performance-v1 and included in JSON backups.
-No cloud push notifications are introduced.
+Updated Home athletic preview with a white high-contrast panel, dark metric values, and readable labels. No sample values inserted; all metrics continue to use saved athletic test results.
+
+Install: replace website files in GitHub Pages. This complete site includes the videos folder. Existing local workout and athletic data are not reset.

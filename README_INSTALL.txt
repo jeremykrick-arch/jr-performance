@@ -1,8 +1,9 @@
-JR Performance 8.23 — Monday stability
+JR Performance v8.37 — Monday-start, baseball strength plan
 
-Complete site package: all core files and videos.
-Quick update from v8.22: app.js and sw.js.
+Upload all files to GitHub Pages (or update app.js, program.js, sw.js). Preserve videos folder.
 
-Fixes: optional weight suggestions cannot block Train; isolated workout-count and layout failures; safe timer rendering; Schedule navigation fallback. If a card fails, technical details are shown.
+Training week Monday–Sunday; gym Monday (lower body + acceleration), Thursday (upper body + shoulder stability), Saturday (total body + power). 12 weeks, reduced volume weeks 4, 8, 12.
 
-No claim of reproducing the reported iPhone failure. Test Week 1 Monday on the phone.
+Existing logged data stays in local storage. Previous workout logs may still reference prior exercises; export a backup before installing. New movements without videos display normal fallback.
+
+For an adolescent, use qualified supervision, avoid maximal lifts and training through pain, and adapt to pitching workload.

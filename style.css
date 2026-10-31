@@ -640,3 +640,5 @@ body .ath-home-panel .ath-home-tile strong{color:#ffffff!important}
 body .ath-home-panel .ath-home-tile strong em{color:#cbd2da!important}
 body .ath-home-panel .ath-home-tile .ath-home-trend{color:#86e5a3!important}
 body .ath-home-panel .ath-home-tile:focus-visible,body .ath-home-heading button:focus-visible{outline-color:#ffdb29!important}
+
+.pitch-week-note{border:1px solid rgba(250,204,21,.28);background:#202226}.pitch-week-note b{color:#facc15}.pitch-week-note p{margin:.55rem 0 0}

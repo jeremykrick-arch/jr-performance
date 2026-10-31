@@ -568,3 +568,18 @@ body .jr8-favfilter.on{color:#facc15!important;border-color:#a68b29!important;ba
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%;}
 body .v71-search-wrap input,body #librarySearch,body input[type="search"]{font-size:16px!important;line-height:1.4!important;}
 @media(max-width:767px){body input:not([type="checkbox"]):not([type="radio"]),body textarea,body select{font-size:16px!important;}}
+
+/* v8.28: clean Train controls and one-time readiness dialog */
+.readiness-launch{margin:8px 0 14px;display:flex;justify-content:flex-end}
+.readiness-launch button{border-color:#6b6b6b!important;color:#facc15!important;background:#1d1d1f!important}
+.readiness-status{color:#e5e7eb;margin-left:8px;font-size:12px}
+.jr-readiness-overlay{position:fixed;inset:0;z-index:20000;background:rgba(0,0,0,.83);display:flex;align-items:center;justify-content:center;padding:16px;overscroll-behavior:contain}
+.jr-readiness-sheet{width:min(100%,480px);max-height:calc(100dvh - 32px);overflow-y:auto;background:#202124;color:#f5f5f5;border:1px solid #65666a;border-radius:18px;padding:20px;box-shadow:0 25px 80px #000}
+.jr-readiness-title{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.jr-readiness-title small{color:#facc15;font-weight:750;letter-spacing:.09em}
+.jr-readiness-title h2{margin:5px 0 8px;font-size:23px;line-height:1.15}
+.jr-readiness-close{background:transparent!important;color:#facc15!important;border:1px solid #666!important;border-radius:10px!important;font-size:28px!important;min-width:42px;min-height:42px;padding:0!important}
+.jr-readiness-fields{display:grid;gap:12px;margin:15px 0}
+.jr-readiness-fields label{color:#f1f1f1;font-size:14px;font-weight:600}
+.jr-readiness-fields select{display:block;width:100%;font-size:16px;min-height:44px;margin-top:6px;background:#111215;color:#fff;border:1px solid #727272;border-radius:10px;padding:9px}
+.jr-readiness-done{width:100%;margin-top:12px;background:#facc15!important;color:#171717!important;font-weight:800!important;min-height:48px;border-radius:12px!important}

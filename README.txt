@@ -1,5 +1,3 @@
-JR Performance 8.27 — iPhone Search Zoom Fix
-
-Replace style.css and sw.js in the GitHub repository root.
-
-The Movement Library search now uses a minimum 16px input font size, which prevents iOS Safari from automatically zooming when the field receives focus. The viewport still permits user-initiated pinch zoom for accessibility. No application logic or saved data is changed.
+JR Performance v8.28 — Train UI cleanup
+Replace app.js, style.css, sw.js in the GitHub repository.
+Changes: remove Reset Order and Restore Layout buttons; show 60-second readiness check in a popup once per workout date/week/day, with a compact button to reopen. No program or video changes.

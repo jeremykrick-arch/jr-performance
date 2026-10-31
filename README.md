@@ -1,5 +1,5 @@
-JR Performance v8.35 — New Home Screen Icon
+JR Performance v8.36 — Dark Athletic Dashboard
 
-New JR monogram icon in 180px (Apple touch icon), 192px and 512px (PWA). Updated index.html, sw.js for icon caching. No workout code or stored data changed.
+Updated the Home Athletic Performance panel from bright white to muted charcoal with readable white text, subtle borders and yellow navigation. All metrics are drawn from the existing saved athlete records; no fabricated measurements. Existing workouts, schedules, exercise videos and the v8.35 JR app icon are unchanged.
 
-Upload index.html, sw.js, icon-180.png, icon-192.png, icon-512.png to GitHub repository root. On iPhone remove old Home Screen shortcut, open site in Safari and Add to Home Screen again if old icon remains.
+Upload all files to the root of the GitHub Pages repository, preserving videos/. For an incremental update, only style.css and sw.js need replacing. If iPhone still shows old styling, reload after deployment and close/reopen the Home Screen app.

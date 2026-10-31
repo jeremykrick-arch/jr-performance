@@ -589,3 +589,6 @@ body .settings-page .settings-back{display:inline-flex;align-items:center;justif
 body .settings-page .settings-back .settings-back-arrow{display:inline-grid;place-items:center;width:24px;height:24px;color:#facc15!important;font-size:23px;line-height:1}
 body .settings-page .settings-back span:last-child{font-size:13px!important;letter-spacing:0!important;text-transform:none!important;color:#f5f6f8!important}
 body .settings-page .settings-back:focus-visible{outline:2px solid #facc15;outline-offset:3px}
+
+/* v8.30 reminder preferences */
+.jr-reminder-toggle{display:flex;align-items:center;gap:12px;margin:18px 0;color:#f5f5f5;font-weight:600}.jr-reminder-toggle input{width:21px;height:21px;accent-color:#facc15}.event button.small{flex-shrink:0}

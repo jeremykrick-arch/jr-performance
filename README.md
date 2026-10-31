@@ -1,5 +1,9 @@
-JR Performance 8.38 — Every-other-Tuesday pitching and adjusted Monday training.
+JR Performance 8.40 — Functional Lower Body + Nov 2 Start
 
-Week 1,3,5,7,9,11: Monday speed/jump/trap bar sets capped at 2 to preserve freshness for Tuesday pitching. Even weeks retain full prescription. The calendar shows pitching every other Tuesday, starting Nov 3 2026 by default. Change the pitching anchor Tuesday on Schedule.
+Start: Monday, November 2, 2026 (Week 1). Pitching anchor: Tuesday, November 3, 2026, repeating every other week.
+Monday: Bulgarian split squats, dumbbell step-ups, slider hamstring curls, single-leg calf raises replace machine-based leg work.
+Saturday: lateral bounds added, box jumps reduced to 2 sets.
+Pitching weeks: reduced Monday acceleration, jump, trap-bar and split-squat sets; skip step-ups when fatigued.
+Existing workouts, data, schedule and demos remain; new exercises use written movement guides until videos are available.
 
-Upload app.js, style.css and sw.js. All other assets included for a full-site install. Export backup before updating. Local storage key unchanged.
+Upload the site files to the GitHub Pages repository. For incremental upload, replace app.js, program.js, movement_catalog.js, index.html and sw.js. Existing local records are preserved; export a backup first.

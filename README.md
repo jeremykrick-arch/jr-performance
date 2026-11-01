@@ -1,9 +1,7 @@
-JR Performance 8.40 — Functional Lower Body + Nov 2 Start
+OFFSZN v8.42 — Animated launch intro
 
-Start: Monday, November 2, 2026 (Week 1). Pitching anchor: Tuesday, November 3, 2026, repeating every other week.
-Monday: Bulgarian split squats, dumbbell step-ups, slider hamstring curls, single-leg calf raises replace machine-based leg work.
-Saturday: lateral bounds added, box jumps reduced to 2 sets.
-Pitching weeks: reduced Monday acceleration, jump, trap-bar and split-squat sets; skip step-ups when fatigued.
-Existing workouts, data, schedule and demos remain; new exercises use written movement guides until videos are available.
+Upload all files to GitHub Pages, or only index.html, style.css and sw.js.
 
-Upload the site files to the GitHub Pages repository. For incremental upload, replace app.js, program.js, movement_catalog.js, index.html and sw.js. Existing local records are preserved; export a backup first.
+Features: animated existing OFFSZN logo, gold reveal, tagline and loading bar; skip button; automatically disappears after ~2.6 seconds; respects reduced motion; no changes to training data or program.
+
+On iPhone, refresh/reopen the installed web app after deployment.

@@ -1,7 +1,7 @@
-OFFSZN v8.42 — Animated launch intro
+OFFSZN 8.43 — Cinematic Intro
 
-Upload all files to GitHub Pages, or only index.html, style.css and sw.js.
+Changes: slower 5.1-second staged logo reveal, animated gold light sweep, subtle orbital effects, no progress bar, working Skip control, and reduced-motion support.
 
-Features: animated existing OFFSZN logo, gold reveal, tagline and loading bar; skip button; automatically disappears after ~2.6 seconds; respects reduced motion; no changes to training data or program.
+For an incremental update, replace index.html, style.css, sw.js in your GitHub repository. The ZIP includes the complete site and existing videos.
 
-On iPhone, refresh/reopen the installed web app after deployment.
+If iPhone retains the old animation, refresh Safari and relaunch the Home Screen app after deployment.

@@ -1,9 +1,12 @@
-JR Performance v8.37 — Monday-start, baseball strength plan
+OFFSZN v8.41 — branding and icon update
 
-Upload all files to GitHub Pages (or update app.js, program.js, sw.js). Preserve videos folder.
+Based on JR Performance v8.40 (Monday November 2 training plan).
 
-Training week Monday–Sunday; gym Monday (lower body + acceleration), Thursday (upper body + shoulder stability), Saturday (total body + power). 12 weeks, reduced volume weeks 4, 8, 12.
+Upload all files to the root of your GitHub Pages repository, preserving the videos/ folder.
+For a smaller update replace: index.html, manifest.webmanifest, app.js, sw.js, icon-180.png, icon-192.png, icon-512.png.
 
-Existing logged data stays in local storage. Previous workout logs may still reference prior exercises; export a backup before installing. New movements without videos display normal fallback.
+The app URL and GitHub repository do not need to change. Existing localStorage keys were deliberately preserved to protect workout history, performance measurements, and settings.
 
-For an adolescent, use qualified supervision, avoid maximal lifts and training through pain, and adapt to pitching workload.
+On iPhone: after deployment, open Safari and refresh; remove the old Home Screen shortcut, then Share > Add to Home Screen to see the new icon/name. Export a data backup before major changes.
+
+Checks: JavaScript syntax and archive integrity. Interactive iPhone testing still required.

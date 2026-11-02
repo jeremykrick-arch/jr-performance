@@ -677,3 +677,6 @@ body .ath-home-panel .ath-home-tile:focus-visible,body .ath-home-heading button:
 
 /* OFFSZN 8.44 */
 .offszn-builder .grid{margin:16px 0;gap:12px}.offszn-builder label{display:block;font-weight:650;font-size:.85rem}.offszn-builder select{width:100%;margin-top:6px}.offszn-plan{margin-top:16px}.offszn-plan-day{border-top:1px solid rgba(255,255,255,.12);padding:14px 0}.offszn-plan-day h3{color:#f5ce38;margin:0 0 6px}.offszn-plan-day ul{margin:10px 0;padding-left:22px}.offszn-plan-day li{padding:3px 0}
+
+/* OFFSZN athlete account */
+.offszn-account label{display:block;margin:12px 0;font-weight:650}.offszn-account input,.offszn-account select{width:100%;margin-top:7px}.offszn-account .actionrow{margin-top:16px;flex-wrap:wrap}

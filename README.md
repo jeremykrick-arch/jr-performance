@@ -25,3 +25,6 @@ IMPORTANT LIMITATIONS
 - Public launch needs security review, anti-abuse/rate limiting, role verification,
   privacy controls, audit logs, account deletion, and youth privacy compliance.
 - SQL migration and live Supabase end-to-end testing have not been performed here.
+
+## v8.58 parent registration fix
+Shows validation and signup feedback beside the Create Parent Account button, disables it during submission, and reports timeout and server errors. No SQL changes beyond v8.57 are needed.

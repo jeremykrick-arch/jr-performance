@@ -824,25 +824,32 @@ function offsznEraseData(){offsznConfirm('Erase all local records?','This perman
 
 // OFFSZN v8.57: parent account / explicit two-sided link approvals.
 // These links are NOT parental identity verification or COPPA consent.
-function offsznParentMessage(message){const el=$('parentAccountStatus');if(el)el.textContent=message;else toast(message)}
+function offsznParentMessage(message,kind='info'){const el=$('parentAccountStatus');if(el){el.textContent=message;el.dataset.kind=kind;el.hidden=false;}toast(message)}
 function renderParentAccount(){
  const signed=!!(authToken&&authUser),role=offsznAuthRole;
  $('app').innerHTML=`<section class="off-parent-page"><div class="off-parent-hero"><span class="v7-kicker">OFFSZN / FAMILY</span><h1>PARENT <span class="accent">ACCOUNT</span></h1><p>Connect with an athlete through an invitation that both accounts approve. One parent can link to multiple athletes.</p></div>
- ${!signed?`<div class="off-parent-card"><h2>Parent sign in or registration</h2><label>Parent email<input id="parentEmail" type="email" autocomplete="email" placeholder="parent@example.com"></label><label>Password<input id="parentPassword" type="password" minlength="8" autocomplete="current-password" placeholder="At least 8 characters"></label><div class="actionrow"><button onclick="offsznParentSignUp()">Create parent account</button><button class="secondary" onclick="offsznParentLogin()">Sign in</button></div><button class="secondary small" onclick="offsznParentReset()">Forgot password?</button><p class="mini">Confirm your email before signing in. Parent registration does not itself establish verified parental consent for an under-13 athlete.</p></div>`:
+ ${!signed?`<div class="off-parent-card"><h2>Parent sign in or registration</h2><label>Parent email<input id="parentEmail" type="email" autocomplete="email" placeholder="parent@example.com"></label><label>Password<input id="parentPassword" type="password" minlength="8" autocomplete="current-password" placeholder="At least 8 characters"></label><p id="parentAccountStatus" role="status" aria-live="polite" class="off-parent-feedback" hidden></p><div class="actionrow"><button type="button" id="parentCreateButton" onclick="offsznParentSignUp()">Create parent account</button><button type="button" class="secondary" onclick="offsznParentLogin()">Sign in</button></div><button class="secondary small" onclick="offsznParentReset()">Forgot password?</button><p class="mini">Confirm your email before signing in. Parent registration does not itself establish verified parental consent for an under-13 athlete.</p></div>`:
  `<div class="off-parent-card"><div class="off-parent-status">● Signed in ${role==='parent'?'as parent':role==='athlete'?'as athlete':'(account type not established)'}</div><p class="mini">Account: ${esc(authUser)}</p><button class="secondary small" onclick="cloudLogout();settingsOpen('parentAccount')">Sign out</button></div>
  ${role==='parent'?`<div class="off-parent-card"><h2>Link an existing athlete</h2><p>Enter the athlete's invitation code. Your request stays pending until the athlete accepts it.</p><label>Athlete invitation code<input id="parentInviteCode" maxlength="12" autocapitalize="characters" placeholder="e.g. A1B2C3D4"></label><button onclick="offsznParentRequestLink()">Request athlete link</button></div><div class="off-parent-card"><h2>My linked athletes</h2><div id="parentLinkedList">Loading...</div><button class="secondary" onclick="offsznLoadFamilyLinks()">Refresh links</button></div>`:
  role==='athlete'?`<div class="off-parent-card"><h2>Invite a parent</h2><p>Create a one-time code and share it privately with your parent. Codes expire after 24 hours.</p><button onclick="offsznAthleteInviteCode()">Generate invitation code</button><div id="offParentInviteResult" class="off-parent-code" aria-live="polite"></div></div><div class="off-parent-card"><h2>Parent link requests</h2><div id="parentPendingList">Loading...</div><button class="secondary" onclick="offsznLoadFamilyLinks()">Refresh requests</button></div>`:
  `<div class="notice">Sign out and sign in with an athlete or parent account to manage links.</div>`}`}
- <div class="off-parent-card"><h2>Family privacy</h2><p>Linking is optional. Athletes must approve a parent request before the accounts are connected. This release does not share workout records with parent accounts or support under-13 registration.</p><p class="mini">Account linking requires the v8.57 Supabase SQL migration and an online connection. Do not share invitation codes publicly.</p></div><p id="parentAccountStatus" role="status" aria-live="polite" class="mini"></p></section>`;
+ <div class="off-parent-card"><h2>Family privacy</h2><p>Linking is optional. Athletes must approve a parent request before the accounts are connected. This release does not share workout records with parent accounts or support under-13 registration.</p><p class="mini">Account linking requires the v8.57 Supabase SQL migration and an online connection. Do not share invitation codes publicly.</p></div></section>`;
  if(signed&&(role==='parent'||role==='athlete'))offsznLoadFamilyLinks();
 }
 async function offsznParentSignUp(){
  const email=builderValue('parentEmail').trim(),password=builderValue('parentPassword');
- if(!email||password.length<8)return offsznParentMessage('Enter a valid email and a password of at least 8 characters.');
- try{const x=await athleteAuthRequest('signup',{email,password,data:{role:'parent'}});
- if(x.access_token){authToken=x.access_token;authUser=x.user?.id;offsznAuthRole='parent';renderParentAccount()}
- else offsznParentMessage('Check your email to confirm your parent account, then sign in.');
- }catch(e){offsznParentMessage(e.message)}
+ if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))return offsznParentMessage('Enter a valid parent email address.','error');
+ if(password.length<8)return offsznParentMessage('Enter a password of at least 8 characters.','error');
+ const btn=$('parentCreateButton');
+ if(btn?.disabled)return;
+ if(btn){btn.disabled=true;btn.textContent='Creating account…'}
+ offsznParentMessage('Connecting securely to create your parent account…');
+ try{
+  const x=await Promise.race([athleteAuthRequest('signup',{email,password,data:{role:'parent'}}),new Promise((_,reject)=>setTimeout(()=>reject(new Error('Connection timed out. Check your internet connection and Supabase configuration, then try again.')),15000))]);
+  if(x.access_token&&x.user?.id){authToken=x.access_token;authUser=x.user.id;offsznAuthRole='parent';renderParentAccount();offsznParentMessage('Parent account created and signed in.','success')}
+  else offsznParentMessage('Account request submitted. Check your email for a confirmation link, then return here to sign in.','success');
+ }catch(e){offsznParentMessage('Could not create parent account: '+(e?.message||'Network error. Please try again.'),'error')}
+ finally{const current=$('parentCreateButton');if(current){current.disabled=false;current.textContent='Create parent account'}}
 }
 async function offsznParentLogin(){
  const email=builderValue('parentEmail').trim(),password=builderValue('parentPassword');

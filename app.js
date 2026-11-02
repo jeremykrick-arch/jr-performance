@@ -31,6 +31,7 @@ const base={sessions:{},tests:{},start:'',notes:{},readiness:{},baseball:{},sche
 let db=structuredClone(base);try{let saved=JSON.parse(localStorage.getItem(KEY)||'{}');db={...db,...saved,settings:{...base.settings,...saved.settings},schedule:Array.isArray(saved.schedule)?saved.schedule:DEFAULT_SCHEDULE};}catch(e){console.warn('Unable to load saved workouts',e)}
 const $=id=>document.getElementById(id),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 for(const ev of db.schedule){if(ev.id==='mon-gym'&&ev.name==='Lower-body strength + acceleration')ev.name='Functional lower-body strength + acceleration';if(ev.id==='sat-gym'&&ev.name==='Total-body strength + rotational power')ev.name='Total-body strength + lateral and rotational power';if(ev.id==='sat-gym'&&ev.name==='Total-body strength + agility')ev.name='Total-body strength + lateral and rotational power';}
+let offsznAuthRole=null;
 let tab='home',workoutFocus=false,week=Math.max(1,Math.min(12,Number(db.settings.week)||programWeekForDate(localWorkoutDate()))),day='Monday',view='athlete',selectedDate=new Date().toISOString().slice(0,10),restRemaining=0,restInterval=null,toastTimer=null,syncTimer=null,authToken=null,authUser=null;
 function save(){db.settings.week=week;try{localStorage.setItem(KEY,JSON.stringify(db))}catch(e){toast('Storage full. Export a backup.')}}
 function session(w,d){const x=db.sessions?.[`${w}-${d}`];return x&&typeof x==='object'&&!Array.isArray(x)?x:{}}function ensureSession(w,d){if(!db.sessions||typeof db.sessions!=='object'||Array.isArray(db.sessions))db.sessions={};const k=`${w}-${d}`;if(!db.sessions[k]||typeof db.sessions[k]!=='object'||Array.isArray(db.sessions[k]))db.sessions[k]={};return db.sessions[k]}function finished(w,d){return !!session(w,d).finished}
@@ -100,11 +101,12 @@ function renderSettingsPage(){
   else if(settingsSection==='reminders')renderRemindersSettings();
   else if(settingsSection==='builder')renderProgramBuilder();
   else if(settingsSection==='account')renderAthleteAccount();
+  else if(settingsSection==='parentAccount')renderParentAccount();
   else {settingsSection='';return renderSettingsPage()}
   const app=$('app');
   const first=app.querySelector('button');
   if(first&&first.classList.contains('secondary')&&first.textContent.includes('←'))first.remove();
-  const heading=({edit:'Athlete details',workout:'Workout preferences',strength:'Strength profile',data:'Backups & data',growth:'Measurements',parent:'Parent overview',reminders:'Event reminders',builder:'Program builder',account:'Athlete account'})[settingsSection]||'Settings';
+  const heading=({edit:'Athlete details',workout:'Workout preferences',strength:'Strength profile',data:'Backups & data',growth:'Measurements',parent:'Parent overview',reminders:'Event reminders',builder:'Program builder',account:'Athlete account',parentAccount:'Parent account'})[settingsSection]||'Settings';
   app.insertAdjacentHTML('afterbegin',`<button class="off-detail-back" onclick="settingsOpen('')">← Settings</button><div class="off-settings-subnav"><span>SETTINGS</span><span aria-hidden="true">/</span><strong>${heading}</strong></div>`);
   return;
  }
@@ -125,11 +127,12 @@ function renderSettingsPage(){
  ${settingsRow('profile','Athlete Details','Photo, position and training goals','edit')}
  ${settingsRow('profile','Athlete Account','Sign in and manage your account','account')}
  ${settingsRow('parent','Parent Overview','Training consistency and recovery','parent')}
+ ${settingsRow('parent','Parent Account & Linking','Create a parent login or connect an athlete','parentAccount')}
  </section>
  <section class="off-approved-group"><h2>APP & DATA</h2>
  ${settingsRow('backup','Backup & Restore','Export, import and cloud backups','data')}
  </section>
- <div class="off-approved-footer"><strong>OFFSZN</strong><span>VERSION 8.56</span><small>BUILT IN THE OFFSEASON.</small></div>
+ <div class="off-approved-footer"><strong>OFFSZN</strong><span>VERSION 8.57</span><small>BUILT IN THE OFFSEASON.</small></div>
  </section>`;
 }
 function offFilterSettings(value){
@@ -626,9 +629,9 @@ function exportCSV(){let rows=[['Week','Day','Exercise','Set','Weight (lb)','Rep
 async function restoreBackup(ev){let file=ev.target.files?.[0];if(!file)return;try{let parsed=JSON.parse(await file.text());if(!parsed.sessions||!parsed.tests||typeof parsed.sessions!=='object')throw Error('Not a OFFSZN backup');if(!confirm('Replace current local data with this backup? Export a backup first if needed.'))return;db={...structuredClone(base),...parsed,settings:{...base.settings,...parsed.settings}};save();render();toast('Backup restored')}catch(e){alert('Could not restore: '+e.message)}}
 function saveCloudConfig(){let url=$('cloudUrl').value.trim().replace(/\/$/,''),key=$('cloudKey').value.trim();if(url&&!/^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(url))return toast('Enter a valid HTTPS Supabase project URL');db.settings.cloudUrl=url;db.settings.cloudKey=key;save();toast('Connection settings saved locally')}
 function cloudConfig(){let url=db.settings.cloudUrl||OFFSZN_SUPABASE_URL,key=db.settings.cloudKey||OFFSZN_SUPABASE_KEY;if(!url||!key)throw Error('Save your Supabase project URL and public key first.');return{url,key}}
-async function cloudAuth(endpoint){try{saveCloudConfig();let {url,key}=cloudConfig(),email=$('cloudEmail').value.trim(),password=$('cloudPassword').value;if(!email||!password)throw Error('Enter email and password');let r=await fetch(`${url}/auth/v1/${endpoint}`,{method:'POST',headers:{apikey:key,'Content-Type':'application/json'},body:JSON.stringify({email,password})});let x=await r.json();if(!r.ok)throw Error(x.msg||x.error_description||x.message||'Authentication failed');if(x.access_token){authToken=x.access_token;authUser=x.user?.id;toast('Signed in. You can now sync.')}else toast('Check your email to confirm the account, then sign in.');render()}catch(e){alert(e.message)}}
+async function cloudAuth(endpoint){try{saveCloudConfig();let {url,key}=cloudConfig(),email=$('cloudEmail').value.trim(),password=$('cloudPassword').value;if(!email||!password)throw Error('Enter email and password');let r=await fetch(`${url}/auth/v1/${endpoint}`,{method:'POST',headers:{apikey:key,'Content-Type':'application/json'},body:JSON.stringify({email,password})});let x=await r.json();if(!r.ok)throw Error(x.msg||x.error_description||x.message||'Authentication failed');if(x.access_token){authToken=x.access_token;authUser=x.user?.id;offsznAuthRole=x.user?.user_metadata?.role||null;toast('Signed in. You can now sync.')}else toast('Check your email to confirm the account, then sign in.');render()}catch(e){alert(e.message)}}
 function cloudLogin(){settingsOpen('account')}function cloudSignUp(){settingsOpen('account')}
-function cloudLogout(){authToken=null;authUser=null;toast('Signed out');render()}
+function cloudLogout(){authToken=null;authUser=null;offsznAuthRole=null;toast('Signed out');render()}
 async function cloudRequest(method,path,body){let {url,key}=cloudConfig();if(!authToken||!authUser)throw Error('Sign in to your athlete account first');let r=await fetch(url+'/rest/v1/'+path,{method,headers:{apikey:key,Authorization:'Bearer '+authToken,'Content-Type':'application/json',Prefer:'resolution=merge-duplicates,return=representation'},body:body?JSON.stringify(body):undefined});if(!r.ok){let text=await r.text();throw Error('Cloud request failed: '+text.slice(0,220))}return r.json()}
 async function cloudPush(silent=false){try{if(!authToken||!authUser){if(!silent)toast('Sign in first');return}let data=structuredClone(db);delete data.settings.cloudKey;delete data.settings.cloudUrl;delete data.settings.cloudAuto;await cloudRequest('POST','jr_backups?on_conflict=user_id',{user_id:authUser,payload:data,updated_at:new Date().toISOString()});if(!silent)toast('Cloud backup uploaded')}catch(e){if(!silent)alert(e.message);else console.warn(e)}}
 async function cloudPull(){try{let rows=await cloudRequest('GET','jr_backups?select=payload,updated_at&user_id=eq.'+encodeURIComponent(authUser));if(!rows?.length)return toast('No cloud backup found');if(!confirm('Restore cloud backup from '+rows[0].updated_at+'? This replaces local workout records. Export a local backup first.'))return;let data=rows[0].payload;if(!data?.sessions||!data?.tests)throw Error('Cloud backup format is invalid');let settings={...db.settings};db={...structuredClone(base),...data,settings:{...base.settings,...data.settings,...settings}};save();render();toast('Cloud backup restored')}catch(e){alert(e.message)}}
@@ -732,7 +735,7 @@ function renderAthleteAccount(){
  <label>Date of birth<input id="athDob" type="date" autocomplete="bday" onchange="offsznShowCalculatedAge()" oninput="offsznShowCalculatedAge()" required></label><div class="notice" id="athCalculatedAge" aria-live="polite">Enter your date of birth to calculate your age.</div>
  <div class="notice">Athletes aged 12 can begin registration only through a parent/guardian consent flow. This release does not yet provide verified parental consent, so age-12 account creation is unavailable. Athletes 13–17 should review the privacy notice with a parent or guardian.</div>
  <div class="actionrow"><button onclick="offsznAthleteSignUp()">Create athlete account</button><button class="secondary" onclick="offsznAthleteLogin()">Sign in</button></div>
- <button class="secondary small" onclick="offsznResetPassword()">Forgot password?</button>
+ <button class="secondary small" onclick="offsznResetPassword()">Forgot password?</button><button class="secondary" onclick="settingsOpen('parentAccount')">I'm a parent / guardian</button>
  <p class="mini">Email confirmation must be enabled in Supabase. Authentication is online-only. The app's existing local training history remains on this device until you explicitly upload it.</p>`}
  <p id="athAccountStatus" class="mini" role="status"></p></section>`;
 }
@@ -752,7 +755,7 @@ async function offsznAthleteSignUp(){
  if(!email||password.length<8){athleteAccountMessage('Enter an email and password of at least 8 characters.');return}
  try{
   const x=await athleteAuthRequest('signup',{email,password,data:{date_of_birth:dob,role:'athlete'}});
-  if(x.access_token){authToken=x.access_token;authUser=x.user?.id;await offsznSaveDobProfile(dob);renderAthleteAccount()}
+  if(x.access_token){authToken=x.access_token;authUser=x.user?.id;offsznAuthRole='athlete';await offsznSaveDobProfile(dob);renderAthleteAccount()}
   else athleteAccountMessage('Check your email for the confirmation link, then return to sign in.');
  }catch(e){athleteAccountMessage(e.message)}
 }
@@ -762,7 +765,7 @@ async function offsznAthleteLogin(){
  try{
   const x=await athleteAuthRequest('token?grant_type=password',{email,password});
   if(!x.access_token||!x.user?.id)throw Error('Email confirmation may still be required.');
-  authToken=x.access_token;authUser=x.user.id;
+  authToken=x.access_token;authUser=x.user.id;offsznAuthRole=x.user.user_metadata?.role||'athlete';
   if(x.user.user_metadata?.date_of_birth)await offsznSaveDobProfile(x.user.user_metadata.date_of_birth);
   renderAthleteAccount();
  }catch(e){athleteAccountMessage(e.message)}
@@ -818,3 +821,54 @@ function offsznConfirm(title,message,onConfirm,danger=false){
  document.body.appendChild(layer);layer.querySelector('#offsznCancel').focus();
 }
 function offsznEraseData(){offsznConfirm('Erase all local records?','This permanently deletes the training history stored on this device. Export a backup before continuing.',()=>{localStorage.removeItem(KEY);location.reload()},true)}
+
+// OFFSZN v8.57: parent account / explicit two-sided link approvals.
+// These links are NOT parental identity verification or COPPA consent.
+function offsznParentMessage(message){const el=$('parentAccountStatus');if(el)el.textContent=message;else toast(message)}
+function renderParentAccount(){
+ const signed=!!(authToken&&authUser),role=offsznAuthRole;
+ $('app').innerHTML=`<section class="off-parent-page"><div class="off-parent-hero"><span class="v7-kicker">OFFSZN / FAMILY</span><h1>PARENT <span class="accent">ACCOUNT</span></h1><p>Connect with an athlete through an invitation that both accounts approve. One parent can link to multiple athletes.</p></div>
+ ${!signed?`<div class="off-parent-card"><h2>Parent sign in or registration</h2><label>Parent email<input id="parentEmail" type="email" autocomplete="email" placeholder="parent@example.com"></label><label>Password<input id="parentPassword" type="password" minlength="8" autocomplete="current-password" placeholder="At least 8 characters"></label><div class="actionrow"><button onclick="offsznParentSignUp()">Create parent account</button><button class="secondary" onclick="offsznParentLogin()">Sign in</button></div><button class="secondary small" onclick="offsznParentReset()">Forgot password?</button><p class="mini">Confirm your email before signing in. Parent registration does not itself establish verified parental consent for an under-13 athlete.</p></div>`:
+ `<div class="off-parent-card"><div class="off-parent-status">● Signed in ${role==='parent'?'as parent':role==='athlete'?'as athlete':'(account type not established)'}</div><p class="mini">Account: ${esc(authUser)}</p><button class="secondary small" onclick="cloudLogout();settingsOpen('parentAccount')">Sign out</button></div>
+ ${role==='parent'?`<div class="off-parent-card"><h2>Link an existing athlete</h2><p>Enter the athlete's invitation code. Your request stays pending until the athlete accepts it.</p><label>Athlete invitation code<input id="parentInviteCode" maxlength="12" autocapitalize="characters" placeholder="e.g. A1B2C3D4"></label><button onclick="offsznParentRequestLink()">Request athlete link</button></div><div class="off-parent-card"><h2>My linked athletes</h2><div id="parentLinkedList">Loading...</div><button class="secondary" onclick="offsznLoadFamilyLinks()">Refresh links</button></div>`:
+ role==='athlete'?`<div class="off-parent-card"><h2>Invite a parent</h2><p>Create a one-time code and share it privately with your parent. Codes expire after 24 hours.</p><button onclick="offsznAthleteInviteCode()">Generate invitation code</button><div id="offParentInviteResult" class="off-parent-code" aria-live="polite"></div></div><div class="off-parent-card"><h2>Parent link requests</h2><div id="parentPendingList">Loading...</div><button class="secondary" onclick="offsznLoadFamilyLinks()">Refresh requests</button></div>`:
+ `<div class="notice">Sign out and sign in with an athlete or parent account to manage links.</div>`}`}
+ <div class="off-parent-card"><h2>Family privacy</h2><p>Linking is optional. Athletes must approve a parent request before the accounts are connected. This release does not share workout records with parent accounts or support under-13 registration.</p><p class="mini">Account linking requires the v8.57 Supabase SQL migration and an online connection. Do not share invitation codes publicly.</p></div><p id="parentAccountStatus" role="status" aria-live="polite" class="mini"></p></section>`;
+ if(signed&&(role==='parent'||role==='athlete'))offsznLoadFamilyLinks();
+}
+async function offsznParentSignUp(){
+ const email=builderValue('parentEmail').trim(),password=builderValue('parentPassword');
+ if(!email||password.length<8)return offsznParentMessage('Enter a valid email and a password of at least 8 characters.');
+ try{const x=await athleteAuthRequest('signup',{email,password,data:{role:'parent'}});
+ if(x.access_token){authToken=x.access_token;authUser=x.user?.id;offsznAuthRole='parent';renderParentAccount()}
+ else offsznParentMessage('Check your email to confirm your parent account, then sign in.');
+ }catch(e){offsznParentMessage(e.message)}
+}
+async function offsznParentLogin(){
+ const email=builderValue('parentEmail').trim(),password=builderValue('parentPassword');
+ if(!email||!password)return offsznParentMessage('Enter your email and password.');
+ try{const x=await athleteAuthRequest('token?grant_type=password',{email,password});
+ if(!x.access_token||!x.user?.id)throw Error('Confirm your email before signing in.');
+ if(x.user.user_metadata?.role!=='parent')throw Error('This account is not registered as a parent. Use Athlete Account to sign in.');
+ authToken=x.access_token;authUser=x.user.id;offsznAuthRole='parent';renderParentAccount();
+ }catch(e){offsznParentMessage(e.message)}
+}
+async function offsznParentReset(){const email=builderValue('parentEmail').trim();if(!email)return offsznParentMessage('Enter your email first.');try{await athleteAuthRequest('recover',{email});offsznParentMessage('If the address exists, a recovery email has been sent.')}catch(e){offsznParentMessage(e.message)}}
+async function offsznFamilyRPC(fn,params={}){
+ if(!authToken||!authUser)throw Error('Sign in first.');
+ const {url,key}=cloudConfig();const r=await fetch(url+'/rest/v1/rpc/'+fn,{method:'POST',headers:{apikey:key,Authorization:'Bearer '+authToken,'Content-Type':'application/json'},body:JSON.stringify(params)});
+ const result=await r.json().catch(()=>null);
+ if(!r.ok)throw Error(result?.message||'Family linking is unavailable. Apply the v8.57 Supabase SQL migration.');
+ return result;
+}
+async function offsznAthleteInviteCode(){try{const code=await offsznFamilyRPC('offszn_create_parent_invite');const el=$('offParentInviteResult');if(el)el.textContent='Code: '+code+' — expires in 24 hours';}catch(e){offsznParentMessage(e.message)}}
+async function offsznParentRequestLink(){const code=builderValue('parentInviteCode').trim().toUpperCase();if(!/^[A-Z0-9]{8}$/.test(code))return offsznParentMessage('Enter the eight-character invitation code.');try{await offsznFamilyRPC('offszn_request_parent_link',{invite_code:code});offsznParentMessage('Request sent. The athlete must approve the link.');offsznLoadFamilyLinks()}catch(e){offsznParentMessage(e.message)}}
+async function offsznAthleteDecideLink(linkId,approve){try{await offsznFamilyRPC('offszn_decide_parent_link',{link_id:linkId,approve});offsznParentMessage(approve?'Parent linked.':'Request declined.');offsznLoadFamilyLinks()}catch(e){offsznParentMessage(e.message)}}
+async function offsznUnlinkParent(linkId){offsznConfirm('Remove family link?','This parent will no longer be linked to the athlete.',async()=>{try{await offsznFamilyRPC('offszn_unlink_parent',{link_id:linkId});offsznLoadFamilyLinks()}catch(e){offsznParentMessage(e.message)}},true)}
+async function offsznLoadFamilyLinks(){
+ const target=offsznAuthRole==='parent'?'parentLinkedList':'parentPendingList',el=$(target);if(!el)return;
+ try{const rows=await offsznFamilyRPC('offszn_list_family_links');
+ if(!rows?.length){el.textContent=offsznAuthRole==='parent'?'No links yet.':'No parent requests yet.';return}
+ el.innerHTML=rows.map(x=>`<div class="off-family-link"><div><strong>${x.status==='approved'?'Linked':'Pending'} ${offsznAuthRole==='parent'?'athlete':'parent'}</strong><small>${esc(x.counterpart_email||'Account')} · ${esc(x.status)}</small></div><div class="off-family-actions">${offsznAuthRole==='athlete'&&x.status==='pending'?`<button class="small" onclick="offsznAthleteDecideLink('${x.id}',true)">Approve</button><button class="secondary small" onclick="offsznAthleteDecideLink('${x.id}',false)">Decline</button>`:''}${x.status==='approved'?`<button class="secondary small" onclick="offsznUnlinkParent('${x.id}')">Unlink</button>`:''}</div></div>`).join('');
+ }catch(e){el.textContent=e.message}
+}

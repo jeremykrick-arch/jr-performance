@@ -680,3 +680,107 @@ body .ath-home-panel .ath-home-tile:focus-visible,body .ath-home-heading button:
 
 /* OFFSZN athlete account */
 .offszn-account label{display:block;margin:12px 0;font-weight:650}.offszn-account input,.offszn-account select{width:100%;margin-top:7px}.offszn-account .actionrow{margin-top:16px;flex-wrap:wrap}
+
+
+/* OFFSZN 8.48 — unified design system */
+:root{
+ --off-bg:#090c11;--off-surface:#151a22;--off-surface-raised:#1d2530;
+ --off-border:#34404d;--off-yellow:#f4cb35;--off-yellow-strong:#ffdc55;
+ --off-text:#f5f7fa;--off-muted:#a9b4c2;
+ --bg:var(--off-bg);--panel:var(--off-surface);--panel2:var(--off-surface-raised);
+ --border:var(--off-border);--ink:var(--off-text);--muted:var(--off-muted);
+ --red:var(--off-yellow);--red2:#c69e18;--amber:var(--off-yellow);
+ color-scheme:dark;
+}
+html{background:var(--off-bg);scroll-behavior:smooth}
+body{background:radial-gradient(ellipse 90% 35% at 50% -5%,#26303d 0%,transparent 85%),var(--off-bg);color:var(--off-text)}
+.card,.profile-stat,.profile-week>div,.growth-summary>div,.strength-entry,.v7-session-row,.v7-tool,.v7-tool-grid>button{
+ border-color:var(--off-border)!important;
+ background-color:var(--off-surface)!important;
+ border-radius:18px!important;
+ box-shadow:0 8px 26px rgba(0,0,0,.14);
+}
+.card{margin-bottom:16px}
+.v7-kicker,.eyebrow{color:var(--off-yellow)!important;letter-spacing:.12em}
+.accent,.v7-greeting em,.v7-section-title button{color:var(--off-yellow)!important}
+button,select,input,textarea{font:inherit}
+button{transition:background-color .18s ease,border-color .18s ease,transform .18s ease,box-shadow .18s ease}
+button:active{transform:scale(.985)}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--off-yellow)!important;outline-offset:3px}
+input,select,textarea{background:#10161e!important;color:var(--off-text)!important;border:1px solid #465362!important;border-radius:12px!important;min-height:44px}
+input::placeholder,textarea::placeholder{color:#8392a2}
+button:not(.secondary):not(.ghost):not(.small):not(.profile-menu):not(.active):not(.nav-item):not(.settings-row):not(.header-avatar):not(.header-settings):not(.intro-skip){
+ border-radius:12px;
+}
+.settings-row,.profile-menu{background:transparent!important;border:0!important;border-bottom:1px solid var(--off-border)!important;border-radius:0!important;min-height:70px;display:flex;align-items:center;width:100%;text-align:left}
+.settings-row:last-child,.profile-menu:last-child{border-bottom:0!important}
+.settings-row-icon,.profile-menu-icon{background:#252e3a!important;color:var(--off-yellow)!important;border-radius:13px!important}
+.settings-chevron,.profile-chevron{color:var(--off-yellow)!important}
+html body #bottomNav{
+ background:#151b24!important;
+ border-top:1px solid #394653!important;
+ box-shadow:0 -10px 35px #0008!important;
+ padding-bottom:max(6px,env(safe-area-inset-bottom))!important;
+}
+html body #bottomNav button{color:#aab7c5!important;border-radius:13px!important}
+html body #bottomNav button.active{background:var(--off-yellow)!important;color:#11151b!important}
+html body #bottomNav button.active .ico{color:#11151b!important}
+.video-overlay,.swap-overlay,.jr-activity-overlay,.jr-readiness-overlay{
+ background:rgba(3,6,10,.78)!important;
+ backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+}
+.video-sheet,.swap-sheet,.jr-activity-dialog,.jr-readiness-sheet{
+ background:linear-gradient(160deg,#232d39,#141a22 75%)!important;
+ border:1px solid #495869!important;
+ border-top:2px solid var(--off-yellow)!important;
+ border-radius:24px!important;
+ box-shadow:0 24px 80px #000b!important;
+}
+.toast{
+ position:fixed!important;bottom:calc(92px + env(safe-area-inset-bottom))!important;
+ left:50%!important;transform:translateX(-50%)!important;
+ max-width:min(92vw,420px)!important;
+ background:#242e39!important;color:#fff!important;
+ border:1px solid #6d5b28!important;border-left:4px solid var(--off-yellow)!important;
+ border-radius:14px!important;padding:13px 18px!important;
+ box-shadow:0 16px 48px #000a!important;
+ font-weight:650!important;z-index:20050!important;
+}
+.offszn-dialog-layer{position:fixed;inset:0;z-index:25000;display:grid;place-items:center;padding:18px;background:rgba(3,6,10,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.offszn-dialog{width:min(100%,440px);padding:24px;border-radius:24px;border:1px solid #4c5b68;border-top:3px solid var(--off-yellow);background:linear-gradient(150deg,#25303d,#121820);box-shadow:0 25px 100px #000c}
+.offszn-dialog-mark{display:grid;place-items:center;width:46px;height:46px;background:#3a3320;color:var(--off-yellow);border-radius:14px;font-size:24px;margin-bottom:14px}
+.offszn-dialog h2{margin:0 0 9px;font-size:23px;letter-spacing:-.025em}
+.offszn-dialog p{color:#c2cbd5;line-height:1.55;margin:0 0 20px}
+.offszn-dialog-actions{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap}
+.offszn-dialog-actions button{min-height:44px;padding:10px 16px}
+.offszn-dialog-actions .offszn-danger{background:#a52e37!important;color:#fff!important}
+@media(max-width:420px){.offszn-dialog-actions button{flex:1}.offszn-dialog{padding:20px}}
+@media(prefers-reduced-motion:reduce){button{transition:none!important}html{scroll-behavior:auto}}
+
+/* OFFSZN 8.49 — performance dashboard and workout polish */
+.offszn-featured-session{position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(120deg,#202b36 0%,#141b25 58%,#0f141c 100%)!important;border:1px solid #4c5968!important;border-radius:24px!important;box-shadow:0 16px 40px #0005!important}
+.offszn-featured-session:before{content:"";position:absolute;z-index:-1;inset:-45% -40% auto 35%;height:360px;transform:rotate(-18deg);background:linear-gradient(90deg,transparent,#f4cb3519,transparent);pointer-events:none}
+.offszn-featured-session:after{content:"";position:absolute;right:-70px;bottom:-115px;width:270px;height:270px;border:1px solid #f4cb3526;border-radius:50%;box-shadow:0 0 0 42px #f4cb3509,0 0 0 90px #f4cb3506;pointer-events:none}
+.offszn-featured-session .v7-primary{min-height:52px;border-radius:14px!important;box-shadow:0 8px 22px #0006}
+.offszn-brand-mark{font-style:italic;font-weight:1000;letter-spacing:-.07em;opacity:.16!important;color:#fff!important;white-space:nowrap;font-size:clamp(50px,13vw,105px)!important;line-height:1!important;pointer-events:none}
+.offszn-brand-mark span{color:#f4cb35!important}
+.offszn-home-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:16px 0 23px}
+.offszn-home-actions button{display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-width:0;text-align:left;padding:14px 12px!important;border:1px solid #394755!important;background:#171e27!important;color:#fff!important;border-radius:17px!important;box-shadow:0 7px 20px #0003}
+.offszn-home-actions button b{font-size:14px;letter-spacing:-.02em}.offszn-home-actions button small{color:#aab6c4;font-size:10px;line-height:1.25}
+.offszn-quick-icon{display:grid;place-items:center;width:35px;height:35px;margin-bottom:5px;border-radius:11px;background:#343120;color:#f4cb35;font-size:22px;font-weight:700}
+.offszn-home-actions button:active{background:#283240!important}
+.offszn-workout-control{border:1px solid #425060!important;border-radius:22px!important;background:linear-gradient(155deg,#1d2631,#131922)!important;padding:18px!important}
+.offszn-session-meta{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:15px;flex-wrap:wrap}
+.offszn-session-tag{font-size:10px;font-weight:850;letter-spacing:.11em;color:#f4cb35}
+.offszn-session-tag-muted{color:#b8c4d0}
+.offszn-workout-days{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px!important;margin:16px 0!important}
+.offszn-workout-days button{min-width:0!important;min-height:46px!important;border-radius:12px!important;font-size:12px!important;padding:9px 5px!important}
+.offszn-progress-label{margin-top:15px!important}
+.offszn-rest-heading{display:flex;justify-content:space-between;gap:8px;color:#f4cb35;font-size:10px;font-weight:850;letter-spacing:.09em;margin-top:19px}
+.offszn-rest-heading span{color:#99a9b8;font-weight:600}
+.offszn-rest-actions{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px!important;margin-top:10px}
+.offszn-rest-actions button{min-width:0!important;min-height:43px!important;border-radius:11px!important;padding:9px 3px!important;font-size:12px!important}
+.offszn-readiness-launch button{min-height:48px;border:1px solid #455464!important;border-radius:13px!important;background:#1b2530!important}
+.offszn-workout-finish{border-top:2px solid #f4cb35!important;background:linear-gradient(155deg,#242c37,#141a22)!important}
+@media(max-width:365px){.offszn-home-actions{gap:6px}.offszn-home-actions button{padding:12px 8px!important}.offszn-home-actions button b{font-size:12px}.offszn-home-actions button small{font-size:9px}}
+@media(prefers-reduced-motion:reduce){.offszn-featured-session:before{display:none}}

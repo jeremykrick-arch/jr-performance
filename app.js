@@ -49,14 +49,15 @@ function toast(msg){let el=$('toast');el.textContent=msg;el.classList.remove('hi
 let settingsReturnTab='home',settingsSection='';
 function openSettings(){if(tab!=='settings')settingsReturnTab=tab==='profile'?'home':tab;settingsSection='';tab='settings';workoutFocus=false;render();window.scrollTo(0,0)}
 function closeSettings(){settingsSection='';tab=settingsReturnTab;render();window.scrollTo(0,0)}
-function settingsOpen(section){settingsSection=section;render();window.scrollTo(0,0)}
+function settingsOpen(section){if(tab!=='settings'){settingsReturnTab=tab;tab='settings'}settingsSection=section;render();window.scrollTo(0,0)}
+function openProgramBuilder(){settingsOpen('builder')}
 function nav(t){if(t==='settings'){openSettings();return}tab=t;if(t!=='train')workoutFocus=false;render();window.scrollTo(0,0)}
 function focusWorkout(){workoutFocus=true;day=DAYS.includes(day)?day:'Saturday';nav('train')}
 function exitWorkout(){workoutFocus=false;render();window.scrollTo(0,0)}
 function renderHeaderAthlete(){const p=profileData(),name=(p.name||'JR').trim()||'JR',avatar=$('headerAvatar'),label=$('headerAthleteName');if(!avatar||!label)return;label.textContent=name.toUpperCase()+' · ATHLETIC DEVELOPMENT';avatar.replaceChildren();if(p.photo){const img=document.createElement('img');img.src=p.photo;img.alt=name+' profile photo';avatar.appendChild(img)}else{avatar.textContent=name.split(/\s+/).map(x=>x[0]).join('').slice(0,2).toUpperCase()}}
 // Original, dependency-free outline icons inspired by contemporary fitness-app UI patterns.
 const ICON_PATHS={
- home:'<path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/>',
+ home:'<path d="M4 4.5H20V12L12 21L4 12Z"/>',
  train:'<path d="M3 9v6M6 7v10M18 7v10M21 9v6M6 12h12"/>',
  library:'<rect x="3" y="4" width="18" height="16" rx="3"/><path d="m10 8 6 4-6 4z"/>',
  progress:'<path d="M4 19V5M4 19h17M7 15l5-5 3 3 5-7"/><path d="M16 6h4v4"/>',
@@ -102,7 +103,7 @@ function renderSettingsPage(){
   else {settingsSection='';return renderSettingsPage()}
   const app=$('app');
   const first=app.querySelector('button');
-  if(first&&first.classList.contains('secondary')&&first.textContent.includes('←')){first.textContent='← Settings';first.onclick=()=>settingsOpen('')}
+  if(first&&first.classList.contains('secondary')&&first.textContent.includes('←'))first.remove();
   const heading=({edit:'Athlete details',workout:'Workout preferences',strength:'Strength profile',data:'Backups & data',growth:'Measurements',parent:'Parent overview',reminders:'Event reminders',builder:'Program builder',account:'Athlete account'})[settingsSection]||'Settings';
   app.insertAdjacentHTML('afterbegin',`<button class="off-detail-back" onclick="settingsOpen('')">← Settings</button><div class="off-settings-subnav"><span>SETTINGS</span><span aria-hidden="true">/</span><strong>${heading}</strong></div>`);
   return;
@@ -206,7 +207,7 @@ function renderHome(){
  const label={Monday:'Lower body + acceleration',Thursday:'Upper body + shoulder stability',Saturday:'Total body + rotational power'};
  $('app').innerHTML=`<div class="v7-greeting"><div><div class="v7-kicker">YOUR TRAINING SPACE</div><h1>LET'S GET<br><em>STRONGER.</em></h1><p>Hey, ${esc((profile.name||'JR').split(' ')[0])}. Keep building, one session at a time.</p></div><button class="v7-round" aria-label="Athlete profile" onclick="nav('profile')">↗</button></div>
  <div class="v7-hero offszn-featured-session"><div class="v7-hero-top"><span class="v7-label">NEXT SESSION</span><span class="v7-chip">WEEK ${w} / 12</span></div><div class="v7-hero-mark offszn-brand-mark" aria-hidden="true">OFF<span>SZN</span></div><h2>${esc(label[pick])}</h2><p>${esc(pick)} · ${esc(phase(w))} · ${exercises[pick].length} movements</p><button class="v7-primary" onclick="day='${pick}';focusWorkout()">${finished(w,pick)?'REVIEW WORKOUT':'START WORKOUT'} <span>↗</span></button></div>
- <section class="offszn-home-actions" aria-label="Quick actions"><button onclick="nav('train')"><span class="offszn-quick-icon">↗</span><b>Train</b><small>Today’s workout</small></button><button onclick="settingsOpen('builder')"><span class="offszn-quick-icon">✦</span><b>Build</b><small>Training blueprint</small></button><button onclick="nav('progress')"><span class="offszn-quick-icon">▥</span><b>Progress</b><small>Your results</small></button></section><div class="v7-section-title"><h2>UPCOMING DATES</h2><button onclick="nav('schedule')">Full schedule ↗</button></div><p class="jr-calendar-hint">Swipe left to see future dates →</p><div class="v7-week-strip" role="group" aria-label="Upcoming four weeks of training dates">${strip}</div>
+ <section class="offszn-home-actions" aria-label="Quick actions"><button onclick="nav('train')"><span class="offszn-quick-icon">↗</span><b>Train</b><small>Today’s workout</small></button><button onclick="openProgramBuilder()"><span class="offszn-quick-icon">✦</span><b>Build</b><small>Training blueprint</small></button><button onclick="nav('progress')"><span class="offszn-quick-icon">▥</span><b>Progress</b><small>Your results</small></button></section><div class="v7-section-title"><h2>UPCOMING DATES</h2><button onclick="nav('schedule')">Full schedule ↗</button></div><p class="jr-calendar-hint">Swipe left to see future dates →</p><div class="v7-week-strip" role="group" aria-label="Upcoming four weeks of training dates">${strip}</div>
  <div class="v7-stats"><div class="v7-stat"><span>WORKOUTS DONE</span><strong>${count}<small>/36</small></strong><div class="v7-stat-track"><i style="width:${pct}%"></i></div></div><div class="v7-stat"><span>PROGRAM WEEK</span><strong>${w}<small>/12</small></strong><p>${esc(phase(w))}</p></div></div>
  <div class="v7-section-title"><h2>YOUR TRAINING</h2><button onclick="nav('progress')">See progress ↗</button></div><div class="v7-stack">${DAYS.map(x=>`<button class="v7-session-row" onclick="day='${x}';nav('train')"><span class="v7-session-icon">${x==='Monday'?'01':x==='Thursday'?'02':'03'}</span><span><b>${esc(label[x])}</b><small>${x} · ${finished(w,x)?'Completed':'Ready when you are'}</small></span><span class="v7-chevron">↗</span></button>`).join('')}</div>
  <div class="v7-section-title"><h2>RECOVERY & TOOLS</h2></div><button class="v7-tool" onclick="day='${pick}';nav('train')"><span><b>${esc(state.label)}</b><small>${esc(state.message)}</small></span><span>↗</span></button><div class="v7-tool-grid"><button onclick="nav('library')">${uiIcon('library')} <b>Movement library</b><small>Technique guides</small></button><button onclick="nav('profile')">${uiIcon('profile')} <b>Athlete profile</b><small>Settings & backups</small></button></div>${athleticHomePreview()}`;

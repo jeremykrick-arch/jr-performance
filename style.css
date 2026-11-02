@@ -867,3 +867,6 @@ html body .settings-row-icon{color:#facc15!important;border-color:#4a4430!import
 .off-setting-link{margin-bottom:9px;min-height:66px}
 .off-settings-subnav{margin-bottom:9px}
 @media(max-width:360px){.off-field-grid{grid-template-columns:1fr}}
+
+/* v8.53: home plate icon follows existing classic navigation colors. */
+nav#bottomNav button[aria-label="Home"] .ui-icon{stroke-linejoin:round;stroke-linecap:round}

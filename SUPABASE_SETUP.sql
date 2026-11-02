@@ -27,3 +27,8 @@ drop policy if exists backups_own_insert on public.jr_backups;
 create policy backups_own_insert on public.jr_backups for insert to authenticated with check (auth.uid()=user_id);
 drop policy if exists backups_own_update on public.jr_backups;
 create policy backups_own_update on public.jr_backups for update to authenticated using (auth.uid()=user_id) with check (auth.uid()=user_id);
+
+-- v8.47: Store DOB securely; do not store a fixed age that becomes stale.
+alter table public.athlete_profiles add column if not exists date_of_birth date;
+alter table public.athlete_profiles drop constraint if exists athlete_profiles_age_check;
+-- Keep the legacy age column nullable for older profiles; new registrations use DOB.

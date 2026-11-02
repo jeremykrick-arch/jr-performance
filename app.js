@@ -120,7 +120,7 @@ function renderSettingsPage(){
  ${settingsRow('profile','Athlete account','Register, verify email and sign in','account')}
  ${settingsRow('backup','Cloud backup & data','Sync workout data after database setup','data')}
  ${settingsRow('profile','Athlete details','Photo, position, number and goals','edit')}
- </div><div class="settings-about"><span>OFFSZN</span><b>VERSION 8.46</b><p>Built for baseball. Designed for progress.</p></div>
+ </div><div class="settings-about"><span>OFFSZN</span><b>VERSION 8.47</b><p>Built for baseball. Designed for progress.</p></div>
  </section>`;
 }
 function settingsRow(icon,title,desc,section){return `<button class="settings-row" onclick="settingsOpen('${section}')"><span class="settings-row-icon">${uiIcon(icon)}</span><span class="settings-row-copy"><strong>${title}</strong><small>${desc}</small></span><span class="settings-chevron">›</span></button>`}
@@ -672,7 +672,7 @@ function renderAthleteAccount(){
  ${signed?`<div class="notice good">Authenticated account: ${esc(authUser)}</div><button class="secondary" onclick="cloudLogout();settingsOpen('account')">Sign out</button><button onclick="settingsOpen('data')">Cloud backup & data</button>`:
  `<label>Email address<input id="athEmail" type="email" autocomplete="email" inputmode="email" placeholder="athlete@example.com"></label>
  <label>Password<input id="athPassword" type="password" autocomplete="new-password" minlength="8" placeholder="At least 8 characters"></label>
- <label>Age <select id="athAge">${Array.from({length:7},(_,i)=>i+12).map(v=>`<option value="${v}">${v}</option>`).join('')}</select></label>
+ <label>Date of birth<input id="athDob" type="date" autocomplete="bday" onchange="offsznShowCalculatedAge()" oninput="offsznShowCalculatedAge()" required></label><div class="notice" id="athCalculatedAge" aria-live="polite">Enter your date of birth to calculate your age.</div>
  <div class="notice">Athletes aged 12 can begin registration only through a parent/guardian consent flow. This release does not yet provide verified parental consent, so age-12 account creation is unavailable. Athletes 13–17 should review the privacy notice with a parent or guardian.</div>
  <div class="actionrow"><button onclick="offsznAthleteSignUp()">Create athlete account</button><button class="secondary" onclick="offsznAthleteLogin()">Sign in</button></div>
  <button class="secondary small" onclick="offsznResetPassword()">Forgot password?</button>
@@ -688,12 +688,14 @@ async function athleteAuthRequest(endpoint,payload){
  return result;
 }
 async function offsznAthleteSignUp(){
- const age=Number(builderValue('athAge')),email=builderValue('athEmail').trim(),password=builderValue('athPassword');
+ const dob=builderValue('athDob'),age=offsznAgeFromDob(dob),email=builderValue('athEmail').trim(),password=builderValue('athPassword');
+ if(age===null){athleteAccountMessage('Enter a valid date of birth.');return}
  if(age===12){athleteAccountMessage('Age 12 requires verified guardian consent; registration is not available yet.');return}
+ if(age<13||age>18){athleteAccountMessage('OFFSZN athlete registration is currently available only for ages 13–18.');return}
  if(!email||password.length<8){athleteAccountMessage('Enter an email and password of at least 8 characters.');return}
  try{
-  const x=await athleteAuthRequest('signup',{email,password,options:{data:{age,role:'athlete'}}});
-  if(x.access_token){authToken=x.access_token;authUser=x.user?.id;renderAthleteAccount()}
+  const x=await athleteAuthRequest('signup',{email,password,data:{date_of_birth:dob,role:'athlete'}});
+  if(x.access_token){authToken=x.access_token;authUser=x.user?.id;await offsznSaveDobProfile(dob);renderAthleteAccount()}
   else athleteAccountMessage('Check your email for the confirmation link, then return to sign in.');
  }catch(e){athleteAccountMessage(e.message)}
 }
@@ -704,11 +706,37 @@ async function offsznAthleteLogin(){
   const x=await athleteAuthRequest('token?grant_type=password',{email,password});
   if(!x.access_token||!x.user?.id)throw Error('Email confirmation may still be required.');
   authToken=x.access_token;authUser=x.user.id;
-  athleteAccountMessage('Signed in.');renderAthleteAccount();
+  if(x.user.user_metadata?.date_of_birth)await offsznSaveDobProfile(x.user.user_metadata.date_of_birth);
+  renderAthleteAccount();
  }catch(e){athleteAccountMessage(e.message)}
 }
 async function offsznResetPassword(){
  const email=builderValue('athEmail').trim();
  if(!email){athleteAccountMessage('Enter your email address first.');return}
  try{await athleteAuthRequest('recover',{email});athleteAccountMessage('If this email is registered, a password recovery message will be sent.')}catch(e){athleteAccountMessage(e.message)}
+}
+
+// v8.47: DOB is the source of truth; age is always derived on demand.
+function offsznAgeFromDob(dob, today=new Date()){
+ if(!/^\d{4}-\d{2}-\d{2}$/.test(dob||''))return null;
+ const [y,m,d]=dob.split('-').map(Number);
+ const date=new Date(Date.UTC(y,m-1,d));
+ if(date.getUTCFullYear()!==y||date.getUTCMonth()!==m-1||date.getUTCDate()!==d)return null;
+ const currentYear=today.getFullYear(),currentMonth=today.getMonth()+1,currentDay=today.getDate();
+ if(y>currentYear||y===currentYear&&(m>currentMonth||m===currentMonth&&d>currentDay))return null;
+ return currentYear-y-(currentMonth<m||currentMonth===m&&currentDay<d?1:0);
+}
+function offsznShowCalculatedAge(){
+ const el=$('athCalculatedAge');if(!el)return;
+ const age=offsznAgeFromDob(builderValue('athDob'));
+ el.textContent=age===null?'Enter a valid date of birth.':age===12?'Age 12 — guardian consent is required; registration is not yet available.':age>=13&&age<=18?`Calculated age: ${age} years — eligible to register.`:`Calculated age: ${age} years — outside the supported 12–18 age range.`;
+}
+async function offsznSaveDobProfile(dob){
+ if(!authToken||!authUser||offsznAgeFromDob(dob)===null)return;
+ const {url,key}=cloudConfig();
+ const response=await fetch(url+'/rest/v1/athlete_profiles?on_conflict=user_id',{
+  method:'POST',headers:{apikey:key,Authorization:'Bearer '+authToken,'Content-Type':'application/json',Prefer:'resolution=merge-duplicates'},
+  body:JSON.stringify({user_id:authUser,date_of_birth:dob})
+ });
+ if(!response.ok){console.warn('DOB profile sync pending',response.status);athleteAccountMessage('Signed in, but birthdate profile sync needs database setup.');}
 }

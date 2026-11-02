@@ -827,3 +827,43 @@ html body .settings-row-icon{color:#facc15!important;border-color:#4a4430!import
 .off-settings-subnav strong{color:#facc15}
 @media(max-width:390px){.off-settings-status{align-items:flex-start;flex-direction:column}.off-settings-shortcuts button{padding:11px 8px}.off-settings-v851 .settings-row{padding:11px!important}}
 @media(prefers-reduced-motion:no-preference){.off-settings-v851 .settings-row,.off-settings-shortcuts button{transition:background .15s,border-color .15s,transform .15s}.off-settings-shortcuts button:active{transform:scale(.97)}}
+
+/* 8.52 — actual settings detail screen styling */
+.off-detail-page{padding:2px 0 28px}
+.off-detail-back{display:inline-flex;align-items:center;min-height:40px;margin:0 0 6px;background:none!important;border:0!important;color:#facc15!important;font-weight:800;font-size:14px}
+.off-detail-title{padding:8px 4px 18px}
+.off-detail-title h1,.off-workout-banner h1{font-size:clamp(26px,7vw,34px);letter-spacing:-1px;line-height:1.06;margin:9px 0}
+.off-detail-title p,.off-workout-banner p{font-size:13px;line-height:1.55;color:#b6bec8;margin:0}
+.off-profile-photo{display:flex;align-items:center;flex-direction:column;gap:10px;padding:20px 14px 24px;background:radial-gradient(ellipse at 50% 0,#303741,#181b20 75%);border:1px solid #353b43;border-radius:19px;margin-bottom:19px}
+.off-profile-avatar{width:100px;height:100px;border:3px solid #facc15;border-radius:50%;display:grid;place-items:center;background:#32373e;color:#fff;font-size:36px;font-weight:900;overflow:hidden}
+.off-profile-avatar img{width:100%;height:100%;object-fit:cover}
+.off-profile-photo>strong{font-size:23px;letter-spacing:-.5px}
+.off-photo-upload{display:inline-flex;align-items:center;justify-content:center;background:#facc15;color:#151515;padding:10px 20px;border-radius:12px;font-size:12px;font-weight:850;cursor:pointer;min-height:40px}
+.off-photo-upload input{position:absolute;width:1px;height:1px;opacity:0}
+.off-text-button{border:0;background:none!important;color:#c4c9d1!important;text-decoration:underline;font-size:12px}
+.off-detail-section{margin:0 0 20px}
+.off-detail-section h2{font-size:11px;font-weight:850;letter-spacing:1.3px;color:#aeb7c2;margin:0 0 11px 4px}
+.off-field{display:flex;flex-direction:column;gap:7px;font-size:12px;font-weight:750;color:#d8dce2;margin-bottom:13px}
+.off-field input,.off-field select,.off-field textarea{width:100%;box-sizing:border-box;padding:12px 13px!important;background:#1e232a!important;border:1px solid #434a53!important;border-radius:12px!important;font-size:14px;color:#fff}
+.off-field-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.off-account-link button,.off-setting-link{display:flex;align-items:center;gap:12px;text-align:left;width:100%;border:1px solid #3c434b!important;border-radius:15px!important;background:#1d2229!important;color:#fff!important;padding:15px!important}
+.off-account-link button>span:nth-child(2),.off-setting-link>span{flex:1;display:flex;flex-direction:column;gap:4px}
+.off-account-link button svg{color:#facc15}
+.off-account-link button small,.off-setting-link small{font-size:11px;color:#aab3bf;line-height:1.4}
+.off-account-link button b,.off-setting-link b{color:#facc15;font-size:22px}
+.off-save-button{background:#facc15!important;color:#161616!important;border-radius:14px!important;min-height:50px;font-weight:900}
+.off-workout-banner{padding:24px 18px 27px;margin-bottom:23px;background:radial-gradient(ellipse at 90% 10%,#3b3630,#1b2028 70%);border:1px solid #3d444c;border-radius:19px}
+.off-setting-field{position:relative;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:76px;padding:13px 14px;border:1px solid #39424b;background:#1e232a;border-radius:14px;margin-bottom:9px}
+.off-setting-field>span:first-child{display:flex;flex-direction:column;gap:4px;flex:1}
+.off-setting-field strong,.off-setting-link strong{font-size:13px;color:#f2f3f5}
+.off-setting-field small{font-size:11px;color:#aab3bf;line-height:1.35}
+.off-setting-field select{width:auto;max-width:115px;min-height:40px;padding:8px 7px!important;font-size:12px}
+.off-toggle-row input{position:absolute;right:14px;width:47px;height:28px;opacity:0;z-index:2;cursor:pointer}
+.off-toggle-track{position:relative;flex:0 0 48px;width:48px;height:28px;border-radius:99px;background:#555c65;transition:background .2s}
+.off-toggle-track:after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;background:#fff;border-radius:50%;transition:transform .2s}
+.off-toggle-row input:checked+.off-toggle-track{background:#facc15}
+.off-toggle-row input:checked+.off-toggle-track:after{transform:translateX(20px)}
+.off-toggle-row input:focus-visible+.off-toggle-track{outline:2px solid #facc15;outline-offset:3px}
+.off-setting-link{margin-bottom:9px;min-height:66px}
+.off-settings-subnav{margin-bottom:9px}
+@media(max-width:360px){.off-field-grid{grid-template-columns:1fr}}

@@ -1,15 +1,1 @@
-OFFSZN 8.51 — Settings Experience Refresh
-
-Changes:
-- Reorganized settings into Training & Performance, Account & Personalization,
-  and Data & Privacy.
-- Added searchable settings with no-results and clear-search states.
-- Added quick actions for Program Builder, Reminders and Backups.
-- Improved athlete profile header, account sign-in status, menu descriptions,
-  spacing, and subpage breadcrumbs.
-- Retained the classic pre-8.48 bottom navigation and colors.
-- No Supabase schema changes. No videos added.
-
-Upload all extracted app files to the GitHub Pages repository.
-This release does not change existing athlete data or backend limitations.
-Test on mobile Safari / installed PWA before broader use.
+OFFSZN v8.52 — Settings Design Alignment\n\nUpdated Settings hub, Athlete Details and Workout Preferences with real, working controls.\nPreserved classic navigation, existing profile fields, workout timer behavior, reminders and manual backups.\nOnly implemented controls that have actual app functionality; mockup-only sound/haptic toggles and automatic cloud sync are not represented as working features.\n\nUpload extracted files to GitHub Pages. No SQL migration required. Test on mobile devices before public rollout.\n

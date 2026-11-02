@@ -1,30 +1,7 @@
-OFFSZN v8.57 — Parent Accounts & Athlete Linking (initial implementation)
+# OFFSZN v8.59 — Athlete cloud synchronization (beta)
 
-WHAT'S INCLUDED
-- Parent signup, login, password reset through Supabase Auth.
-- Athlete-generated one-time invitation code, 24-hour expiration.
-- Parent request to link using athlete code; athlete approval/decline.
-- Linked account listing and unlink control.
-- Supports multiple linked athletes per parent.
-- Preserves classic navigation and existing app pages.
+Deploy all website files to GitHub Pages. In Supabase SQL Editor run SUPABASE_SETUP.sql, SUPABASE_FAMILY_LINKING_v857.sql, then **SUPABASE_CLOUD_SYNC_v859.sql**.
 
-INSTALL
-1. Upload extracted website files to your GitHub Pages repository.
-2. In Supabase SQL Editor, run SUPABASE_SETUP.sql if not already done.
-3. Run SUPABASE_FAMILY_LINKING_v857.sql (new migration).
-4. Ensure Supabase Auth email confirmation and Site URL/redirect URLs are configured.
-5. Test with separate parent and athlete accounts on separate browsers/devices.
+Athletes must sign in and opt into uploading local data. A per-account local cache supports offline changes. The app debounces uploads and uses revision checks to prevent silent overwrite. On conflict it stops automatic uploading and requires reconnection; export local JSON first to preserve unsynced changes. Parent accounts do not yet have read-only access to workout data.
 
-IMPORTANT LIMITATIONS
-- This is account linking, NOT verified parental consent. Age-12 signup stays blocked.
-- No parent access to workout data yet. The existing Parent Overview remains a
-  same-device local view, not a remote parent dashboard.
-- Existing browser training data is NOT isolated by account; do not switch
-  athlete logins in one browser profile.
-- Login sessions are not persisted on refresh. Manual cloud backup only.
-- Public launch needs security review, anti-abuse/rate limiting, role verification,
-  privacy controls, audit logs, account deletion, and youth privacy compliance.
-- SQL migration and live Supabase end-to-end testing have not been performed here.
-
-## v8.58 parent registration fix
-Shows validation and signup feedback beside the Create Parent Account button, disables it during submission, and reports timeout and server errors. No SQL changes beyond v8.57 are needed.
+Important: authentication sessions are not persisted across page reloads; sign in again to reconnect. This beta is not validated for public release or for verified parental consent. Cloud snapshots are capped at 2MB. Automated integration testing against live Supabase has not been performed.

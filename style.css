@@ -712,19 +712,6 @@ input::placeholder,textarea::placeholder{color:#8392a2}
 button:not(.secondary):not(.ghost):not(.small):not(.profile-menu):not(.active):not(.nav-item):not(.settings-row):not(.header-avatar):not(.header-settings):not(.intro-skip){
  border-radius:12px;
 }
-.settings-row,.profile-menu{background:transparent!important;border:0!important;border-bottom:1px solid var(--off-border)!important;border-radius:0!important;min-height:70px;display:flex;align-items:center;width:100%;text-align:left}
-.settings-row:last-child,.profile-menu:last-child{border-bottom:0!important}
-.settings-row-icon,.profile-menu-icon{background:#252e3a!important;color:var(--off-yellow)!important;border-radius:13px!important}
-.settings-chevron,.profile-chevron{color:var(--off-yellow)!important}
-html body #bottomNav{
- background:#151b24!important;
- border-top:1px solid #394653!important;
- box-shadow:0 -10px 35px #0008!important;
- padding-bottom:max(6px,env(safe-area-inset-bottom))!important;
-}
-html body #bottomNav button{color:#aab7c5!important;border-radius:13px!important}
-html body #bottomNav button.active{background:var(--off-yellow)!important;color:#11151b!important}
-html body #bottomNav button.active .ico{color:#11151b!important}
 .video-overlay,.swap-overlay,.jr-activity-overlay,.jr-readiness-overlay{
  background:rgba(3,6,10,.78)!important;
  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
@@ -784,3 +771,14 @@ html body #bottomNav button.active .ico{color:#11151b!important}
 .offszn-workout-finish{border-top:2px solid #f4cb35!important;background:linear-gradient(155deg,#242c37,#141a22)!important}
 @media(max-width:365px){.offszn-home-actions{gap:6px}.offszn-home-actions button{padding:12px 8px!important}.offszn-home-actions button b{font-size:12px}.offszn-home-actions button small{font-size:9px}}
 @media(prefers-reduced-motion:reduce){.offszn-featured-session:before{display:none}}
+
+/* OFFSZN 8.50 — classic pre-8.48 navigation restored */
+html body nav#bottomNav{background:#191a1d!important;border-top:1px solid #34363b!important;box-shadow:0 -4px 18px rgba(0,0,0,.38)!important}
+html body nav#bottomNav button{background:transparent!important;color:#a6abb8!important;border-radius:12px!important}
+html body nav#bottomNav button.active{background:rgba(250,204,21,.075)!important;color:#facc15!important;border-radius:12px!important}
+html body nav#bottomNav button.active .ico,html body nav#bottomNav button.active .ui-icon{color:#facc15!important;stroke:currentColor!important}
+html body nav#bottomNav button:not(.active) .ui-icon{color:#a6abb8!important}
+/* restore separate raised menu tiles */
+html body .profile-v812 .profile-v812-links .profile-menu{background:#2b3037!important;border:1px solid #4b535d!important;border-radius:12px!important;margin:0 0 9px!important;padding:12px!important;min-height:68px!important}
+html body .profile-v812 .profile-v812-links .profile-menu-icon{background:#20242a!important;border:1px solid #505861!important;color:#facc15!important}
+html body .settings-row-icon{color:#facc15!important;border-color:#4a4430!important;background:#292720!important}

@@ -782,3 +782,48 @@ html body nav#bottomNav button:not(.active) .ui-icon{color:#a6abb8!important}
 html body .profile-v812 .profile-v812-links .profile-menu{background:#2b3037!important;border:1px solid #4b535d!important;border-radius:12px!important;margin:0 0 9px!important;padding:12px!important;min-height:68px!important}
 html body .profile-v812 .profile-v812-links .profile-menu-icon{background:#20242a!important;border:1px solid #505861!important;color:#facc15!important}
 html body .settings-row-icon{color:#facc15!important;border-color:#4a4430!important;background:#292720!important}
+
+
+/* OFFSZN v8.51: settings-only refresh. Classic pre-8.48 navigation unchanged. */
+.off-settings-v851 .settings-top{margin-bottom:17px}
+.off-settings-v851 .settings-top-label{font-size:9px;letter-spacing:1.3px}
+.off-settings-v851 .settings-heading h1{margin-top:7px;margin-bottom:8px}
+.off-settings-v851 .settings-heading p{max-width:36ch;line-height:1.55}
+.off-settings-v851 .off-settings-hero{
+ background:linear-gradient(125deg,#292d34,#191c21)!important;
+ border:1px solid #4b5059!important;
+ padding:17px!important;margin-bottom:11px!important;
+ border-radius:19px!important;
+ box-shadow:0 9px 25px #0004!important
+}
+.off-settings-v851 .settings-athlete-photo{width:62px;height:62px}
+.off-settings-v851 .off-profile-link{font-size:11px;font-weight:800;color:#facc15}
+.off-settings-status{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#1b1e24;border:1px solid #343a44;border-radius:13px;padding:10px 12px;margin:0 0 23px}
+.off-settings-status>div{display:flex;align-items:center;gap:8px;color:#bbc1ca;font-size:11px;font-weight:700}
+.off-status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#8c949d}
+.off-status-dot.is-connected{background:#60c98d;box-shadow:0 0 0 3px #60c98d22}
+.off-settings-status button{background:none!important;border:0!important;color:#facc15!important;padding:8px 0;font-size:11px;font-weight:800;white-space:nowrap}
+.off-settings-search-label{display:block;font-size:10px;letter-spacing:1.8px;font-weight:850;color:#9fa6b1;margin:0 0 9px 4px}
+.off-settings-search-wrap{position:relative;margin-bottom:14px}
+.off-settings-search-wrap>span{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:#facc15;font-size:27px;pointer-events:none}
+.off-settings-search-wrap input{box-sizing:border-box;width:100%;height:49px;min-height:49px;border:1px solid #414752!important;background:#1c2027!important;border-radius:14px!important;padding:0 43px!important;color:#fff;font-size:14px}
+.off-settings-clear{position:absolute;right:7px;top:6px;min-width:36px;min-height:36px;background:#323741!important;border:0;border-radius:10px;color:#fff;font-size:23px}
+.off-settings-clear[hidden]{display:none!important}
+.off-settings-shortcuts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-bottom:29px}
+.off-settings-shortcuts button{display:flex;flex-direction:column;align-items:flex-start;gap:9px;min-width:0;min-height:93px;background:#20242b!important;border:1px solid #3c424a!important;border-radius:15px!important;color:#f1f2f5;padding:13px 10px;text-align:left}
+.off-settings-shortcuts button span{color:#facc15;display:flex}
+.off-settings-shortcuts button svg{width:21px;height:21px}
+.off-settings-shortcuts button strong{font-size:11px;line-height:1.25}
+.off-settings-group{margin-bottom:24px}
+.off-settings-group h2{margin:0 0 12px 5px}
+.off-settings-v851 .settings-row{background:#1d2026!important;border:1px solid #363b44!important;border-radius:15px!important;min-height:76px;margin-bottom:8px!important;padding:13px 14px!important}
+.off-settings-v851 .settings-row-icon{background:#2a2b2d!important;border:1px solid #48443b!important;color:#facc15!important}
+.off-settings-v851 .settings-row-copy strong{font-size:14px}
+.off-settings-v851 .settings-row-copy small{font-size:11px;color:#aab0ba;line-height:1.45}
+.off-settings-v851 .settings-chevron{color:#e4ca62}
+.off-settings-v851 .settings-row[hidden],.off-settings-group[hidden],#offSettingsEmpty[hidden]{display:none!important}
+.off-settings-empty{background:#1d2026;border:1px dashed #444a54;padding:20px;border-radius:14px;color:#b7bec7;font-size:13px}
+.off-settings-subnav{display:flex;align-items:center;gap:8px;margin:5px 0 15px;color:#9099a5;font-size:10px;letter-spacing:1px;text-transform:uppercase;font-weight:800}
+.off-settings-subnav strong{color:#facc15}
+@media(max-width:390px){.off-settings-status{align-items:flex-start;flex-direction:column}.off-settings-shortcuts button{padding:11px 8px}.off-settings-v851 .settings-row{padding:11px!important}}
+@media(prefers-reduced-motion:no-preference){.off-settings-v851 .settings-row,.off-settings-shortcuts button{transition:background .15s,border-color .15s,transform .15s}.off-settings-shortcuts button:active{transform:scale(.97)}}

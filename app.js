@@ -100,28 +100,66 @@ function renderSettingsPage(){
   else if(settingsSection==='builder')renderProgramBuilder();
   else if(settingsSection==='account')renderAthleteAccount();
   else {settingsSection='';return renderSettingsPage()}
-  const back=$('app').querySelector('button');
-  if(back){back.textContent='← Settings';back.onclick=()=>settingsOpen('')}
+  const app=$('app');
+  const first=app.querySelector('button');
+  if(first){first.textContent='← Settings';first.onclick=()=>settingsOpen('')}
+  const heading=({edit:'Athlete details',workout:'Workout preferences',strength:'Strength profile',data:'Backups & data',growth:'Measurements',parent:'Parent overview',reminders:'Event reminders',builder:'Program builder',account:'Athlete account'})[settingsSection]||'Settings';
+  app.insertAdjacentHTML('afterbegin',`<div class="off-settings-subnav"><span>SETTINGS</span><span aria-hidden="true">/</span><strong>${heading}</strong></div>`);
   return;
  }
  const initials=(p.name||'JR').trim().split(/\s+/).map(x=>x[0]).join('').slice(0,2).toUpperCase();
- $('app').innerHTML=`<section class="settings-page">
- <div class="settings-top"><button class="settings-back" onclick="closeSettings()" aria-label="Back to app"><span class="settings-back-arrow" aria-hidden="true">←</span><span>Back</span></button><span class="settings-top-label">PREFERENCES</span></div>
- <div class="settings-heading"><span class="v7-kicker">OFFSZN</span><h1>SETTINGS<span class="settings-dot">.</span></h1><p>Make your training experience your own.</p></div>
- <button class="settings-athlete" onclick="settingsOpen('edit')"><span class="settings-athlete-photo">${p.photo?`<img src="${esc(p.photo)}" alt="Athlete photo">`:esc(initials)}</span><span class="settings-athlete-text"><strong>${esc(p.name||'JR')}</strong><small>${esc(p.position||'Baseball athlete')} · Edit athlete profile</small></span><span class="settings-chevron">›</span></button>
- <div class="settings-group"><h2>TRAINING</h2>
- ${settingsRow('train','Program builder','Create a baseball-specific training plan preview','builder')}
- ${settingsRow('train','Strength profile','Working weights, estimated maxes and load increments','strength')}
- ${settingsRow('clock','Event reminders','Calendar alerts and upcoming activities','reminders')}
+ const signed=!!(authToken&&authUser);
+ $('app').innerHTML=`<section class="settings-page off-settings-v851">
+ <div class="settings-top"><button class="settings-back" onclick="closeSettings()" aria-label="Back to app"><span class="settings-back-arrow" aria-hidden="true">←</span><span>Back</span></button><span class="settings-top-label">ATHLETE CONTROL CENTER</span></div>
+ <div class="settings-heading"><span class="v7-kicker">OFFSZN / YOUR EXPERIENCE</span><h1>SETTINGS<span class="settings-dot">.</span></h1><p>Manage your athlete, workouts and training data in one place.</p></div>
+ <button class="settings-athlete off-settings-hero" onclick="settingsOpen('edit')"><span class="settings-athlete-photo">${p.photo?`<img src="${esc(p.photo)}" alt="Athlete photo">`:esc(initials)}</span><span class="settings-athlete-text"><strong>${esc(p.name||'Athlete')}</strong><small>${esc(p.position||'Baseball athlete')}</small><span class="off-profile-link">Edit athlete profile →</span></span><span class="settings-chevron" aria-hidden="true">›</span></button>
+ <div class="off-settings-status"><div><span class="off-status-dot ${signed?'is-connected':''}"></span><span>${signed?'Account signed in':'Account not signed in'}</span></div><button onclick="settingsOpen('account')">${signed?'Manage account':'Sign in / register'} →</button></div>
+ <label class="off-settings-search-label" for="offSettingsSearch">FIND A SETTING</label>
+ <div class="off-settings-search-wrap"><span aria-hidden="true">⌕</span><input id="offSettingsSearch" type="search" placeholder="Search settings..." autocomplete="off" oninput="offFilterSettings(this.value)"><button id="offSettingsClear" class="off-settings-clear" onclick="offClearSettingsSearch()" aria-label="Clear settings search" hidden>×</button></div>
+ <div class="off-settings-shortcuts" aria-label="Quick settings">
+ <button onclick="settingsOpen('builder')"><span>${uiIcon('train')}</span><strong>Build a plan</strong></button>
+ <button onclick="settingsOpen('reminders')"><span>${uiIcon('clock')}</span><strong>Reminders</strong></button>
+ <button onclick="settingsOpen('data')"><span>${uiIcon('backup')}</span><strong>Backups</strong></button>
+ </div>
+ <div class="settings-group off-settings-group" data-settings-group><h2>TRAINING & PERFORMANCE</h2>
+ ${settingsRow('train','Program builder','Build a baseball-specific training plan','builder')}
+ ${settingsRow('train','Strength profile','Working weights, max estimates and increments','strength')}
  ${settingsRow('clock','Workout preferences','Rest timer, auto-rest and weekly goal','workout')}
- ${settingsRow('measurements','Height & weight','Measurements and growth history','growth')}
- ${settingsRow('parent','Parent overview','Consistency, recovery and performance','parent')}
- </div><div class="settings-group"><h2>ACCOUNT & DATA</h2>
- ${settingsRow('profile','Athlete account','Register, verify email and sign in','account')}
- ${settingsRow('backup','Cloud backup & data','Sync workout data after database setup','data')}
- ${settingsRow('profile','Athlete details','Photo, position, number and goals','edit')}
- </div><div class="settings-about"><span>OFFSZN</span><b>VERSION 8.47</b><p>Built for baseball. Designed for progress.</p></div>
+ ${settingsRow('clock','Event reminders','Upcoming activities and calendar alerts','reminders')}
+ ${settingsRow('measurements','Height & weight','Track measurements and growth','growth')}
+ </div>
+ <div class="settings-group off-settings-group" data-settings-group><h2>ACCOUNT & PERSONALIZATION</h2>
+ ${settingsRow('profile','Athlete account',signed?'Manage your signed-in account':'Sign in, register or recover your password','account')}
+ ${settingsRow('profile','Athlete details','Name, photo, baseball position and goals','edit')}
+ ${settingsRow('parent','Parent overview','Training consistency and recovery','parent')}
+ </div>
+ <div class="settings-group off-settings-group" data-settings-group><h2>DATA & PRIVACY</h2>
+ ${settingsRow('backup','Cloud backup & data','Export, restore and manage cloud backups','data')}
+ </div>
+ <p id="offSettingsEmpty" class="off-settings-empty" hidden>No matching settings. Try “workout”, “account”, or “backup”.</p>
+ <div class="settings-about"><span>OFFSZN</span><b>VERSION 8.51</b><p>Built in the offseason. Designed for progress.</p></div>
  </section>`;
+}
+function offFilterSettings(value){
+ const q=String(value||'').trim().toLowerCase();
+ let found=0;
+ document.querySelectorAll('.off-settings-group').forEach(group=>{
+  let visible=0;
+  group.querySelectorAll('.settings-row').forEach(row=>{
+   const match=!q||row.textContent.toLowerCase().includes(q);
+   row.hidden=!match;
+   if(match){visible++;found++}
+  });
+  group.hidden=visible===0;
+ });
+ const empty=document.getElementById('offSettingsEmpty');
+ if(empty)empty.hidden=found!==0;
+ const clear=document.getElementById('offSettingsClear');
+ if(clear)clear.hidden=!q;
+}
+function offClearSettingsSearch(){
+ const input=document.getElementById('offSettingsSearch');
+ if(input){input.value='';offFilterSettings('');input.focus()}
 }
 function settingsRow(icon,title,desc,section){return `<button class="settings-row" onclick="settingsOpen('${section}')"><span class="settings-row-icon">${uiIcon(icon)}</span><span class="settings-row-copy"><strong>${title}</strong><small>${desc}</small></span><span class="settings-chevron">›</span></button>`}
 function scheduleDay(d,dateStr){return db.schedule.filter(e=>e.day===d&&(e.id!=='tue-pitch'||!dateStr||pitchingOnDate(dateStr)))}

@@ -674,3 +674,6 @@ body .ath-home-panel .ath-home-tile:focus-visible,body .ath-home-heading button:
 @keyframes off-halo{0%{opacity:0;transform:scale(.86)}55%{opacity:1}100%{opacity:.8;transform:scale(1.05)}}
 @keyframes off-sheen{from{transform:translateX(-115%) rotate(12deg)}to{transform:translateX(115%) rotate(12deg)}}
 @media(prefers-reduced-motion:reduce){.offszn-intro,.offszn-intro *{animation:none!important;transition:none!important}.intro-icon-wrap,.intro-tagline,.intro-bottomline,.intro-overline,.intro-skip{opacity:1!important;transform:none!important}}
+
+/* OFFSZN 8.44 */
+.offszn-builder .grid{margin:16px 0;gap:12px}.offszn-builder label{display:block;font-weight:650;font-size:.85rem}.offszn-builder select{width:100%;margin-top:6px}.offszn-plan{margin-top:16px}.offszn-plan-day{border-top:1px solid rgba(255,255,255,.12);padding:14px 0}.offszn-plan-day h3{color:#f5ce38;margin:0 0 6px}.offszn-plan-day ul{margin:10px 0;padding-left:22px}.offszn-plan-day li{padding:3px 0}

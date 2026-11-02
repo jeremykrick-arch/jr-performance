@@ -870,3 +870,72 @@ html body .settings-row-icon{color:#facc15!important;border-color:#4a4430!import
 
 /* v8.53: home plate icon follows existing classic navigation colors. */
 nav#bottomNav button[aria-label="Home"] .ui-icon{stroke-linejoin:round;stroke-linecap:round}
+
+/* 8.55 visual alignment: Settings hub follows approved charcoal / gold concept */
+.off-settings-v855{padding:2px 0 26px;max-width:620px;margin:auto}
+.off-settings-v855 .settings-top{padding:3px 0 15px;margin:0;display:flex;align-items:center;justify-content:space-between}
+.off-settings-v855 .settings-back{color:#f5f5f5!important;font-size:14px;font-weight:750;background:transparent!important;border:0!important}
+.off-settings-v855 .settings-top-label{font-size:9px;color:#9ca5af;letter-spacing:1.3px}
+.off-settings-v855 .settings-heading{padding:10px 3px 18px}
+.off-settings-v855 .settings-heading .v7-kicker{font-size:10px;letter-spacing:2px;color:#facc15!important}
+.off-settings-v855 .settings-heading h1{font-size:clamp(36px,10vw,46px);font-weight:950;letter-spacing:-1.7px;margin:8px 0 9px;line-height:1}
+.off-settings-v855 .settings-heading p{font-size:13px;line-height:1.5;color:#aeb6c2;margin:0}
+.off-settings-v855 .off-settings-hero{min-height:110px;background:linear-gradient(125deg,#2d323b,#20242b)!important;border:1px solid #474d56!important;border-radius:18px!important;padding:19px!important;display:flex;align-items:center;gap:15px;box-shadow:0 10px 28px #0004!important}
+.off-settings-v855 .settings-athlete-photo{width:68px;height:68px;min-width:68px;border:2px solid #facc15;border-radius:50%;background:#373b42;color:#fff;font-weight:900;font-size:23px;display:grid;place-items:center;overflow:hidden}
+.off-settings-v855 .settings-athlete-photo img{width:100%;height:100%;object-fit:cover}
+.off-settings-v855 .settings-athlete-text{display:flex;flex:1;min-width:0;flex-direction:column;gap:5px;text-align:left}
+.off-settings-v855 .settings-athlete-text strong{font-size:21px;color:#fff;letter-spacing:-.3px}
+.off-settings-v855 .settings-athlete-text small{font-size:12px;color:#b6bec9}
+.off-settings-v855 .off-profile-link{font-size:12px;color:#facc15;font-weight:800}
+.off-settings-v855 .off-settings-status{margin:11px 0 24px;border:1px solid #3d434b;background:#1b2026;border-radius:13px}
+.off-settings-v855 .off-settings-search-label{font-size:10px;letter-spacing:1.6px}
+.off-settings-v855 .off-settings-search-wrap input{height:52px;border-radius:13px!important;background:#20252d!important}
+.off-settings-v855 .off-settings-shortcuts{margin:0 0 26px;gap:10px}
+.off-settings-v855 .off-settings-shortcuts button{min-height:92px;border-radius:14px!important;background:#242830!important;border:1px solid #404650!important;align-items:center;justify-content:center;text-align:center;gap:9px}
+.off-settings-v855 .off-settings-shortcuts button strong{font-size:12px}
+.off-settings-v855 .off-settings-group{margin-bottom:27px}
+.off-settings-v855 .off-settings-group h2{color:#facc15;font-size:11px;letter-spacing:1.6px;font-weight:900;margin:0 0 11px 4px}
+.off-settings-v855 .settings-row{background:#22262d!important;border:1px solid #3b424b!important;border-radius:15px!important;margin-bottom:9px!important;padding:13px 14px!important;min-height:79px;display:flex;align-items:center;gap:13px}
+.off-settings-v855 .settings-row-icon{display:grid;place-items:center;flex:0 0 43px;width:43px;height:43px;border:1px solid #5c5234!important;border-radius:12px!important;background:#343126!important;color:#facc15!important}
+.off-settings-v855 .settings-row-copy{display:flex;flex:1;flex-direction:column;gap:5px;text-align:left}
+.off-settings-v855 .settings-row-copy strong{font-size:14px;font-weight:850;color:#f7f7f8}
+.off-settings-v855 .settings-row-copy small{font-size:11px;color:#aab2be;line-height:1.35}
+.off-settings-v855 .settings-chevron{font-size:25px;color:#facc15}
+.off-settings-v855 .settings-about{padding-bottom:85px}
+#bottomNav:not(.settings-hidden){z-index:100}
+@media(max-width:390px){.off-settings-v855 .settings-top-label{font-size:8px}.off-settings-v855 .off-settings-hero{padding:13px!important}.off-settings-v855 .settings-athlete-photo{width:58px;height:58px;min-width:58px}.off-settings-v855 .settings-athlete-text strong{font-size:18px}}
+
+/* OFFSZN 8.56: approved mockup layout, actual app implementation */
+.off-settings-approved{padding:0 0 125px!important;color:#f6f7fa}
+.off-approved-heading{display:flex;align-items:center;gap:14px;margin:10px 0 24px}
+.off-approved-heading h1{font-size:26px;font-weight:850;letter-spacing:-.7px;margin:0;flex:1}
+.off-approved-back{width:38px;height:38px;min-width:38px;display:grid;place-items:center;background:#22262d!important;border:1px solid #3c414a!important;border-radius:12px!important;color:#f5f5f5!important;font-size:24px}
+.off-approved-brand{font-size:12px;letter-spacing:1.6px;font-weight:950;color:#facc15}
+.off-approved-athlete{display:flex;align-items:center;text-align:left;gap:15px;width:100%;min-height:128px;padding:18px!important;border-radius:20px!important;border:1px solid #454c57!important;background:linear-gradient(112deg,#323842 0%,#1c222b 80%)!important;box-shadow:0 12px 30px #0005;margin-bottom:13px}
+.off-approved-avatar{display:grid;place-items:center;flex:none;width:82px;height:82px;border-radius:50%;border:3px solid #facc15;background:#343b45;color:#fff;font-size:29px;font-weight:900;overflow:hidden}
+.off-approved-avatar img{width:100%;height:100%;object-fit:cover}
+.off-approved-athlete-copy{display:flex;flex:1;min-width:0;flex-direction:column;align-items:flex-start;gap:6px}
+.off-approved-athlete-copy strong{font-size:23px;font-weight:900;color:#fff;letter-spacing:-.5px}
+.off-approved-athlete-copy small{font-size:12px;color:#bec5cf}
+.off-approved-athlete-copy em{font-style:normal;color:#facc15;font-size:10px;font-weight:950;letter-spacing:1.4px;margin-top:3px}
+.off-approved-chevron{font-size:30px;color:#facc15}
+.off-approved-cloud{display:flex;align-items:center;text-align:left;width:100%;gap:13px;padding:13px 16px!important;margin-bottom:31px;border:1px solid #454a50!important;border-radius:15px!important;background:#20252c!important}
+.off-approved-cloud-icon{display:grid;place-items:center;color:#facc15;flex:0 0 36px}
+.off-approved-cloud>span:nth-child(2){display:flex;flex:1;flex-direction:column;gap:5px}
+.off-approved-cloud strong{font-size:13px;color:#fff}
+.off-approved-cloud small{font-size:11px;color:#aab4c1;line-height:1.35}
+.off-approved-cloud b{font-size:24px;color:#facc15}
+.off-approved-group{margin-bottom:29px}
+.off-approved-group h2{font-size:12px;letter-spacing:2px;font-weight:950;color:#facc15;margin:0 0 13px 5px}
+.off-settings-approved .settings-row{display:flex;align-items:center;gap:13px;width:100%;min-height:73px;margin:0 0 8px!important;padding:12px 13px!important;border-radius:15px!important;background:#242932!important;border:1px solid #404751!important;box-shadow:none!important}
+.off-settings-approved .settings-row-icon{display:grid;place-items:center;flex:0 0 43px;width:43px;height:43px;background:#343b46!important;border:1px solid #49515c!important;border-radius:12px!important;color:#facc15!important}
+.off-settings-approved .settings-row-icon svg{width:22px;height:22px}
+.off-settings-approved .settings-row-copy{display:flex;flex:1;flex-direction:column;gap:5px;text-align:left}
+.off-settings-approved .settings-row-copy strong{font-size:14px;color:#fff;font-weight:850}
+.off-settings-approved .settings-row-copy small{font-size:11px;color:#aab3c0;line-height:1.3}
+.off-settings-approved .settings-chevron{font-size:26px;color:#e8c948}
+.off-approved-footer{display:flex;flex-wrap:wrap;align-items:center;gap:9px;padding:17px 4px;border-top:1px solid #3d434b}
+.off-approved-footer strong{color:#facc15;font-size:12px;letter-spacing:2px}
+.off-approved-footer span{margin-left:auto;color:#b1b8c2;font-size:10px;letter-spacing:1px}
+.off-approved-footer small{width:100%;color:#929ba8;font-size:10px;letter-spacing:1.4px}
+@media(max-width:375px){.off-approved-athlete{padding:13px!important}.off-approved-avatar{width:68px;height:68px}.off-approved-athlete-copy strong{font-size:20px}.off-approved-cloud{padding:11px!important}}

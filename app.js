@@ -74,7 +74,7 @@ const ICON_PATHS={
  favorite:'<path d="m12 3 2.8 5.8 6.4.9-4.6 4.5 1.1 6.3L12 17.5l-5.7 3 1.1-6.3-4.6-4.5 6.4-.9z"/>'
 };
 function uiIcon(name,cls=''){return `<svg class="ui-icon ${cls}" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON_PATHS[name]||ICON_PATHS.home}</svg>`}
-function render(){let items=[['home','home','Home'],['train','train','Train'],['library','library','Movements'],['progress','progress','Progress'],['schedule','schedule','Schedule']];$('bottomNav').classList.toggle('settings-hidden',tab==='settings');$('bottomNav').innerHTML=items.map(([id,icon,label])=>`<button class="${tab===id?'active':''}" aria-label="${label}" aria-current="${tab===id?'page':'false'}" onclick="nav('${id}')"><span class="ico">${uiIcon(icon)}</span><span class="nav-label">${label}</span></button>`).join('');renderHeaderAthlete();const gear=$('headerSettings');if(gear){gear.classList.toggle('selected',tab==='settings');gear.setAttribute('aria-label',tab==='settings'?'Close settings':'Open settings')} $('headerDate').textContent=new Date().toLocaleDateString(undefined,{weekday:'long',month:'short',day:'numeric'});({home:renderHome,train:safeRenderTrain,schedule:renderSchedule,progress:renderProgress,library:renderLibrary,profile:renderProfile,settings:renderSettingsPage})[tab]();renderTimer()}
+function render(){let items=[['home','home','Home'],['train','train','Train'],['library','library','Movements'],['progress','progress','Progress'],['schedule','schedule','Schedule']];$('bottomNav').classList.toggle('settings-hidden',false);$('bottomNav').innerHTML=items.map(([id,icon,label])=>`<button class="${tab===id?'active':''}" aria-label="${label}" aria-current="${tab===id?'page':'false'}" onclick="nav('${id}')"><span class="ico">${uiIcon(icon)}</span><span class="nav-label">${label}</span></button>`).join('');renderHeaderAthlete();const gear=$('headerSettings');if(gear){gear.classList.toggle('selected',tab==='settings');gear.setAttribute('aria-label',tab==='settings'?'Close settings':'Open settings')} $('headerDate').textContent=new Date().toLocaleDateString(undefined,{weekday:'long',month:'short',day:'numeric'});({home:renderHome,train:safeRenderTrain,schedule:renderSchedule,progress:renderProgress,library:renderLibrary,profile:renderProfile,settings:renderSettingsPage})[tab]();renderTimer()}
 
 // Smart Weight Progression v8.5. Estimates are derived from submaximal working sets.
 const PRIMARY_STRENGTH=['Barbell back squat','Barbell front squat','Trap bar deadlift','Barbell strict press','Dumbbell bench press'];
@@ -110,35 +110,26 @@ function renderSettingsPage(){
  }
  const initials=(p.name||'JR').trim().split(/\s+/).map(x=>x[0]).join('').slice(0,2).toUpperCase();
  const signed=!!(authToken&&authUser);
- $('app').innerHTML=`<section class="settings-page off-settings-v851">
- <div class="settings-top"><button class="settings-back" onclick="closeSettings()" aria-label="Back to app"><span class="settings-back-arrow" aria-hidden="true">←</span><span>Back</span></button><span class="settings-top-label">ATHLETE CONTROL CENTER</span></div>
- <div class="settings-heading"><span class="v7-kicker">OFFSZN / YOUR EXPERIENCE</span><h1>⚙ SETTINGS<span class="settings-dot">.</span></h1><p>Manage your athlete, workouts and training data in one place.</p></div>
- <button class="settings-athlete off-settings-hero" onclick="settingsOpen('edit')"><span class="settings-athlete-photo">${p.photo?`<img src="${esc(p.photo)}" alt="Athlete photo">`:esc(initials)}</span><span class="settings-athlete-text"><strong>${esc(p.name||'Athlete')}</strong><small>${esc(p.position||'Baseball athlete')}</small><span class="off-profile-link">Edit athlete profile →</span></span><span class="settings-chevron" aria-hidden="true">›</span></button>
- <div class="off-settings-status"><div><span class="off-status-dot ${signed?'is-connected':''}"></span><span>${signed?'Account signed in':'Account not signed in'}</span></div><button onclick="settingsOpen('account')">${signed?'Manage account':'Sign in / register'} →</button></div>
- <label class="off-settings-search-label" for="offSettingsSearch">FIND A SETTING</label>
- <div class="off-settings-search-wrap"><span aria-hidden="true">⌕</span><input id="offSettingsSearch" type="search" placeholder="Search settings..." autocomplete="off" oninput="offFilterSettings(this.value)"><button id="offSettingsClear" class="off-settings-clear" onclick="offClearSettingsSearch()" aria-label="Clear settings search" hidden>×</button></div>
- <div class="off-settings-shortcuts" aria-label="Quick settings">
- <button onclick="settingsOpen('builder')"><span>${uiIcon('train')}</span><strong>Build a plan</strong></button>
- <button onclick="settingsOpen('reminders')"><span>${uiIcon('clock')}</span><strong>Reminders</strong></button>
- <button onclick="settingsOpen('data')"><span>${uiIcon('backup')}</span><strong>Backups</strong></button>
- </div>
- <div class="settings-group off-settings-group" data-settings-group><h2>TRAINING & PERFORMANCE</h2>
- ${settingsRow('train','Program builder','Build a baseball-specific training plan','builder')}
- ${settingsRow('train','Strength profile','Working weights, max estimates and increments','strength')}
- ${settingsRow('clock','Workout preferences','Rest timer, auto-rest and weekly goal','workout')}
- ${settingsRow('clock','Event reminders','Upcoming activities and calendar alerts','reminders')}
- ${settingsRow('measurements','Height & weight','Track measurements and growth','growth')}
- </div>
- <div class="settings-group off-settings-group" data-settings-group><h2>ACCOUNT & PERSONALIZATION</h2>
- ${settingsRow('profile','Athlete account',signed?'Manage your signed-in account':'Sign in, register or recover your password','account')}
- ${settingsRow('profile','Athlete details','Name, photo, baseball position and goals','edit')}
- ${settingsRow('parent','Parent overview','Training consistency and recovery','parent')}
- </div>
- <div class="settings-group off-settings-group" data-settings-group><h2>DATA & PRIVACY</h2>
- ${settingsRow('backup','Cloud backup & data','Export, restore and manage cloud backups','data')}
- </div>
- <p id="offSettingsEmpty" class="off-settings-empty" hidden>No matching settings. Try “workout”, “account”, or “backup”.</p>
- <div class="settings-about"><span>OFFSZN</span><b>VERSION 8.52</b><p>Built in the offseason. Designed for progress.</p></div>
+ $('app').innerHTML=`<section class="settings-page off-settings-approved">
+ <div class="off-approved-heading"><button class="off-approved-back" onclick="closeSettings()" aria-label="Back to app">←</button><h1>Settings</h1><span class="off-approved-brand">OFFSZN</span></div>
+ <button class="off-approved-athlete" onclick="settingsOpen('edit')"><span class="off-approved-avatar">${p.photo?`<img src="${esc(p.photo)}" alt="Athlete photo">`:esc(initials)}</span><span class="off-approved-athlete-copy"><strong>${esc(p.name||'Athlete')}</strong><small>${esc(p.position||'Baseball athlete')}</small><em>EDIT PROFILE</em></span><span class="off-approved-chevron">›</span></button>
+ <button class="off-approved-cloud" onclick="settingsOpen('account')"><span class="off-approved-cloud-icon">${uiIcon('backup')}</span><span><strong>${signed?'Athlete account connected':'Connect your athlete account'}</strong><small>${signed?'Manual cloud backup available in Data & Privacy':'Sign in to access account features'}</small></span><b>›</b></button>
+ <section class="off-approved-group"><h2>TRAINING</h2>
+ ${settingsRow('train','Program Builder','Create your personalized plan','builder')}
+ ${settingsRow('train','Strength Profile','Working weights and progressions','strength')}
+ ${settingsRow('clock','Workout Preferences','Rest timer and training schedule','workout')}
+ ${settingsRow('clock','Event Reminders','Activities and calendar alerts','reminders')}
+ ${settingsRow('measurements','Height & Weight','Measurements and growth tracking','growth')}
+ </section>
+ <section class="off-approved-group"><h2>ACCOUNT</h2>
+ ${settingsRow('profile','Athlete Details','Photo, position and training goals','edit')}
+ ${settingsRow('profile','Athlete Account','Sign in and manage your account','account')}
+ ${settingsRow('parent','Parent Overview','Training consistency and recovery','parent')}
+ </section>
+ <section class="off-approved-group"><h2>APP & DATA</h2>
+ ${settingsRow('backup','Backup & Restore','Export, import and cloud backups','data')}
+ </section>
+ <div class="off-approved-footer"><strong>OFFSZN</strong><span>VERSION 8.56</span><small>BUILT IN THE OFFSEASON.</small></div>
  </section>`;
 }
 function offFilterSettings(value){

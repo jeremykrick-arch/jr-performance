@@ -948,3 +948,28 @@ nav#bottomNav button[aria-label="Home"] .ui-icon{stroke-linejoin:round;stroke-li
 
 /* OFFSZN v8.61 beta feedback */
 .compact-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;padding:10px;border-radius:14px;background:#1b2028}.compact-options button{font-size:12px;min-height:38px}.compact-card-actions{display:flex;justify-content:flex-start}.compact-card-actions button{font-size:12px}.beta-toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);z-index:9999;background:#202830;border:1px solid #65717b;border-radius:30px;padding:9px 16px;box-shadow:0 10px 35px #0009;color:#fff;font-size:12px;font-weight:700;white-space:nowrap;animation:betaToastIn .2s ease-out}.beta-toast.out{opacity:0;transition:opacity .25s}@keyframes betaToastIn{from{opacity:0;transform:translate(-50%,12px)}to{opacity:1;transform:translate(-50%,0)}}.beta-overlay,.beta-complete-overlay{position:fixed;inset:0;z-index:9998;background:#000b;display:flex;align-items:center;justify-content:center;padding:16px}.beta-sheet,.beta-complete-sheet{background:#171c23;border:1px solid #454d58;border-radius:22px;padding:20px;width:min(100%,430px);max-height:75vh;overflow:auto;color:#fff;box-shadow:0 25px 90px #000a}.beta-sheet input{width:100%;margin:12px 0}.beta-movement-results{max-height:55vh;overflow:auto}.beta-movement-option{display:flex;align-items:center;gap:10px;width:100%;padding:12px;margin:5px 0;background:#262c34;border:1px solid #404751;border-radius:12px;text-align:left;color:#fff}.beta-movement-option b{flex:1}.beta-movement-option small{color:#b9c1cc}.beta-movement-option span{color:#f5c742;font-size:22px}.beta-complete-sheet{text-align:center;max-width:345px;animation:betaCompletePop .65s cubic-bezier(.2,1.4,.4,1)}.beta-complete-ring{display:grid;place-items:center;margin:8px auto 18px;width:94px;height:94px;border:4px solid #f5c742;border-radius:50%;color:#f5c742;font-size:54px;animation:betaRing .9s ease-out}.beta-complete-sheet span{font-size:11px;letter-spacing:2px;color:#f5c742}.beta-complete-sheet h2{font-size:27px;letter-spacing:1px}.beta-complete-sheet button{margin-top:15px;width:100%}@keyframes betaCompletePop{from{opacity:0;transform:scale(.75)}to{opacity:1;transform:scale(1)}}@keyframes betaRing{from{transform:scale(.5) rotate(-40deg);opacity:0}to{transform:scale(1) rotate(0);opacity:1}}@media(prefers-reduced-motion:reduce){.beta-complete-sheet,.beta-complete-ring,.beta-toast{animation:none}}
+
+/* v8.62 simplified Settings — exact approved four-section hierarchy */
+.off-settings-simple{max-width:680px;margin:0 auto;padding:8px 0 34px;color:#fff}
+.off-simple-top{display:flex;align-items:center;justify-content:space-between;margin:0 0 20px}
+.off-simple-top h1{font-size:29px;letter-spacing:-.8px;margin:0;font-weight:800}
+.off-simple-top span{font-size:11px;letter-spacing:1.8px;color:#aeb5c0;font-weight:800}
+.off-simple-profile{display:flex;align-items:center;width:100%;text-align:left;border:0;border-radius:17px;background:#242830;padding:17px;gap:15px;color:#fff;box-shadow:none;margin:0 0 25px}
+.off-simple-avatar{display:flex;align-items:center;justify-content:center;flex:0 0 58px;height:58px;border:2px solid #facc15;border-radius:50%;background:#363c45;color:#facc15;font-size:18px;font-weight:800;overflow:hidden}
+.off-simple-avatar img{width:100%;height:100%;object-fit:cover}
+.off-simple-profile-text{display:flex;flex:1;flex-direction:column;gap:4px;min-width:0}
+.off-simple-profile-text strong{font-size:17px;font-weight:800}
+.off-simple-profile-text small{font-size:12px;color:#aab2bd;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.off-simple-profile-text em{font-size:11px;font-style:normal;font-weight:800;color:#facc15;margin-top:4px}
+.off-simple-arrow{font-size:26px;color:#facc15}
+.off-simple-section{margin:0 0 25px}
+.off-simple-section h2{font-size:11px;font-weight:800;letter-spacing:1.5px;color:#facc15;margin:0 0 10px}
+.off-simple-menu{background:#242830;border-radius:16px;overflow:hidden}
+.off-simple-menu .settings-row{background:transparent!important;border-radius:0!important;margin:0!important;border:0!important;border-bottom:1px solid #3b414a!important;min-height:74px;box-shadow:none!important}
+.off-simple-menu .settings-row:last-child{border-bottom:0!important}
+.off-simple-menu .settings-row:hover{background:#30353e!important}
+.off-simple-heading h1{margin:14px 0 4px;font-size:25px}
+.off-simple-heading p{color:#aeb5c0;margin:0 0 18px;font-size:13px}
+.off-simple-help{background:#242830;border-radius:16px;padding:20px;margin-top:14px;color:#cbd1da}
+.off-simple-help strong{color:#facc15}
+.off-simple-help p{font-size:13px}

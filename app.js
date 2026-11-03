@@ -92,6 +92,18 @@ function renderStrengthSettings(){let inc=Number(db.settings.loadIncrement)||5;$
 function renderSettingsPage(){
  const p=profileData();
  if(settingsSection){
+  if(settingsSection==='trainingHub'||settingsSection==='familyHub'||settingsSection==='accountHub'||settingsSection==='helpHub'){
+   const hub=settingsSection;
+   const blocks={
+    trainingHub:{title:'Training Program',subtitle:'Your personalized plan and training tools',rows:[['train','Athlete Setup','Goals, position and equipment','onboarding'],['train','Program Builder','Create or update your program','builder'],['train','Strength Profile','Working weights and progressions','strength'],['measurements','Height & Weight','Growth and measurements','growth'],['clock','Event Reminders','Training and calendar alerts','reminders']]},
+    familyHub:{title:'Parent & Athlete Linking',subtitle:'Connect and manage your family',rows:[['parent','Parent Account & Linking','Invitations and connected accounts','parentAccount'],['parent','Parent Overview','Training consistency and recovery','parent']]},
+    accountHub:{title:'Account & Cloud Sync',subtitle:'Manage sign-in, synchronization and backups',rows:[['profile','Athlete Account','Sign in and cloud synchronization','account'],['backup','Backup & Restore','Export, import and backups','data']]},
+    helpHub:{title:'Help & About',subtitle:'OFFSZN support and app information',rows:[]}
+   };
+   const h=blocks[hub];
+   $('app').innerHTML=`<section class="settings-page off-settings-simple"><button class="off-detail-back" onclick="settingsOpen('')">← Settings</button><div class="off-simple-heading"><h1>${h.title}</h1><p>${h.subtitle}</p></div><div class="off-simple-menu">${h.rows.map(r=>settingsRow(...r)).join('')}</div>${hub==='helpHub'?'<div class="off-simple-help"><strong>OFFSZN</strong><p>Baseball strength, speed and athletic development.</p><p>Version 8.62</p><p>For account or workout support, contact your OFFSZN administrator.</p></div>':''}</section>`;
+   return;
+  }
   if(settingsSection==='edit')profileEdit();
   else if(settingsSection==='workout')profileSettings();
   else if(settingsSection==='strength')renderStrengthSettings();
@@ -111,30 +123,23 @@ function renderSettingsPage(){
   app.insertAdjacentHTML('afterbegin',`<button class="off-detail-back" onclick="settingsOpen('')">← Settings</button><div class="off-settings-subnav"><span>SETTINGS</span><span aria-hidden="true">/</span><strong>${heading}</strong></div>`);
   return;
  }
- const initials=(p.name||'JR').trim().split(/\s+/).map(x=>x[0]).join('').slice(0,2).toUpperCase();
- const signed=!!(authToken&&authUser);
- $('app').innerHTML=`<section class="settings-page off-settings-approved">
- <div class="off-approved-heading"><button class="off-approved-back" onclick="closeSettings()" aria-label="Back to app">←</button><h1>Settings</h1><span class="off-approved-brand">OFFSZN</span></div>
- <button class="off-approved-athlete" onclick="settingsOpen('edit')"><span class="off-approved-avatar">${p.photo?`<img src="${esc(p.photo)}" alt="Athlete photo">`:esc(initials)}</span><span class="off-approved-athlete-copy"><strong>${esc(p.name||'Athlete')}</strong><small>${esc(p.position||'Baseball athlete')}</small><em>EDIT PROFILE</em></span><span class="off-approved-chevron">›</span></button>
- <button class="off-approved-cloud" onclick="settingsOpen('account')"><span class="off-approved-cloud-icon">${uiIcon('backup')}</span><span><strong>${signed?'Athlete account connected':'Connect your athlete account'}</strong><small>${signed?'Manual cloud backup available in Data & Privacy':'Sign in to access account features'}</small></span><b>›</b></button>
- <section class="off-approved-group"><h2>TRAINING</h2>
- ${settingsRow('train','Athlete Setup','Complete onboarding and build your plan','onboarding')}
- ${settingsRow('train','Program Builder','Create your personalized plan','builder')}
- ${settingsRow('train','Strength Profile','Working weights and progressions','strength')}
- ${settingsRow('clock','Workout Preferences','Rest timer and training schedule','workout')}
- ${settingsRow('clock','Event Reminders','Activities and calendar alerts','reminders')}
- ${settingsRow('measurements','Height & Weight','Measurements and growth tracking','growth')}
- </section>
- <section class="off-approved-group"><h2>ACCOUNT</h2>
- ${settingsRow('profile','Athlete Details','Photo, position and training goals','edit')}
- ${settingsRow('profile','Athlete Account','Sign in and manage your account','account')}
- ${settingsRow('parent','Parent Overview','Training consistency and recovery','parent')}
- ${settingsRow('parent','Parent Account & Linking','Create a parent login or connect an athlete','parentAccount')}
- </section>
- <section class="off-approved-group"><h2>APP & DATA</h2>
- ${settingsRow('backup','Backup & Restore','Export, import and cloud backups','data')}
- </section>
- <div class="off-approved-footer"><strong>OFFSZN</strong><span>VERSION 8.60</span><small>BUILT IN THE OFFSEASON.</small></div>
+ const initials=(p.name||'').trim().split(/\s+/).filter(Boolean).map(x=>x[0]).join('').slice(0,2).toUpperCase()||'AT';
+ const age=p.dob?Math.max(0,Math.floor((Date.now()-new Date(p.dob).getTime())/31557600000)):null;
+ const details=[age!==null&&Number.isFinite(age)?`Age ${age}`:null,p.position||null].filter(Boolean).join(' · ')||'Baseball Athlete';
+ $('app').innerHTML=`<section class="settings-page off-settings-simple">
+ <div class="off-simple-top"><h1>Settings</h1><span>OFFSZN</span></div>
+ <button class="off-simple-profile" onclick="settingsOpen('edit')"><span class="off-simple-avatar">${p.photo?`<img src="${esc(p.photo)}" alt="Athlete photo">`:esc(initials)}</span><span class="off-simple-profile-text"><strong>Athlete Profile</strong><small>${esc(p.name||'Athlete')} · ${esc(details)}</small><em>Edit Profile</em></span><span class="off-simple-arrow">›</span></button>
+ <section class="off-simple-section"><h2>TRAINING</h2><div class="off-simple-menu">
+ ${settingsRow('clock','Workout Preferences','Schedule, equipment, rest timer','workout')}
+ ${settingsRow('train','Training Program','Goals and program builder','trainingHub')}
+ </div></section>
+ <section class="off-simple-section"><h2>ACCOUNT & FAMILY</h2><div class="off-simple-menu">
+ ${settingsRow('parent','Parent & Athlete Linking','Connect and manage family accounts','familyHub')}
+ ${settingsRow('backup','Account & Cloud Sync','Sign-in, backup and synchronization','accountHub')}
+ </div></section>
+ <section class="off-simple-section"><h2>SUPPORT</h2><div class="off-simple-menu">
+ ${settingsRow('profile','Help & About','Support, privacy, app version','helpHub')}
+ </div></section>
  </section>`;
 }
 function offFilterSettings(value){

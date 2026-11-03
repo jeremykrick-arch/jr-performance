@@ -1,0 +1,1 @@
+OFFSZN v8.64: Settings contrast and legibility improvements across main Settings and subpages. Preserves v8.63 family-linking database patch. No new SQL migration. Deploy all files, reload app to refresh service worker.

@@ -646,10 +646,10 @@ function exportCSV(){let rows=[['Week','Day','Exercise','Set','Weight (lb)','Rep
 async function restoreBackup(ev){let file=ev.target.files?.[0];if(!file)return;try{let parsed=JSON.parse(await file.text());if(!parsed.sessions||!parsed.tests||typeof parsed.sessions!=='object')throw Error('Not a OFFSZN backup');if(!confirm('Replace current local data with this backup? Export a backup first if needed.'))return;db={...structuredClone(base),...parsed,settings:{...base.settings,...parsed.settings}};save();render();toast('Backup restored')}catch(e){alert('Could not restore: '+e.message)}}
 function saveCloudConfig(){let url=$('cloudUrl').value.trim().replace(/\/$/,''),key=$('cloudKey').value.trim();if(url&&!/^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(url))return toast('Enter a valid HTTPS Supabase project URL');db.settings.cloudUrl=url;db.settings.cloudKey=key;save();toast('Connection settings saved locally')}
 function cloudConfig(){let url=db.settings.cloudUrl||OFFSZN_SUPABASE_URL,key=db.settings.cloudKey||OFFSZN_SUPABASE_KEY;if(!url||!key)throw Error('Save your Supabase project URL and public key first.');return{url,key}}
-async function cloudAuth(endpoint){try{saveCloudConfig();let {url,key}=cloudConfig(),email=$('cloudEmail').value.trim(),password=$('cloudPassword').value;if(!email||!password)throw Error('Enter email and password');let r=await fetch(`${url}/auth/v1/${endpoint}`,{method:'POST',headers:{apikey:key,'Content-Type':'application/json'},body:JSON.stringify({email,password})});let x=await r.json();if(!r.ok)throw Error(x.msg||x.error_description||x.message||'Authentication failed');if(x.access_token){authToken=x.access_token;authUser=x.user?.id;offsznAuthRole=x.user?.user_metadata?.role||null;toast('Signed in. You can now sync.')}else toast('Check your email to confirm the account, then sign in.');render()}catch(e){alert(e.message)}}
+async function cloudAuth(endpoint){try{saveCloudConfig();let {url,key}=cloudConfig(),email=$('cloudEmail').value.trim(),password=$('cloudPassword').value;if(!email||!password)throw Error('Enter email and password');let r=await fetch(`${url}/auth/v1/${endpoint}`,{method:'POST',headers:{apikey:key,'Content-Type':'application/json'},body:JSON.stringify({email,password})});let x=await r.json();if(!r.ok)throw Error(x.msg||x.error_description||x.message||'Authentication failed');if(x.access_token){authToken=x.access_token;authUser=x.user?.id;offsznAuthRole=x.user?.user_metadata?.role||null;offsznStoreAuthSession(x);toast('Signed in. You can now sync.')}else toast('Check your email to confirm the account, then sign in.');render()}catch(e){alert(e.message)}}
 function cloudLogin(){settingsOpen('account')}function cloudSignUp(){settingsOpen('account')}
-function cloudLogout(){offsznSyncEnabled=false;clearTimeout(offsznSyncTimer);authToken=null;authUser=null;offsznAuthRole=null;offsznActiveDataKey=null;db=structuredClone(base);week=1;toast('Signed out');render()}
-async function cloudRequest(method,path,body){let {url,key}=cloudConfig();if(!authToken||!authUser)throw Error('Sign in to your athlete account first');let r=await fetch(url+'/rest/v1/'+path,{method,headers:{apikey:key,Authorization:'Bearer '+authToken,'Content-Type':'application/json',Prefer:'resolution=merge-duplicates,return=representation'},body:body?JSON.stringify(body):undefined});if(!r.ok){let text=await r.text();throw Error('Cloud request failed: '+text.slice(0,220))}return r.json()}
+function cloudLogout(){localStorage.removeItem(OFFSZN_SESSION_KEY);clearTimeout(offsznAuthRefreshTimer);offsznSyncEnabled=false;clearTimeout(offsznSyncTimer);authToken=null;authUser=null;offsznAuthRole=null;offsznActiveDataKey=null;db=structuredClone(base);week=1;toast('Signed out');render()}
+async function cloudRequest(method,path,body){const saved=offsznReadAuthSession();if(saved&&saved.expires_at*1000<Date.now()+60000)await offsznRefreshAuthSession();let {url,key}=cloudConfig();if(!authToken||!authUser)throw Error('Sign in to your athlete account first');let r=await fetch(url+'/rest/v1/'+path,{method,headers:{apikey:key,Authorization:'Bearer '+authToken,'Content-Type':'application/json',Prefer:'resolution=merge-duplicates,return=representation'},body:body?JSON.stringify(body):undefined});if(!r.ok){let text=await r.text();throw Error('Cloud request failed: '+text.slice(0,220))}return r.json()}
 async function cloudPush(silent=false){try{if(offsznSyncEnabled)throw Error('Automatic cloud sync is active. Manual legacy backup is disabled to avoid conflicting copies.');if(!authToken||!authUser){if(!silent)toast('Sign in first');return}let data=structuredClone(db);delete data.settings.cloudKey;delete data.settings.cloudUrl;delete data.settings.cloudAuto;await cloudRequest('POST','jr_backups?on_conflict=user_id',{user_id:authUser,payload:data,updated_at:new Date().toISOString()});if(!silent)toast('Cloud backup uploaded')}catch(e){if(!silent)alert(e.message);else console.warn(e)}}
 async function cloudPull(){try{if(offsznSyncEnabled)throw Error('Automatic cloud sync is active. Use Reconnect cloud in Athlete Account.');let rows=await cloudRequest('GET','jr_backups?select=payload,updated_at&user_id=eq.'+encodeURIComponent(authUser));if(!rows?.length)return toast('No cloud backup found');if(!confirm('Restore cloud backup from '+rows[0].updated_at+'? This replaces local workout records. Export a local backup first.'))return;let data=rows[0].payload;if(!data?.sessions||!data?.tests)throw Error('Cloud backup format is invalid');let settings={...db.settings};db={...structuredClone(base),...data,settings:{...base.settings,...data.settings,...settings}};save();render();toast('Cloud backup restored')}catch(e){alert(e.message)}}
 
@@ -659,7 +659,7 @@ let offsznActiveDataKey=null,offsznSyncEnabled=false,offsznSyncRevision=0,offszn
 function offsznSnapshot(){const x=structuredClone(db);if(x.settings){delete x.settings.cloudKey;delete x.settings.cloudUrl;delete x.settings.cloudAuto;}return x}
 function offsznLoadSnapshot(x){if(!x||typeof x!=='object'||!x.sessions||!x.tests)throw Error('Invalid cloud snapshot');const cloudUrl=db.settings.cloudUrl,cloudKey=db.settings.cloudKey;db={...structuredClone(base),...x,settings:{...base.settings,...x.settings,cloudUrl,cloudKey}};week=Math.max(1,Math.min(12,Number(db.settings.week)||1));localStorage.setItem(offsznActiveDataKey,JSON.stringify(db));render()}
 function offsznQueueSync(){offsznSyncDirty=true;offsznSyncState=navigator.onLine?'Changes pending upload':'Offline — changes queued';clearTimeout(offsznSyncTimer);offsznSyncTimer=setTimeout(offsznFlushSync,1200)}
-async function offsznSyncRpc(name,payload){const {url,key}=cloudConfig();if(!authToken)throw Error('Sign in to sync');const r=await fetch(url+'/rest/v1/rpc/'+name,{method:'POST',headers:{apikey:key,Authorization:'Bearer '+authToken,'Content-Type':'application/json'},body:JSON.stringify(payload)});const data=await r.json().catch(()=>null);if(!r.ok)throw Error(data?.message||'Cloud synchronization failed ('+r.status+').');return data}
+async function offsznSyncRpc(name,payload){const saved=offsznReadAuthSession();if(saved&&saved.expires_at*1000<Date.now()+60000)await offsznRefreshAuthSession();const {url,key}=cloudConfig();if(!authToken)throw Error('Sign in to sync');const r=await fetch(url+'/rest/v1/rpc/'+name,{method:'POST',headers:{apikey:key,Authorization:'Bearer '+authToken,'Content-Type':'application/json'},body:JSON.stringify(payload)});const data=await r.json().catch(()=>null);if(!r.ok)throw Error(data?.message||'Cloud synchronization failed ('+r.status+').');return data}
 async function offsznFlushSync(){if(!offsznSyncEnabled||offsznSyncBusy||!authToken||!navigator.onLine||!offsznSyncDirty)return;offsznSyncBusy=true;offsznSyncState='Syncing…';const snapshot=offsznSnapshot();offsznSyncDirty=false;try{const result=await offsznSyncRpc('offszn_sync_write',{expected_revision:offsznSyncRevision,new_payload:snapshot});offsznSyncRevision=Number(result);offsznSyncState='Saved to cloud';if(offsznSyncDirty)offsznQueueSync()}catch(e){offsznSyncDirty=true;offsznSyncState=e.message.includes('revision conflict')?'Conflict — cloud changed on another device':e.message;console.warn('OFFSZN sync:',e);if(!e.message.includes('revision conflict'))setTimeout(()=>{if(offsznSyncEnabled&&navigator.onLine)offsznFlushSync()},12000)}finally{offsznSyncBusy=false}}
 async function offsznConnectSync(){if(offsznAuthRole!=='athlete'||!authUser||!authToken)return;offsznSyncEnabled=false;clearTimeout(offsznSyncTimer);offsznSyncRevision=0;const userKey='offszn-athlete-data-'+authUser;const existing=localStorage.getItem(userKey);offsznActiveDataKey=userKey;try{const result=await offsznSyncRpc('offszn_sync_read',{});const remote=result&&result.length?result[0]:null;const local=existing?JSON.parse(existing):null;const legacy=localStorage.getItem(KEY);let choice;
  if(remote){if(local&&JSON.stringify(local)!==JSON.stringify(remote.payload)){choice=confirm('Cloud data exists. OK: load cloud records (recommended). Cancel: keep this device’s records without sync. Export a backup before replacing data.');if(!choice){db={...structuredClone(base),...local,settings:{...base.settings,...local.settings}};offsznSyncState='Local-only: cloud conflict';render();return}}offsznSyncRevision=Number(remote.revision);offsznLoadSnapshot(remote.payload);offsznSyncEnabled=true;offsznSyncState='Cloud data loaded';}
@@ -672,6 +672,7 @@ window.addEventListener('pagehide',()=>{if(offsznSyncEnabled&&offsznSyncDirty)of
 
 if('serviceWorker'in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(console.warn);
 render();
+offsznRestoreAuthSession();
 
 function jrGuideTab(tab){const ids={muscles:'jrGuideMuscles',cues:'jrGuideCues',mistakes:'jrGuideMistakes'};for(const [k,id] of Object.entries(ids)){const el=document.getElementById(id);if(el)el.style.display=k===tab?'block':'none'}document.querySelectorAll('.jr-guide-tab').forEach((b,i)=>b.classList.toggle('active',['muscles','cues','mistakes'][i]===tab))}
 
@@ -777,6 +778,58 @@ function downloadOffsznPlan(){
 const OFFSZN_SUPABASE_URL='https://dzjzoqjmvchvfuzfomde.supabase.co';
 const OFFSZN_SUPABASE_KEY='sb_publishable_ecEae3qJcAaCmzOGy9nHQQ_P3i3OBQE';
 const OFFSZN_SESSION_KEY='offszn-auth-session-v1';
+
+// v8.66: persistent Supabase Auth sessions. Never persist passwords.
+let offsznAuthRefreshTimer=null,offsznAuthRestoreBusy=false,offsznAuthRefreshBusy=null;
+function offsznReadAuthSession(){try{const x=JSON.parse(localStorage.getItem(OFFSZN_SESSION_KEY)||'null');return x&&x.access_token&&x.refresh_token&&x.user_id?x:null}catch{return null}}
+function offsznStoreAuthSession(x){
+ if(!x?.access_token||!x?.refresh_token||!x?.user?.id)return;
+ const session={access_token:x.access_token,refresh_token:x.refresh_token,user_id:x.user.id,role:x.user.user_metadata?.role||offsznAuthRole||'athlete',expires_at:Math.floor(Date.now()/1000)+Number(x.expires_in||3600)};
+ localStorage.setItem(OFFSZN_SESSION_KEY,JSON.stringify(session));offsznScheduleAuthRefresh();
+}
+function offsznScheduleAuthRefresh(){
+ clearTimeout(offsznAuthRefreshTimer);const x=offsznReadAuthSession();if(!x)return;
+ const delay=Math.max(5000,Math.min(2147483647,(x.expires_at*1000-Date.now())-120000));
+ offsznAuthRefreshTimer=setTimeout(()=>{offsznRefreshAuthSession().catch(console.warn)},delay);
+}
+async function offsznRefreshAuthSession(){
+ if(offsznAuthRefreshBusy)return offsznAuthRefreshBusy;
+ offsznAuthRefreshBusy=(async()=>{
+ const current=offsznReadAuthSession();if(!current)return false;
+ const {url,key}=cloudConfig();
+ let response;
+ try{response=await fetch(url+'/auth/v1/token?grant_type=refresh_token',{method:'POST',headers:{apikey:key,'Content-Type':'application/json'},body:JSON.stringify({refresh_token:current.refresh_token})})}
+ catch(e){offsznScheduleAuthRetry();throw e}
+ const result=await response.json().catch(()=>({}));
+ if(!response.ok){
+  if(response.status===400||response.status===401||response.status===403){
+   localStorage.removeItem(OFFSZN_SESSION_KEY);clearTimeout(offsznAuthRefreshTimer);
+   offsznSyncEnabled=false;authToken=null;authUser=null;offsznAuthRole=null;
+   offsznSyncState='Session expired — sign in again';render();return false;
+  }
+  offsznScheduleAuthRetry();throw Error(result.msg||result.message||'Session refresh unavailable');
+ }
+ if(!result.access_token||!result.refresh_token||result.user?.id!==current.user_id){offsznScheduleAuthRetry();return false}
+ authToken=result.access_token;authUser=result.user.id;offsznAuthRole=result.user.user_metadata?.role||current.role;
+ offsznStoreAuthSession(result);return true;
+ })();try{return await offsznAuthRefreshBusy}finally{offsznAuthRefreshBusy=null}
+}
+function offsznScheduleAuthRetry(){clearTimeout(offsznAuthRefreshTimer);offsznAuthRefreshTimer=setTimeout(()=>{if(navigator.onLine)offsznRefreshAuthSession().catch(console.warn)},30000)}
+async function offsznRestoreAuthSession(){
+ if(offsznAuthRestoreBusy)return;offsznAuthRestoreBusy=true;
+ try{
+  const x=offsznReadAuthSession();if(!x)return;
+  authToken=x.access_token;authUser=x.user_id;offsznAuthRole=x.role;
+  if(x.expires_at*1000<=Date.now()+120000){if(!navigator.onLine){offsznScheduleAuthRetry();return}if(!await offsznRefreshAuthSession())return}
+  else offsznScheduleAuthRefresh();
+  if(offsznAuthRole==='athlete')await offsznConnectSync();
+  else render();
+ }catch(e){console.warn('OFFSZN session restore:',e);offsznScheduleAuthRetry()}
+ finally{offsznAuthRestoreBusy=false}
+}
+window.addEventListener('online',()=>{if(offsznReadAuthSession()&&(!authToken||!offsznSyncEnabled&&offsznAuthRole==='athlete'))offsznRestoreAuthSession();else if(offsznReadAuthSession())offsznRefreshAuthSession().catch(console.warn)});
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){const x=offsznReadAuthSession();if(x&&x.expires_at*1000<Date.now()+120000)offsznRefreshAuthSession().catch(console.warn)}});
+
 function renderAthleteAccount(){
  const signed=!!(authToken&&authUser);
  $('app').innerHTML=`<section class="card offszn-account">
@@ -809,7 +862,7 @@ async function offsznAthleteSignUp(){
  if(!email||password.length<8){athleteAccountMessage('Enter an email and password of at least 8 characters.');return}
  try{
   const x=await athleteAuthRequest('signup',{email,password,data:{date_of_birth:dob,role:'athlete'}});
-  if(x.access_token){authToken=x.access_token;authUser=x.user?.id;offsznAuthRole='athlete';await offsznSaveDobProfile(dob);await offsznConnectSync();renderAthleteAccount()}
+  if(x.access_token){authToken=x.access_token;authUser=x.user?.id;offsznAuthRole='athlete';offsznStoreAuthSession(x);await offsznSaveDobProfile(dob);await offsznConnectSync();renderAthleteAccount()}
   else athleteAccountMessage('Check your email for the confirmation link, then return to sign in.');
  }catch(e){athleteAccountMessage(e.message)}
 }
@@ -819,7 +872,7 @@ async function offsznAthleteLogin(){
  try{
   const x=await athleteAuthRequest('token?grant_type=password',{email,password});
   if(!x.access_token||!x.user?.id)throw Error('Email confirmation may still be required.');
-  authToken=x.access_token;authUser=x.user.id;offsznAuthRole=x.user.user_metadata?.role||'athlete';
+  authToken=x.access_token;authUser=x.user.id;offsznAuthRole=x.user.user_metadata?.role||'athlete';offsznStoreAuthSession(x);
   if(x.user.user_metadata?.date_of_birth)await offsznSaveDobProfile(x.user.user_metadata.date_of_birth);
   await offsznConnectSync();renderAthleteAccount();
  }catch(e){athleteAccountMessage(e.message)}
@@ -904,7 +957,7 @@ async function offsznParentSignUp(){
  offsznParentMessage('Connecting securely to create your parent account…');
  try{
   const x=await Promise.race([athleteAuthRequest('signup',{email,password,data:{role:'parent'}}),new Promise((_,reject)=>setTimeout(()=>reject(new Error('Connection timed out. Check your internet connection and Supabase configuration, then try again.')),15000))]);
-  if(x.access_token&&x.user?.id){authToken=x.access_token;authUser=x.user.id;offsznAuthRole='parent';renderParentAccount();offsznParentMessage('Parent account created and signed in.','success')}
+  if(x.access_token&&x.user?.id){authToken=x.access_token;authUser=x.user.id;offsznAuthRole='parent';offsznStoreAuthSession(x);renderParentAccount();offsznParentMessage('Parent account created and signed in.','success')}
   else offsznParentMessage('Account request submitted. Check your email for a confirmation link, then return here to sign in.','success');
  }catch(e){offsznParentMessage('Could not create parent account: '+(e?.message||'Network error. Please try again.'),'error')}
  finally{const current=$('parentCreateButton');if(current){current.disabled=false;current.textContent='Create parent account'}}
@@ -915,11 +968,12 @@ async function offsznParentLogin(){
  try{const x=await athleteAuthRequest('token?grant_type=password',{email,password});
  if(!x.access_token||!x.user?.id)throw Error('Confirm your email before signing in.');
  if(x.user.user_metadata?.role!=='parent')throw Error('This account is not registered as a parent. Use Athlete Account to sign in.');
- authToken=x.access_token;authUser=x.user.id;offsznAuthRole='parent';renderParentAccount();
+ authToken=x.access_token;authUser=x.user.id;offsznAuthRole='parent';offsznStoreAuthSession(x);renderParentAccount();
  }catch(e){offsznParentMessage(e.message)}
 }
 async function offsznParentReset(){const email=builderValue('parentEmail').trim();if(!email)return offsznParentMessage('Enter your email first.');try{await athleteAuthRequest('recover',{email});offsznParentMessage('If the address exists, a recovery email has been sent.')}catch(e){offsznParentMessage(e.message)}}
 async function offsznFamilyRPC(fn,params={}){
+ const saved=offsznReadAuthSession();if(saved&&saved.expires_at*1000<Date.now()+60000)await offsznRefreshAuthSession();
  if(!authToken||!authUser)throw Error('Sign in first.');
  const {url,key}=cloudConfig();const r=await fetch(url+'/rest/v1/rpc/'+fn,{method:'POST',headers:{apikey:key,Authorization:'Bearer '+authToken,'Content-Type':'application/json'},body:JSON.stringify(params)});
  const result=await r.json().catch(()=>null);

@@ -3,3 +3,6 @@
 See README_v865.md for changes. Deploy all files to GitHub Pages.
 
 OFFSZN v8.61 — Workout beta feedback. See README_v861.md for features and limitations.
+
+
+See README_v866.md for persistent sign-in changes.

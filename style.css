@@ -993,3 +993,36 @@ nav#bottomNav button[aria-label="Home"] .ui-icon{stroke-linejoin:round;stroke-li
 #app.off-settings-contrast .off-parent-card,#app.off-settings-contrast .off-parent-hero{color:#f5f7fa}
 #app.off-settings-contrast .off-parent-card label,#app.off-settings-contrast .off-parent-card h2{color:#f5f7fa!important}
 #app.off-settings-contrast .off-detail-back{color:#facc15!important}
+
+
+/* v8.65: shared contrast contract across OFFSZN.
+   Dark surfaces always have light text; gold action surfaces always have dark text.
+   Scoped overrides repair earlier release-specific rules without altering classic navigation. */
+:root{--off-action:#facc15;--off-action-ink:#141619;--off-readable:#f6f7fa;--off-secondary-ink:#c4cbd6;--off-control-bg:#252b34;--off-control-border:#535d6b}
+html body #app .off-simple-profile,html body #app.off-settings-contrast .off-simple-profile{
+ background:#242830!important;background-image:none!important;border:1px solid #454d59!important;color:var(--off-readable)!important;opacity:1!important;box-shadow:none!important
+}
+html body #app .off-simple-profile .off-simple-profile-text strong{color:#fff!important}
+html body #app .off-simple-profile .off-simple-profile-text small{color:#c1c9d4!important}
+html body #app .off-simple-profile .off-simple-profile-text em{color:#facc15!important}
+html body #app .off-simple-menu,html body #app .off-simple-menu .settings-row{background:#242830!important;color:#f6f7fa!important}
+html body #app .off-simple-menu .settings-row-copy strong{color:#f6f7fa!important}
+html body #app .off-simple-menu .settings-row-copy small{color:#c1c9d4!important}
+/* Parent registration and family linking: explicit readable buttons */
+html body #app #parentCreateButton,html body #app .off-parent-card button:not(.secondary):not(.ghost):not(.danger){
+ background:#facc15!important;background-image:none!important;color:#141619!important;border:1px solid #facc15!important;opacity:1;box-shadow:none!important
+}
+html body #app #parentCreateButton:disabled{background:#e1b930!important;color:#191919!important;opacity:.7!important}
+html body #app .off-parent-card button.secondary,html body #app .off-parent-card button.ghost{background:#292e37!important;color:#f6f7fa!important;border:1px solid #59616e!important}
+html body #app .off-parent-card,html body #app .off-parent-hero{background-color:#1e2229!important;color:#f6f7fa!important}
+html body #app .off-parent-card label,html body #app .off-parent-card h2{color:#f6f7fa!important}
+/* Primary actions use dark text on gold. Keep specialized dark-background controls light. */
+html body #app .off-parent-card .actionrow button:not(.secondary),html body #app .strength-entry-footer button:not(.secondary){background:#facc15!important;color:#141619!important}
+html body #app button.primary,html body #app button.off-save-button,html body #app button.finish-workout-button{background:#facc15!important;color:#141619!important;border-color:#facc15!important}
+html body #app button.secondary,html body #app button.ghost{color:#f6f7fa}
+html body #app input:not([type=checkbox]):not([type=radio]),html body #app select,html body #app textarea{background:#242b35!important;color:#f6f7fa!important;border:1px solid #596474!important}
+html body #app input::placeholder,html body #app textarea::placeholder{color:#b4becb!important;opacity:1}
+html body #app .beta-sheet,html body #app .beta-complete-sheet,html body #app .offszn-dialog{color:#f6f7fa!important}
+html body #app .off-parent-feedback{color:#f6f7fa!important;background:#282d35!important}
+html body #app button:focus-visible{outline:3px solid #facc15!important;outline-offset:3px}
+@media(hover:hover){html body #app #parentCreateButton:not(:disabled):hover{background:#ffdb4a!important}}

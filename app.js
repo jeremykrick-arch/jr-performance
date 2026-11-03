@@ -102,7 +102,7 @@ function renderSettingsPage(){
     helpHub:{title:'Help & About',subtitle:'OFFSZN support and app information',rows:[]}
    };
    const h=blocks[hub];
-   $('app').innerHTML=`<section class="settings-page off-settings-simple"><button class="off-detail-back" onclick="settingsOpen('')">← Settings</button><div class="off-simple-heading"><h1>${h.title}</h1><p>${h.subtitle}</p></div><div class="off-simple-menu">${h.rows.map(r=>settingsRow(...r)).join('')}</div>${hub==='helpHub'?'<div class="off-simple-help"><strong>OFFSZN</strong><p>Baseball strength, speed and athletic development.</p><p>Version 8.64</p><p>For account or workout support, contact your OFFSZN administrator.</p></div>':''}</section>`;
+   $('app').innerHTML=`<section class="settings-page off-settings-simple"><button class="off-detail-back" onclick="settingsOpen('')">← Settings</button><div class="off-simple-heading"><h1>${h.title}</h1><p>${h.subtitle}</p></div><div class="off-simple-menu">${h.rows.map(r=>settingsRow(...r)).join('')}</div>${hub==='helpHub'?'<div class="off-simple-help"><strong>OFFSZN</strong><p>Baseball strength, speed and athletic development.</p><p>Version 8.65</p><p>For account or workout support, contact your OFFSZN administrator.</p></div>':''}</section>`;
    return;
   }
   if(settingsSection==='edit')profileEdit();

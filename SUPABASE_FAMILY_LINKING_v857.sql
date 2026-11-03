@@ -41,8 +41,8 @@ create or replace function public.offszn_create_parent_invite() returns text lan
 declare code text;begin
  if not exists(select 1 from public.offszn_account_roles where user_id=auth.uid() and role='athlete') then raise exception 'Athlete sign-in required';end if;
  -- 8 hex characters (32 bits); rate limiting should be added before public release.
- code:=upper(encode(gen_random_bytes(4),'hex'));
- insert into public.offszn_family_invites(athlete_id,code_hash,expires_at) values(auth.uid(),encode(digest(code,'sha256'),'hex'),now()+interval '24 hours');
+ code:=upper(encode(extensions.gen_random_bytes(4),'hex'));
+ insert into public.offszn_family_invites(athlete_id,code_hash,expires_at) values(auth.uid(),encode(extensions.digest(code,'sha256'),'hex'),now()+interval '24 hours');
  return code;
 end $$;
 create or replace function public.offszn_request_parent_link(invite_code text) returns void language plpgsql security definer set search_path='' as $$
@@ -50,7 +50,7 @@ declare aid uuid;begin
  if not exists(select 1 from public.offszn_account_roles where user_id=auth.uid() and role='parent') then raise exception 'Parent sign-in required';end if;
  if invite_code !~ '^[A-F0-9]{8}$' then raise exception 'Invalid invitation code';end if;
  update public.offszn_family_invites set used_at=now()
- where id=(select id from public.offszn_family_invites where code_hash=encode(digest(invite_code,'sha256'),'hex') and expires_at>now() and used_at is null for update skip locked limit 1)
+ where id=(select id from public.offszn_family_invites where code_hash=encode(extensions.digest(invite_code,'sha256'),'hex') and expires_at>now() and used_at is null for update skip locked limit 1)
  returning athlete_id into aid;
  if aid is null then raise exception 'Code expired or already used';end if;
  insert into public.offszn_family_links(parent_id,athlete_id,status) values(auth.uid(),aid,'pending')

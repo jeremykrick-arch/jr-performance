@@ -1026,3 +1026,7 @@ html body #app .beta-sheet,html body #app .beta-complete-sheet,html body #app .o
 html body #app .off-parent-feedback{color:#f6f7fa!important;background:#282d35!important}
 html body #app button:focus-visible{outline:3px solid #facc15!important;outline-offset:3px}
 @media(hover:hover){html body #app #parentCreateButton:not(:disabled):hover{background:#ffdb4a!important}}
+
+/* v8.67: neutral performance metrics without altering the workout card layout */
+.compact-set-row .off-metric-no-weight{display:flex;align-items:center;justify-content:center;color:#aeb8c5;min-height:40px}
+.compact-set-head span:nth-child(4){font-size:10px;letter-spacing:.035em}

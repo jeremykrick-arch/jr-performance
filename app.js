@@ -273,7 +273,53 @@ function jrShoulderExercises(w,d){
   return [name,category,count,reps,unit,`${note}${pitching?' Pitching week: prioritize freshness and skip if arm fatigued.':''}`];
  });
 }
-function jrBaseExercises(w,d){return [...exercises[d],...(session(w,d).addedMovements||[]),...jrRotationalExercises(w,d),...jrShoulderExercises(w,d)]}
+// v8.70: A streamlined DEFAULT for untouched sessions, never a migration of saved sessions.
+// Existing session records with workout interaction retain v8.69 exercise order/indices.
+// Completed sessions and protected weeks are always unchanged.
+function jrLegacyExerciseList(w,d){return [...exercises[d],...(session(w,d).addedMovements||[]),...jrRotationalExercises(w,d),...jrShoulderExercises(w,d)]}
+function jrSessionHasWorkoutHistory(w,d){
+ const s=session(w,d);
+ return !!(s.finished || (s.items&&Object.keys(s.items).length) ||
+  (s.extraSets&&Object.keys(s.extraSets).length) ||
+  (s.swaps&&Object.keys(s.swaps).length) ||
+  (s.movementStatus&&Object.keys(s.movementStatus).length) ||
+  (Array.isArray(s.movementOrder)&&s.movementOrder.length) ||
+  (Array.isArray(s.addedMovements)&&s.addedMovements.length) ||
+  s.rating || s.completedAt || s.finishedAt);
+}
+function jrBaseExercises(w,d){
+ if(!jrRotationEligible(w,d)||jrSessionHasWorkoutHistory(w,d))return jrLegacyExerciseList(w,d);
+ const base=exercises[d],rotation=jrRotationalExercises(w,d),shoulder=jrShoulderExercises(w,d);
+ const names={
+  Monday:['Dynamic warm-up','10-yard acceleration sprint','Broad jump','Trap bar deadlift','Bulgarian split squat','Pallof press'],
+  Thursday:['Dynamic warm-up','Assisted pull-up','Dumbbell bench press','Single-arm cable row','Landmine press'],
+  Saturday:['Dynamic warm-up','Lateral bound','Low box jump','Barbell front squat','Dumbbell Romanian deadlift','Seated cable row','Farmer carry']
+ }[d]||[];
+ const selected=names.map(name=>base.find(e=>e[0]===name)).filter(Boolean);
+ if(d==='Monday'){
+  selected.push(...rotation);
+  // Warm-up accessory; alternate diagonal control and scapular mobility without stacking both.
+  const accessory=shoulder.find(e=>e[0]===(w%2===0?'Serratus wall slide':'Half-kneeling cable lift'));
+  if(accessory)selected.push(accessory);
+ }else if(d==='Thursday'){
+  // Keep one shoulder strength accessory, plus low-fatigue thoracic mobility.
+  const accessory=(w%2===0?base.find(e=>e[0]==='Band external rotation'):shoulder.find(e=>e[0]==='Side-lying external rotation'));
+  if(accessory)selected.push(accessory);
+  selected.push(...rotation);
+  const mobility=shoulder.find(e=>e[0]==='Open-book thoracic rotation');if(mobility)selected.push(mobility);
+ }else if(d==='Saturday'){
+  // Alternate two rotational throw patterns; never stack both on top of hitting/pitching.
+  const rotational=(w%2===0?rotation[0]:base.find(e=>e[0]==='Medicine ball rotational throw'));
+  if(rotational){
+   const r=rotational.slice();
+   if(w%2!==0 && (pitchingWeek(w)||[4,8,12].includes(w)))r[2]=1;
+   selected.splice(3,0,r);
+  }
+  const stability=shoulder.find(e=>e[0]==='Prone Y raise');if(stability)selected.push(stability);
+  const mobility=shoulder.find(e=>e[0]==='Thoracic extension mobility');if(mobility)selected.push(mobility);
+ }
+ return selected;
+}
 function activeExercises(d=day,w=week){let swaps=swapMap(w,d);return jrBaseExercises(w,d).map((e,i)=>{let replacement=swaps[i];if(!replacement)return e;let meta=typeof replacement==='string'?movementByName(replacement):null;return meta?[replacement,meta.category,e[2],e[3],e[4],`Substituted for ${e[0]}. Use coach-approved technique and appropriate loading.`]:e})}
 // v8.6: per-session movement order and reversible skip/remove state.
 function movementStatus(i,w=week,d=day){return (session(w,d).movementStatus&&typeof session(w,d).movementStatus==='object'?session(w,d).movementStatus[i]:null)||'active'}
